@@ -13,10 +13,10 @@ public int getPlayerCount() {
 	return this.playerCount;
 }
 
-public void addPLayer(String g) {
+public void addPlayer(String g) {
 	names.add(g);
 }
-public String getPLayername(int x) {
+public String getPlayername(int x) {
 	return this.names.get(x);
 }
 public ArrayList<String> getNames()
@@ -34,13 +34,13 @@ public void initializeGame() //function that receives the playernames and random
 	for(int i=1;i<=getPlayerCount();i++)
 	{
 		System.out.println("Enter player " + i + "'s Name: ");
-		addPLayer(in.next());
+		addPlayer(in.next());
 	}
 	Collections.shuffle(getNames()); //randomise the arraylist of names
 	System.out.println("Order: "); //will be a neater/more appealing way of doing this
 	for(int j=0;j<getPlayerCount();j++)
 	{
-		System.out.println(getPLayername(j));
+		System.out.println(getPlayername(j));
 	}
 }
 
