@@ -13,11 +13,6 @@ public static void main(String[] args) {
 	}
 	player.setPlayerCount(x);
 	 x = 0;
-
-	 
-	 
-	 
-	 
 	 in.close();	
 }
 }

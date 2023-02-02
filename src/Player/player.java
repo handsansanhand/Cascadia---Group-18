@@ -20,7 +20,6 @@ public String getPLayername(int x) {
 public void setPlayerCount(int x) {
 	// TODO Auto-generated method stub
 	this.playerCount = x;
-
 }
 
 }
