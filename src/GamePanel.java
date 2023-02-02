@@ -12,6 +12,7 @@ public static void main(String[] args) {
 		throw new IllegalArgumentException("invalid nuber of players");
 	}
 	player.setPlayerCount(x);
+	player.initializeGame();
 	 x = 0;
 	 in.close();	
 }
