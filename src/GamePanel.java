@@ -1,7 +1,5 @@
 import java.util.Scanner;
-
 import Player.player;
-
 public class GamePanel {
 public static void main(String[] args) {
 	int x = 0;
@@ -24,7 +22,6 @@ public static void main(String[] args) {
 			in.next();
 		}
 	}
-
 	player.setPlayerCount(x);
 	player.initializeGame();
 	 x = 0;
