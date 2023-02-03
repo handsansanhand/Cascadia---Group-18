@@ -24,6 +24,8 @@ public static void main(String[] args) {
 	}
 	player.setPlayerCount(x);
 	player.initializeGame();
+	player.playGame();
+
 	 x = 0;
 	 in.close();	
 }
