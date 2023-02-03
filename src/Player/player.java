@@ -42,6 +42,8 @@ public void initializeGame() //function that receives the playernames and random
 	{
 		System.out.println(Players.get(j).getName());
 	}
+	//display the instructions
+	displayControls();
 	//player one will start
 	System.out.println(getPlayers().get(0).getName() + " will start");
 }
@@ -65,7 +67,7 @@ public void playGame()
 	int i=0;
 	nextTurn(i);
 	i++;
-		while(stillPlaying)
+		while(stillPlaying)	//the instructions for playing the game will prob go here
 		{
 			switch (in.next()) {
 				case "n" -> {
@@ -76,6 +78,9 @@ public void playGame()
 						i++;
 					}
 				}
+				case "c" -> {
+					displayControls();
+				}
 				case "q" -> {
 					System.out.println("ty for playing");
 					stillPlaying = false;
@@ -83,6 +88,13 @@ public void playGame()
 			}
 
 		}
+	}
+	public void displayControls()
+	{
+		System.out.println("Press 'n' to pass");
+		System.out.println("Press 'c' for controls");
+		System.out.println("Press 'q' to quit the game");
+		System.out.println("Press 'r' for the rules of the game"); //to display the instructions of the game ??
 	}
 }
 

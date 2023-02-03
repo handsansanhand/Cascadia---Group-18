@@ -2,6 +2,7 @@ import java.util.Scanner;
 import Player.player;
 public class GamePanel {
 public static void main(String[] args) {
+	System.out.println("Welcome to Cascadia!");
 	int x = 0;
 	player player = new player();
 	Scanner in = new Scanner(System.in);
