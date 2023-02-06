@@ -37,4 +37,7 @@ public class Tile { // class for the tiles that will be inserted onto the board
                 return new Tile(ht.Error);
         }
     }
+    public ht getLandType(){
+        return landType;
+    }
 }
