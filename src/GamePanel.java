@@ -2,9 +2,10 @@ import java.util.Scanner;
 
 public class GamePanel {
 public static void main(String[] args) {
+
 	System.out.println("Welcome to Cascadia!");
 	int x = 0;
-	player player = new player();
+	playing playing = new playing();
 	Scanner in = new Scanner(System.in);
 	System.out.println("Enter number of players");
 	while(in.hasNext()) {
@@ -23,9 +24,9 @@ public static void main(String[] args) {
 			in.next();
 		}
 	}
-	player.setPlayerCount(x);
-	player.initializeGame();
-	player.playGame();
+	playing.setPlayerCount(x);
+	playing.initializeGame();
+	playing.playGame();
 
 	 x = 0;
 	 in.close();	
