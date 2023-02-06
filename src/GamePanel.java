@@ -23,6 +23,8 @@ public static void main(String[] args) {
 			in.next();
 		}
 	}
+	gameBoard g = new gameBoard();
+	System.out.println(g);
 	playing.setPlayerCount(x);
 	playing.initializeGame();
 	playing.playGame();

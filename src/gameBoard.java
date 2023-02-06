@@ -16,4 +16,9 @@ public class gameBoard {
         }
     }
 
+    public String toString() //temporary tostring method for veiwing the board
+    {
+        return "Habitat Tiles: " + boardHabitatTiles.toString() + "\nWildlife Tokens: " + boardWildlifeTokens.toString();
+    }
+
 }

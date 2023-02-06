@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-public class Board { // class for the board object
+public class Board { // class for the board object for each player
     ArrayList<Tile> TileList = new ArrayList<Tile>();
 
     public void addTile(ht x){
