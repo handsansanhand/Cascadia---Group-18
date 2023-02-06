@@ -3,5 +3,7 @@ public enum ht { // (habitatTypes
         Wetland,
         River,
         Mountain,
-        Prairie
+        Prairie,
+        Error
+
 }
