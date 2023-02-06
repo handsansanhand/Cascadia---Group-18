@@ -16,9 +16,9 @@ public class gameBoard {
         }
     }
 
-    public String toString() //temporary tostring method for veiwing the board
+    public String toString() //temporary tostring method for veiwing the board TEMPORARY
     {
-        return "Habitat Tiles: " + boardHabitatTiles.toString() + "\nWildlife Tokens: " + boardWildlifeTokens.toString();
+        return "Habitat Tiles: " + boardHabitatTiles.get(0).getLandType() + boardHabitatTiles.get(1).getLandType() + boardHabitatTiles.get(2).getLandType() + boardHabitatTiles.get(3).getLandType() +  "\nWildlife Tokens: " + boardWildlifeTokens.get(0).animalType + boardWildlifeTokens.get(1).animalType + boardWildlifeTokens.get(2).animalType + boardWildlifeTokens.get(3).animalType;
     }
 
 }
