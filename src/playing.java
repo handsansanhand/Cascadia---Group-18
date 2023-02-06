@@ -71,6 +71,7 @@ public class playing {
         {
             switch (in.next()) {
                 case "n" -> {
+                    System.out.println(getPlayers().get(i).toString());
                     nextTurn(i);
                     if (i + 1 == playerCount) {
                         i = 0;
