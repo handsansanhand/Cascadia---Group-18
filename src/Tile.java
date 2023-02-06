@@ -5,8 +5,8 @@ public class Tile { // class for the tiles that will be inserted onto the board
     Tile(ht landType){
         this.landType = landType;
     }
-   
-    public Tile starterTiles(){ //returns a tile object of random habitat tile
+
+    public static Tile starterTiles(){ //returns a tile object of random habitat tile
         switch((int) Math.round(Math.random()*4)){
             case 0:
                 return new Tile(ht.Mountain);
