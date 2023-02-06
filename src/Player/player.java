@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class player {
 	Scanner in = new Scanner(System.in);
+
 int playerCount;
 ArrayList<players> Players = new ArrayList<players>();
 
