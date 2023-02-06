@@ -4,7 +4,6 @@ import java.util.ArrayList;
 public class gameBoard {
     ArrayList<Tile> boardHabitatTiles = new ArrayList<>();
     ArrayList<widlifeTokens> boardWildlifeTokens = new ArrayList<>();
-
     gameBoard() //gameboard will be constructed with 4 habitat tiles and 4 wildlifetoken tiles
     {
         for(int i=0;i<4;i++) {
