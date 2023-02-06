@@ -107,6 +107,7 @@ public void playGame()
 
 		}
 	}
+
 	public void displayControls()
 	{
 		System.out.println("Press 'n' to pass");
