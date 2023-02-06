@@ -1,5 +1,4 @@
 //class that contains players names, their score and if it's their turn
-package Player;
 
 public class players {
 
