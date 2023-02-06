@@ -42,11 +42,27 @@ public void initializeGame() //function that receives the playernames and random
 	{
 		System.out.println(Players.get(j).getName());
 	}
+
 	//display the instructions
 	displayControls();
 	//player one will start
 	System.out.println(getPlayers().get(0).getName() + " will start");
 }
+
+//method that allocates starter tiles
+	public void setStarterTiles(ArrayList<players> players)
+	{
+		//available starter tiles:
+
+		for(int i =0; i<playerCount;i++)
+		{
+			//assign a starter tile to each player randomly
+
+
+		}
+
+
+	}
 
 public void nextTurn(int i) //a small function that just prints these out for now, will be changed
 {
@@ -68,7 +84,9 @@ public void playGame()
 	nextTurn(i);
 	i++;
 		while(stillPlaying)	//the instructions for playing the game will prob go here
+			// the game loop
 		{
+
 			switch (in.next()) {
 				case "n" -> {
 					nextTurn(i);
