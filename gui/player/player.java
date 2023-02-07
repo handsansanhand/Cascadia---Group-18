@@ -14,7 +14,7 @@ public static void addplayer(String gg) {
 public int playercount() {
 	return names.size();
 }
-public String getName(int x) {
+public static String getName(int x) {
 	return names.get(x);
 }
 public void shuffle() {
