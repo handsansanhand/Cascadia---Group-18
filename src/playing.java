@@ -70,8 +70,10 @@ public class playing {
         while(stillPlaying)	//the instructions for playing the game will prob go here
         {
             switch (in.next()) {
+                case "v" -> {
+                    System.out.println(getPlayers().get(i).getPlayerBoard());
+                }
                 case "n" -> {
-                    System.out.println(getPlayers().get(i).toString());
                     nextTurn(i);
                     if (i + 1 == playerCount) {
                         i = 0;
@@ -96,10 +98,11 @@ public class playing {
 
     public void displayControls()
     {
-        System.out.println("Press 'n' to pass"); //this should pop ur board up
+        System.out.println("Press v to view your board"); //this should pop ur board up
+        System.out.println("Press 'n' to pass");
         System.out.println("Press 'c' for controls");
         System.out.println("Press 'q' to quit the game");
         System.out.println("Press 'b' to view the game board");
-        System.out.println("Press 'r' for the rules of the game"); //to display the instructions of the game ??
+        System.out.println("Press 'r' for the rules of the game"); //to display the instructions of the game ?? maybe a html
     }
 }
