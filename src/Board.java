@@ -7,7 +7,7 @@ public class Board { // class for the board object for each player
 
     public Board()
     {
-       TileList.add(Tile.starterTiles());
+       TileList.add(Tile.randomTile());
     }
 
     public String toString(){ //visual representation of board here

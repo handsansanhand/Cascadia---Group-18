@@ -10,7 +10,7 @@ import java.util.Collections;
         gameBoard() //gameboard will be constructed with 4 habitat tiles and 4 wildlifetoken tiles
         {
             for (int i = 0; i < 4; i++) {
-                boardHabitatTiles.add(Tile.starterTiles());
+                boardHabitatTiles.add(Tile.randomTile());
             }
             for (int j = 0; j < 4; j++) {
                 boardWildlifeTokens.add(wildlifeToken.generateWildlifeToken());
