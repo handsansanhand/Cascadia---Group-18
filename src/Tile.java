@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Tile { // class for the tiles that will be inserted onto the board
     ArrayList<Tile> starterTiles = new ArrayList<>();
     ht landType;
-    ht landType2
+    ht landType2;
     Tile(ht landType, ht landType2){
         this.landType2 = landType2;
         this.landType = landType;
