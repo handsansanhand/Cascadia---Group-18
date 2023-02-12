@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class player {
     Board playerBoard = new Board();
 
@@ -22,6 +24,9 @@ public class player {
     public int getScore() {
         return score;
     }
-
+    public String toString()
+    {
+        return playerBoard.TileList.toString();
+    }
 
 }

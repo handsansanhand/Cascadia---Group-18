@@ -7,6 +7,7 @@ public class playing {
 
     int playerCount;
     ArrayList<player> Players = new ArrayList<player>();
+    gameBoard gameBoard = new gameBoard();
 
     public int getPlayerCount() {
         return this.playerCount;
@@ -69,6 +70,9 @@ public class playing {
         while(stillPlaying)	//the instructions for playing the game will prob go here
         {
             switch (in.next()) {
+                case "v" -> {
+                    System.out.println(getPlayers().get(i).getPlayerBoard());
+                }
                 case "n" -> {
                     nextTurn(i);
                     if (i + 1 == playerCount) {
@@ -79,6 +83,9 @@ public class playing {
                 }
                 case "c" -> {
                     displayControls();
+                }
+                case "b" -> {
+                    System.out.println(gameBoard);
                 }
                 case "q" -> {
                     System.out.println("ty for playing");
@@ -91,9 +98,11 @@ public class playing {
 
     public void displayControls()
     {
+        System.out.println("Press v to view your board"); //this should pop ur board up
         System.out.println("Press 'n' to pass");
         System.out.println("Press 'c' for controls");
         System.out.println("Press 'q' to quit the game");
-        System.out.println("Press 'r' for the rules of the game"); //to display the instructions of the game ??
+        System.out.println("Press 'b' to view the game board");
+        System.out.println("Press 'r' for the rules of the game"); //to display the instructions of the game ?? maybe a html
     }
 }

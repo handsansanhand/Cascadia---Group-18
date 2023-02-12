@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutY="-33.0" prefHeight="551.0" prefWidth="653.0" style="-fx-background-color: blue;">
+         <children>
+            <Label alignment="CENTER" layoutX="127.0" layoutY="47.0" prefHeight="46.0" prefWidth="360.0" text="CASCADIA" textAlignment="CENTER" textFill="#36ff24" underline="true">
+               <font>
+                  <Font name="Berlin Sans FB Demi Bold" size="57.0" />
+               </font>
+               <effect>
+                  <Glow level="1.0" />
+               </effect>
+            </Label>
+            <Button id="rules" blendMode="ADD" layoutX="164.0" layoutY="163.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="272.0" style="-fx-background-color: #36ff24; -fx-background-radius: 100;" text="Rules">
+               <font>
+                  <Font name="Britannic Bold" size="32.0" />
+               </font>
+            </Button>
+            <Button id="button2" layoutX="164.0" layoutY="247.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="272.0" style="-fx-background-color: #36ff24; -fx-background-radius: 100;" text="2 Player">
+               <font>
+                  <Font name="Britannic Bold" size="32.0" />
+               </font>
+            </Button>
+            <Button id="button3" layoutX="164.0" layoutY="330.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="272.0" style="-fx-background-color: #36ff24; -fx-background-radius: 100;" text="3 Player">
+               <font>
+                  <Font name="Britannic Bold" size="32.0" />
+               </font>
+            </Button>
+            <Button id="button4" layoutX="164.0" layoutY="417.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="272.0" style="-fx-background-color: #36ff24; -fx-background-radius: 100;" text="4 Player">
+               <font>
+                  <Font name="Britannic Bold" size="32.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

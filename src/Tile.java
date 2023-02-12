@@ -1,10 +1,14 @@
-public class Tile { // class for the tiles that will be inserted onto the board
+import java.util.ArrayList;
 
-    int x; // location integers
-    int y;
+public class Tile { // class for the tiles that will be inserted onto the board
+    ArrayList<Tile> starterTiles = new ArrayList<>();
     ht landType;
     Tile(ht landType){
         this.landType = landType;
+    }
+
+    public ArrayList<Tile> getStarterTiles() {
+        return starterTiles;
     }
 
     public static Tile starterTiles(){ //returns a tile object of random habitat tile
@@ -25,5 +29,9 @@ public class Tile { // class for the tiles that will be inserted onto the board
     }
     public ht getLandType(){
         return landType;
+    }
+    public String toString()
+    {
+        return getLandType().toString();
     }
 }
