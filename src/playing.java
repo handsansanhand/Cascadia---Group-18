@@ -67,8 +67,9 @@ public class playing {
         int i=0;
         nextTurn(i);
         i++;
-        while(stillPlaying)	//the instructions for playing the game will prob go here
+        while(stillPlaying)	//FOR TAKING TURN
         {
+            gameBoard.checkForCull();
             switch (in.next()) {
                 case "v" -> {
                     System.out.println(getPlayers().get(i).getPlayerBoard());

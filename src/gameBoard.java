@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -15,18 +16,52 @@ import java.util.Collections;
             for (int j = 0; j < 4; j++) {
                 boardWildlifeTokens.add(wildlifeToken.generateWildlifeToken());
             }
-            if (checkWtEqual()) {
+            if (highestAnimalTypeCount()==4) {
                 boardWildlifeTokens.clear();
+                System.out.println("Four identical wildlife tokens detected, an automatic cull has occurred.");
                 for (int j = 0; j < 4; j++) {
                     boardWildlifeTokens.add(wildlifeToken.generateWildlifeToken());
                 }
             }
-
         }
 
-        public boolean checkWtEqual() //should return true if an automatic cull is needed
+        public int highestAnimalTypeCount()
         {
-            return boardWildlifeTokens.isEmpty() || Collections.frequency(boardWildlifeTokens, boardWildlifeTokens.get(0)) == boardWildlifeTokens.size();
+            int highestCount=0;
+            int temp=0;
+            wT[] tokens = wT.values();
+            for(wT animal: tokens)
+            {
+                temp = countAnimals(animal);
+                if(temp>highestCount)
+                {
+                    highestCount=temp;
+                }
+            }
+            return highestCount;
+        }
+
+        public void checkForCull() //lets users know if a cull is available
+        {
+            if(highestAnimalTypeCount()==3)
+            {
+                System.out.println("A cull is available!");
+            }
+        }
+
+        public int countAnimals(wT animalType) //function that counts the amount of animaltype in the current wildlifetokens(used for culling)
+        {
+            int count =0;
+            for(int i=0;i<boardWildlifeTokens.toArray().length;i++)
+            {
+                if(boardWildlifeTokens.get(i).toString().equals(animalType.toString()))
+                {
+                    count++;
+                }
+                else
+                {}
+            }
+            return count;
         }
 
         public String toString() //temporary tostring method for veiwing the board TEMPORARY
