@@ -277,7 +277,7 @@ public class Tile { // class for the tiles that will be inserted onto the board
     }
     public String toString()
     {
-        return getLandType().toString();
+        return getLandType().toString() + " / " + getLandType2().toString();
     }
 
 }
