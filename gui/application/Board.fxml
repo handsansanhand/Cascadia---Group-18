@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane style="-fx-background-color: blue;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutY="3.0" prefHeight="555.0" prefWidth="677.0">
+         <children>
+            <ImageView fitHeight="555.0" fitWidth="465.0" layoutX="212.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../OneDrive/Documents/python%20folder/boardnew.png" />
+               </image>
+            </ImageView>
+            <Line endX="-100.00001525878906" endY="494.3333740234375" layoutX="311.0" layoutY="61.0" startX="-100.00001525878906" startY="-60.999996185302734" stroke="#1acc4a" strokeWidth="8.0" />
+            <Line endX="100.0" layoutX="106.0" layoutY="66.0" startX="-100.0" stroke="#2fff00" strokeWidth="5.0" />
+            <Label id="labelone" layoutX="2.0" layoutY="22.0" prefHeight="31.0" prefWidth="205.0" text="Label" textFill="#16e231">
+               <font>
+                  <Font name="Bell MT Bold" size="25.0" />
+               </font>
+            </Label>
+            <Button id="buttonone" layoutX="56.0" layoutY="482.0" mnemonicParsing="false" style="-fx-background-radius: 100;" text="End Turn">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Button>
+            <Label layoutX="43.0" layoutY="68.0" prefHeight="34.0" prefWidth="75.0" text="Habitats" textFill="#1dff43" underline="true">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <ImageView id="imageone" fitHeight="67.0" fitWidth="66.0" layoutX="141.0" layoutY="129.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../Downloads/grass%20(2).png" />
+               </image>
+            </ImageView>
+            <Label id="labeltwo" layoutX="5.0" layoutY="141.0" prefHeight="31.0" prefWidth="122.0" text="Label" textFill="#16e231">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
+            <Label id="labelthree" layoutX="5.0" layoutY="219.0" prefHeight="31.0" prefWidth="122.0" text="Label" textFill="#16e231">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
+            <ImageView id="imagetwo" fitHeight="56.0" fitWidth="70.0" layoutX="146.0" layoutY="210.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../Downloads/marine_mountain.png" />
+               </image>
+            </ImageView>
+            <Label id="labelfour" layoutX="5.0" layoutY="302.0" prefHeight="31.0" prefWidth="122.0" text="Label" textFill="#16e231">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
+            <ImageView id="imagethree" fitHeight="78.0" fitWidth="70.0" layoutX="144.0" layoutY="288.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../Downloads/marine_forest.png" />
+               </image>
+            </ImageView>
+            <ImageView id="startingimage" fitHeight="59.0" fitWidth="75.0" layoutX="407.0" layoutY="219.0" nodeOrientation="INHERIT" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../Downloads/marine_forest.png" />
+               </image>
+            </ImageView>
+            <ImageView id="imagefour" fitHeight="65.0" fitWidth="89.0" layoutX="141.0" layoutY="369.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../Downloads/river_marine.png" />
+               </image>
+            </ImageView>
+            <Label id="labelfive" layoutX="5.0" layoutY="386.0" prefHeight="31.0" prefWidth="122.0" text="Label" textFill="#16e231">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
+            <ImageView id="tester" fitHeight="56.0" fitWidth="77.0" layoutX="363.0" layoutY="250.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
+            <ImageView id="pane2" fitHeight="59.0" fitWidth="66.0" layoutX="409.0" layoutY="278.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
+            <ImageView id="pane3" fitHeight="59.0" fitWidth="75.0" layoutX="454.0" layoutY="248.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
+            <ImageView id="pane4" fitHeight="59.0" fitWidth="75.0" layoutX="456.0" layoutY="190.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
+            <ImageView id="pane6" fitHeight="59.0" fitWidth="75.0" layoutX="407.0" layoutY="161.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
+            <ImageView id="pane7" fitHeight="59.0" fitWidth="75.0" layoutX="363.0" layoutY="191.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
+         </children></AnchorPane>
+   </children>
+</AnchorPane>
