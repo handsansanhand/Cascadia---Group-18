@@ -13,6 +13,12 @@ static public  int playercount;
 static public int CurrentPlayer = 0;
 public static ArrayList<ImageView> placedimages = new ArrayList(); 
 
+
+
+public static int getplayercount() {
+	return playercount;
+}
+
 public static void addlastplacetile(ImageView lastClickedImage) {
 	placedimages.add(lastClickedImage);
 

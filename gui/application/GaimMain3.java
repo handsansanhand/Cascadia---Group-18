@@ -1,49 +1,60 @@
 package application;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DataFormat;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import player.player;
 
-public class GameMain extends player{
+public class GaimMain3 extends player{
+	
 	private static Scene scene;
-	static int turn = 1;
+	static int turn = 0;
+
 	static ImageView lastClickedImage = null;
+
+	
 	static {
 		try {
-			
-			FXMLLoader loader = new FXMLLoader(Scene2.class.getResource("Board.fxml"));
 			player.shuffletiles();
+			FXMLLoader loader = new FXMLLoader(Scene2.class.getResource("Board.fxml"));
 			Parent root = loader.load();
-			Label label1 = (Label) root.lookup("#labelone");
-			label1.setText("Player "+player.getName(0));
-			Label label2 = (Label) root.lookup("#labeltwo");
-			Label label3 = (Label) root.lookup("#labelthree");
-			Label label4 = (Label) root.lookup("#labelfour");
-			Label label5 = (Label) root.lookup("#labelfive");
-			Label TurnLabel = (Label) root.lookup("#TurnLabel");
-			Label ScoreLabel = (Label) root.lookup("#ScoreLabel");
-			TurnLabel.setText("Turn: "+turn);
-			ScoreLabel.setText("Score = " + player.getScore(player.placedimages));
-			ImageView startingimage = (ImageView) root.lookup("#startingimage");
 			ImageView image1 = (ImageView) root.lookup("#imageone");
 			ImageView image2 = (ImageView) root.lookup("#imagetwo");
 			ImageView image3 = (ImageView) root.lookup("#imagethree");
 			ImageView image4 = (ImageView) root.lookup("#imagefour");
+			ImageView startingimage = (ImageView) root.lookup("#startingimage");
+			Label label1 = (Label) root.lookup("#labelone");
+			label1.setText("Player "+player.getName(player.CurrentPlayer));
+			Button buttonone = (Button) root.lookup("#buttonone");
+
+			Label TurnLabel = (Label) root.lookup("#TurnLabel");
+			Label ScoreLabel = (Label) root.lookup("#ScoreLabel");
+			TurnLabel.setText("Turn: "+turn);
+			ScoreLabel.setText("Score = " + player.getScore(player.placedimages));
+			
+			
+			Label label2 = (Label) root.lookup("#labeltwo");
+			Label label3 = (Label) root.lookup("#labelthree");
+			Label label4 = (Label) root.lookup("#labelfour");
+			Label label5 = (Label) root.lookup("#labelfive");
+			startingimage.setImage(player.getstarttile(player.CurrentPlayer));
+			image1.setImage(player.getTile(0));
+			image2.setImage(player.getTile(1));
+			image3.setImage(player.getTile(2));
+			image4.setImage(player.getTile(3));
+			label2.setText(player.gettilename(0));
+			label3.setText(player.gettilename(1));
+			label4.setText(player.gettilename(2));
+			label5.setText(player.gettilename(3));
+			
+			
+			//panes 
 			ImageView pane2 = (ImageView) root.lookup("#pane2");
 			ImageView pane3 = (ImageView) root.lookup("#pane3");
 			ImageView pane4 = (ImageView) root.lookup("#pane4");
@@ -62,27 +73,17 @@ public class GameMain extends player{
 			ImageView pane18 = (ImageView) root.lookup("#pane17");
 			ImageView pane19 = (ImageView) root.lookup("#pane18");
 			
-			Button buttonone = (Button) root.lookup("#buttonone");
 			
 			Button rotateright = (Button) root.lookup("#rotateright");
 			Button rotateleft = (Button) root.lookup("#rotateleft");
 
 			ImageView test = (ImageView) root.lookup("#tester");
-			test.setImage(null);
-			startingimage.setImage(player.getstarttile(player.getcurrentPlayer()));
-			player.addmoretiles();
-			player.shuffletiles();
-			image1.setImage(player.getTile(0));
-			image2.setImage(player.getTile(1));
-			image3.setImage(player.getTile(2));
-			image4.setImage(player.getTile(3));
-			label2.setText(player.gettilename(0));
-			label3.setText(player.gettilename(1));
-			label4.setText(player.gettilename(2));
-			label5.setText(player.gettilename(3));
-			boolean picking = true;
-		//	ImageView lastClickedImage = null;
-
+			
+			
+			
+			
+			
+			
 			image1.setOnMouseClicked(event -> {
 		           test.setOnMouseClicked(evernt -> {
 		        	   test.setImage(image1.getImage()); 
@@ -393,86 +394,53 @@ public class GameMain extends player{
 		          });
 		          
 				});
-		
-		rotateright.setOnAction(e -> {
-			lastClickedImage.setRotate(lastClickedImage.getRotate() + 90);
+			
+			
+			//
+			//
+		//rotate	
+			//
+			rotateright.setOnAction(e -> {
+				lastClickedImage.setRotate(lastClickedImage.getRotate() + 90);
 
-		});
-		
-		rotateleft.setOnAction(e -> {
-			lastClickedImage.setRotate(lastClickedImage.getRotate() - 90);
-
-		});
-		
-		
-		
-		
-		buttonone.setOnAction(e ->{
-			
-			
-			//ment to add to arralist to do score
-			player.addlastplacetile(lastClickedImage);
-			// the one above is ment to so that
-			//------------------------------------------------------
-			//------------------------------------------------------
-			player.shuffletiles();
-			ScoreLabel.setText("Score = " + player.getScore(player.placedimages));
-			turn = turn +1;
-			TurnLabel.setText("Turn: "+turn);
-			label2.setText(player.gettilename(0));
-			label3.setText(player.gettilename(1));
-			label4.setText(player.gettilename(2));
-			label5.setText(player.gettilename(3));
-			image1.setImage(player.getTile(0));
-			image2.setImage(player.getTile(1));
-			image3.setImage(player.getTile(2));
-			image4.setImage(player.getTile(3));
-			player.CurrentPlayer = player.CurrentPlayer + 1;
-			
-			
-			
-			Stage stage = (Stage) buttonone.getScene().getWindow();
-			    stage.setScene(Gamemain2.getScene());
-			    stage.show();
-			    
-		});
-		
-		
-		
-
-			/*
-			image1.setOnDragDetected(event -> {
-			    Dragboard dragboard = image1.startDragAndDrop(TransferMode.MOVE);
-			    ClipboardContent content = new ClipboardContent();
-			    content.putImage(image1.getImage());
-			    dragboard.setContent(content);
-			    event.consume();
 			});
+			
+			rotateleft.setOnAction(e -> {
+				lastClickedImage.setRotate(lastClickedImage.getRotate() - 90);
 
-
-			pane1.setOnDragOver(event -> {
-			    event.acceptTransferModes(TransferMode.MOVE);
-			    event.consume();
 			});
+			
+			
+			
+			buttonone.setOnAction(e ->{
+				 player.shuffletiles();
 
-			pane1.setOnDragDropped(event -> {
-			    Dragboard dragboard = event.getDragboard();
-			    Image image = (Image) dragboard.getContent(format);
-			    ImageView imageView = new ImageView(image);
-			    imageView.setFitWidth(pane1.getWidth());
-			    imageView.setFitHeight(pane1.getHeight());
-			    pane1.getChildren().add(imageView);
-			    event.setDropCompleted(true);
-			    event.consume();
+				
+				ScoreLabel.setText("Score = " + player.getScore(player.placedimages));
+				turn = turn +1;
+				TurnLabel.setText("Turn: "+turn);
+				player.CurrentPlayer = player.CurrentPlayer +1;
+
+				
+				
+				if(player.getplayercount() == 4) {
+				Stage stage = (Stage) buttonone.getScene().getWindow();
+				    stage.setScene(GaimMain4.getScene());
+				    stage.show();
+				}
+				else {
+					Stage stage = (Stage) buttonone.getScene().getWindow();
+				    stage.setScene(GameMain.getScene());
+				    stage.show();
+				}
+				    
 			});
-			*/
-			scene = new Scene(root, 800, 600);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 	
-	
+	scene = new Scene(root, 800, 600);
+} catch (IOException e) {
+	e.printStackTrace();
+}
+}
 	public static Scene getScene() {
 		return scene;
 	}
