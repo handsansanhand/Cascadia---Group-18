@@ -4,12 +4,32 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class player extends Habitat{
 	
 static ArrayList<String> names = new ArrayList<String>();
 static public  int playercount;
 static public int CurrentPlayer = 0;
+public static ArrayList<ImageView> placedimages = new ArrayList(); 
+
+public static void addlastplacetile(ImageView lastClickedImage) {
+	placedimages.add(lastClickedImage);
+
+}
+public static int getScore(ArrayList<ImageView> x) {
+    int score = 0;
+    for (int i = 0; i < x.size(); i++) {
+        for (int j = i + 1; j < x.size(); j++) {
+            if (x.get(i).equals(x.get(j)) && !placedimages.contains(x.get(i))) {
+                score++;
+                placedimages.add(x.get(i));
+            }
+        }
+    }
+    return score;
+}
+
 
 public static void addplayer(String gg) {
 	names.add(gg);
@@ -51,6 +71,7 @@ else return dessert;
 }
 public static void shuffletiles() {
 	Collections.shuffle(habitattiles);
+	
 }
 public static Image getTile(int x) {
 	return habitattiles.get(x);

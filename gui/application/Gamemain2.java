@@ -5,8 +5,10 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import player.player;
 
 public class Gamemain2 extends player{
@@ -26,6 +28,8 @@ public class Gamemain2 extends player{
 			ImageView startingimage = (ImageView) root.lookup("#startingimage");
 			Label label1 = (Label) root.lookup("#labelone");
 			label1.setText("Player "+player.getName(player.CurrentPlayer));
+			Button buttonone = (Button) root.lookup("#buttonone");
+
 			Label label2 = (Label) root.lookup("#labeltwo");
 			Label label3 = (Label) root.lookup("#labelthree");
 			Label label4 = (Label) root.lookup("#labelfour");
@@ -39,6 +43,17 @@ public class Gamemain2 extends player{
 			label3.setText(player.gettilename(1));
 			label4.setText(player.gettilename(2));
 			label5.setText(player.gettilename(3));
+			
+			
+			
+			buttonone.setOnAction(e ->{
+				player.CurrentPlayer = player.CurrentPlayer -1;
+				 Stage stage = (Stage) buttonone.getScene().getWindow();
+				 player.shuffletiles();
+				    stage.setScene(GameMain.getScene());
+				    stage.show();
+				    
+			});
 	
 	scene = new Scene(root, 800, 600);
 } catch (IOException e) {
