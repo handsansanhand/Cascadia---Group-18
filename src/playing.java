@@ -14,8 +14,8 @@ public class playing {
     }
 
 
-    public void addPlayer(String g) {
-        player newplayer = new player(g);
+    public void addPlayer(String g, int i) {
+        player newplayer = new player(g, i);
         Players.add(newplayer);
     }
 
@@ -29,12 +29,13 @@ public class playing {
         return Players;
     }
 
+
     public void initializeGame() //function that receives the playernames and randomizes the order in which they play
     {
         for(int i=1;i<=getPlayerCount();i++)
         {
             System.out.println("Enter player " + i + "'s Name: ");
-            addPlayer(in.next());
+            addPlayer(in.next(), (int) (Math.round(Math.random())*getPlayerCount()));
         }
         Collections.shuffle(getPlayers()); //randomise the arraylist of names
         System.out.println("Order: "); //will be a neater/more appealing way of doing this
@@ -42,6 +43,7 @@ public class playing {
         {
             System.out.println(Players.get(j).getName());
         }
+        //give everyone a starter tile
         //display the instructions
         displayControls();
         //player one will start

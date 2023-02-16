@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 
 public class player {
-    Board playerBoard = new Board();
 
     public Board getPlayerBoard() { // return visual representation of board
         return playerBoard;
@@ -9,13 +8,15 @@ public class player {
 
     String name;
     int score;
+    Board playerBoard;
 
-    public player(String x)
+    public player(String x, int i)
     {
         this.name = x;
         this.score = 0;
-    }
+        this.playerBoard = new Board(i);
 
+    }
 
     public String getName() {
         return name;

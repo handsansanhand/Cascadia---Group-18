@@ -8,6 +8,7 @@ public class Tile { // class for the tiles that will be inserted onto the board
     wT animal2;
     wT animal3;
 
+
     Tile(ht landType, ht landType2) {
         if(landType2 != null){
             this.landType2 = landType2;
@@ -180,7 +181,6 @@ public class Tile { // class for the tiles that will be inserted onto the board
 
         }
     }
-
     public ArrayList<Tile> getStarterTiles() {
         return starterTiles;
     }
