@@ -32,18 +32,29 @@ public class playing {
 
     public void initializeGame() //function that receives the playernames and randomizes the order in which they play
     {
+        ArrayList<String> playersArrayList = new ArrayList<>();
+        ArrayList<Integer> intArrayList = new ArrayList<>(); //for replacement
         for(int i=1;i<=getPlayerCount();i++)
         {
             System.out.println("Enter player " + i + "'s Name: ");
-            addPlayer(in.next(), (int) (Math.round(Math.random())*getPlayerCount()));
+            playersArrayList.add(in.next());
+            //addPlayer(in.next(), (int) (Math.round(Math.random())*getPlayerCount()));
         }
-        Collections.shuffle(getPlayers()); //randomise the arraylist of names
+        for(int j=0;j<getPlayerCount();j++)
+        {
+            intArrayList.add(j);
+        }
+        Collections.shuffle(playersArrayList);
+        Collections.shuffle(intArrayList);
+        for(int j=0;j<getPlayerCount();j++) //initialize the players with random numbers
+        {
+            addPlayer(playersArrayList.get(j),intArrayList.get(j));
+        }
         System.out.println("Order: "); //will be a neater/more appealing way of doing this
         for(int j=0;j<getPlayerCount();j++)
         {
             System.out.println(Players.get(j).getName());
         }
-        //give everyone a starter tile
         //display the instructions
         displayControls();
         //player one will start

@@ -41,7 +41,7 @@ public class Board { // class for the board object for each player
 
     public String printUserBoard()
     {
-        String userBoard="";
+        String userBoard="Your Board: ";
         for(int i=0;i<TileList.size();i++)
         {
             userBoard = userBoard + "[ " + TileList.get(i).toString() + " ] ";
