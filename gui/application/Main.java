@@ -37,17 +37,14 @@ public class Main extends Application {
 			    stage.show();
 			});  
 			button2.setOnAction(event -> {
-				System.out.println("test");
 				stage.setScene(Scene2.getScene());
 		        stage.show();
 			});
 			button3.setOnAction(event -> {
-				System.out.println("test");
 				stage.setScene(scene3.getScene());
 		        stage.show();
 			});
 			button4.setOnAction(event -> {
-				System.out.println("test");
 				stage.setScene(scene4.getScene());
 		        stage.show();
 				

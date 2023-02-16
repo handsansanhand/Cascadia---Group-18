@@ -38,7 +38,7 @@ public class GameMain extends player{
 			Label TurnLabel = (Label) root.lookup("#TurnLabel");
 			Label ScoreLabel = (Label) root.lookup("#ScoreLabel");
 			TurnLabel.setText("Turn: "+turn);
-			ScoreLabel.setText("Score = " + player.getScore(player.placedimages));
+			//ScoreLabel.setText("Score = " + player.getScore(player.Score));
 			ImageView startingimage = (ImageView) root.lookup("#startingimage");
 			ImageView image1 = (ImageView) root.lookup("#imageone");
 			ImageView image2 = (ImageView) root.lookup("#imagetwo");
@@ -80,7 +80,6 @@ public class GameMain extends player{
 			label3.setText(player.gettilename(1));
 			label4.setText(player.gettilename(2));
 			label5.setText(player.gettilename(3));
-			boolean picking = true;
 		//	ImageView lastClickedImage = null;
 
 			image1.setOnMouseClicked(event -> {
@@ -409,14 +408,16 @@ public class GameMain extends player{
 		
 		buttonone.setOnAction(e ->{
 			
-			
+
 			//ment to add to arralist to do score
-			player.addlastplacetile(lastClickedImage);
+			player.AddImageView(lastClickedImage);
+			System.out.println(player.Score);
+
 			// the one above is ment to so that
 			//------------------------------------------------------
 			//------------------------------------------------------
 			player.shuffletiles();
-			ScoreLabel.setText("Score = " + player.getScore(player.placedimages));
+			ScoreLabel.setText("Score = " + player.getScore(player.Score));
 			turn = turn +1;
 			TurnLabel.setText("Turn: "+turn);
 			label2.setText(player.gettilename(0));

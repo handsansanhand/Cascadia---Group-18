@@ -2,6 +2,8 @@ package player;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,30 +13,36 @@ public class player extends Habitat{
 static ArrayList<String> names = new ArrayList<String>();
 static public  int playercount;
 static public int CurrentPlayer = 0;
-public static ArrayList<ImageView> placedimages = new ArrayList(); 
+public static ArrayList<String> Score = new ArrayList(); 
 
-
-
+/*
+public static class ImageViewComparator implements Comparator<ImageView> {
+    public int compare(ImageView iv1, ImageView iv2) {
+        return iv1.getId().compareTo(iv2.getId());
+    }
+}
+*/
 public static int getplayercount() {
 	return playercount;
 }
 
-public static void addlastplacetile(ImageView lastClickedImage) {
-	placedimages.add(lastClickedImage);
 
-}
-public static int getScore(ArrayList<ImageView> x) {
-    int score = 0;
-    for (int i = 0; i < x.size(); i++) {
-        for (int j = i + 1; j < x.size(); j++) {
-            if (x.get(i).equals(x.get(j)) && !placedimages.contains(x.get(i))) {
-                score++;
-                placedimages.add(x.get(i));
-            }
+public static int getScore(ArrayList<String> list) {
+    int count = 0;
+    HashSet<String> set = new HashSet<String>();
+
+    for (String str : list) {
+        if (set.contains(str)) {
+            count++;
+        } else {
+            set.add(str);
         }
     }
-    return score;
+
+    return count;
 }
+
+
 
 
 public static void addplayer(String gg) {
@@ -105,6 +113,40 @@ public static String gettilename(int x) {
 	else {
 		return "river";
 	}
+}
+public static void AddImageView(ImageView x) {
+	if(x.getImage() == Habitat.dessert) {
+		Score.add("dessert");
+	}
+	if(x.getImage() == Habitat.dessert_forrest) {
+		Score.add("desset_forest");
+	}
+	if(x.getImage() == Habitat.forest) {
+		Score.add("forest");
+	}
+	if(x.getImage() == Habitat.marine) {
+		Score.add("marine");
+	}
+	if(x.getImage() == Habitat.mountains) {
+		Score.add("mountains");
+	}
+	if(x.getImage() == Habitat.rivers) {
+		Score.add("rivers");
+	}
+	if(x.getImage() == Habitat.rock_forest) {
+		Score.add("rock_forest");
+	}
+	
+	if(x.getImage() == Habitat.rock_water) {
+		Score.add("rock_water");
+	}
+	if(x.getImage() == Habitat.water_forest) {
+		Score.add("water_forest");
+	}
+	else {
+		Score.add("null");
+	}
+
 }
 
 }

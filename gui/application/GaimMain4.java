@@ -14,7 +14,7 @@ import player.player;
 public class GaimMain4 extends player{
 	
 	private static Scene scene;
-	static int turn = 0;
+	static int turn = 1;
 
 	static ImageView lastClickedImage = null;
 
@@ -36,7 +36,7 @@ public class GaimMain4 extends player{
 			Label TurnLabel = (Label) root.lookup("#TurnLabel");
 			Label ScoreLabel = (Label) root.lookup("#ScoreLabel");
 			TurnLabel.setText("Turn: "+turn);
-			ScoreLabel.setText("Score = " + player.getScore(player.placedimages));
+	//		ScoreLabel.setText("Score = " + player.getScore(player.placedimages));
 			
 			
 			Label label2 = (Label) root.lookup("#labeltwo");
@@ -416,7 +416,7 @@ public class GaimMain4 extends player{
 				 player.shuffletiles();
 
 				
-				ScoreLabel.setText("Score = " + player.getScore(player.placedimages));
+	//			ScoreLabel.setText("Score = " + player.getScore(player.placedimages));
 				turn = turn +1;
 				TurnLabel.setText("Turn: "+turn);
 				player.CurrentPlayer = player.CurrentPlayer +1;
