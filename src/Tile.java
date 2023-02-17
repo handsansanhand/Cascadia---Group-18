@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 
 public class Tile { // class for the tiles that will be inserted onto the board
-    ArrayList<Tile> starterTiles = new ArrayList<>();
     ht landType;
     ht landType2;
     wT animal1;
@@ -278,10 +277,6 @@ public class Tile { // class for the tiles that will be inserted onto the board
         }
 
     }
-    public ArrayList<Tile> getStarterTiles() {
-        return starterTiles;
-    }
-
     public static Tile randomTile(){ //returns a tile object of random habitat tile
         switch((int) Math.round(Math.random()*4)){
             case 0:
