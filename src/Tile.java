@@ -362,9 +362,8 @@ public class Tile { // class for the tiles that will be inserted onto the board
         if(x.animalType == animal1 || x.animalType == animal2 || x.animalType == animal3){
             token = x;
         }
-        else{
-            System.out.println("error wrong animal type");
-        }
+
+
 
     }
     public ht getLandType(){

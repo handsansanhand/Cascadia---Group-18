@@ -6,6 +6,10 @@ public class player {
         return playerBoard;
     }
 
+    ArrayList<wildlifeToken> hand = new ArrayList<>();
+    public void addToken(wildlifeToken x){
+        hand.add(x);
+    }
     String name;
     int score;
     Board playerBoard;
