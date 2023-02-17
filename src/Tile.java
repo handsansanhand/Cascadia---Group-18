@@ -359,9 +359,21 @@ public class Tile { // class for the tiles that will be inserted onto the board
         }
     }
     public void addWildlifetoken(wildlifeToken x){
-        if(x.animalType == animal1 || x.animalType == animal2 || x.animalType == animal3){
-            token = x;
+        while(true){
+            try{
+                if(x.animalType == animal1 || x.animalType == animal2 || x.animalType == animal3){
+                    token = x;
+                    break;
+                }
+                else{
+                    throw new IllegalArgumentException();
+                }
+            }catch (IllegalArgumentException ex){
+                System.out.println("incorrect wildlife token please try again\n");
+            }
         }
+
+
 
 
 
