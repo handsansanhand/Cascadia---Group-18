@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 //class that holds the wildlife scoring cards, habitat tiles(ht) and wildlife tokens
-
     public class gameBoard {
         ArrayList<Tile> boardHabitatTiles = new ArrayList<>();
         ArrayList<wildlifeToken> boardWildlifeTokens = new ArrayList<>();
@@ -69,6 +68,20 @@ import java.util.Scanner;
                 System.out.println("Too many " + findMostCommonAnimal() + "'s, an automatic cull has been implemented.");
             }
             }
+            public Tile removeHabitatTile(int i)  //function for removing the i'th
+            {
+                Tile temp = boardHabitatTiles.get(i);
+                boardHabitatTiles.remove(i);
+                boardHabitatTiles.add(Tile.randomTile());
+                return temp;
+            }
+    public wildlifeToken removeWildlifeToken(int i)  //function for removing the i'th
+    {
+        wildlifeToken temp = boardWildlifeTokens.get(i);
+        boardWildlifeTokens.remove(i);
+        boardWildlifeTokens.add(wildlifeToken.generateWildlifeToken());
+        return temp;
+    }
 
         public void cull(wT animalToCull)   //function that replaces the culled animals
         {

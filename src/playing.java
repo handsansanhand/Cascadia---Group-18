@@ -67,10 +67,16 @@ public class playing {
         {
             i=0;
             System.out.println(getPlayers().get(i).getName() + "'s turn!");
+            startTurn(i); //asks the user to draw a tile
+            System.out.println("\n" + getPlayers().get(i).getPlayerBoard());
+            displayControls();
 
         }
         else {
             System.out.println(getPlayers().get(i).getName() + "'s turn!");
+            startTurn(i); //asks the user to draw a tile
+            System.out.println("\n" + getPlayers().get(i).getPlayerBoard());
+            displayControls();
         }
     }
 
@@ -80,14 +86,13 @@ public class playing {
         int i=0;
         nextTurn(i);
         i++;
-        while(stillPlaying)	//FOR TAKING TURN
+        while(stillPlaying)	//still playing = still playing the game
         {
-            gameBoard.checkForCull();
             switch (in.next()) {
                 case "v" -> {
                     System.out.println(getPlayers().get(i).getPlayerBoard());
                 }
-                case "n" -> {
+                case "p" -> {
                     nextTurn(i);
                     if (i + 1 == playerCount) {
                         i = 0;
@@ -105,18 +110,79 @@ public class playing {
                     System.out.println("ty for playing");
                     stillPlaying = false;
                 }
+                case "y" -> {
+                    //tile placement goes here
+                }
             }
 
+        }
+    }
+
+    public void startTurn(int i)
+    {
+        System.out.println(gameBoard);
+        System.out.println("Pick a habitat token and wildlife token from the board. [0-4]");
+        gameBoard.checkForCull();
+            switch (in.next()) {
+                case "0": {
+                    Tile t = gameBoard.removeHabitatTile(0);
+                    wildlifeToken w = gameBoard.removeWildlifeToken(0);
+                    getPlayers().get(i).addToken(w); //adds the token to your hand
+                    int input = Integer.parseInt(in.next());
+                    getPlayers().get(i).getPlayerBoard().TileList.add(input, t);
+                    break;
+                }
+                case "1": {
+                        Tile t = gameBoard.removeHabitatTile(1);
+                        wildlifeToken w = gameBoard.removeWildlifeToken(1);
+                        getPlayers().get(i).addToken(w); //adds the token to your hand
+                        placeTile(i, t);
+                        break;
+                    }
+                    case "2": {
+                        Tile t = gameBoard.removeHabitatTile(2);
+                        wildlifeToken w = gameBoard.removeWildlifeToken(2);
+                        getPlayers().get(i).addToken(w); //adds the token to your hand
+                        placeTile(i, t);
+                        break;
+                    }
+                    case "3": {
+                        Tile t = gameBoard.removeHabitatTile(3);
+                        wildlifeToken w = gameBoard.removeWildlifeToken(3);
+                        getPlayers().get(i).addToken(w); //adds the token to your hand
+                        placeTile(i, t);
+                        break;
+                    }
+                default:
+                {break;}
+                }
+            }
+
+
+
+    public void placeTile(int i, Tile t)
+    {
+        System.out.println("Where would you like to place the tile?");
+        int input = Integer.parseInt(in.next());
+        if (input > getPlayers().get(i).getPlayerBoard().TileList.size()) {
+            System.out.println("Incorrect position");
+        } else //place tile
+        {
+            getPlayers().get(i).getPlayerBoard().TileList.add(input, t);
         }
     }
 
     public void displayControls()
     {
         System.out.println("Press v to view your board"); //this should pop ur board up
-        System.out.println("Press 'n' to pass");
+        System.out.println("Press 'p' to pass");
         System.out.println("Press 'c' for controls");
         System.out.println("Press 'q' to quit the game");
         System.out.println("Press 'b' to view the game board");
         System.out.println("Press 'r' for the rules of the game"); //to display the instructions of the game ?? maybe a html
+    }
+    public void displayPlacementOption()
+    {
+        System.out.println("Would you like to place a tile? Y / N");
     }
 }
