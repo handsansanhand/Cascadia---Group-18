@@ -7,7 +7,7 @@ public class Tile { // class for the tiles that will be inserted onto the board
     wT animal1;
     wT animal2;
     wT animal3;
-
+    wildlifeToken token;
 
     Tile(ht landType, ht landType2) {
         if(landType2 != null){
@@ -180,6 +180,103 @@ public class Tile { // class for the tiles that will be inserted onto the board
                 break;
 
         }
+        switch(landType) {
+            case Mountain:
+                switch((int) Math.round(Math.random()*5)){
+                    case 0:
+                        if(animal1 != wT.BEAR){
+                            animal3 = wT.BEAR;
+                        }
+                        break;
+                    case 1:
+                        if(animal1 != wT.HAWK){
+                            animal3 = wT.HAWK;
+                        }
+                        break;
+                    case 2:
+                        if(animal1 != wT.ELK){
+                            animal3 = wT.ELK;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            case Forest:
+                switch((int) Math.round(Math.random()*7)){
+                    case 0:
+                        if(animal1 != wT.BEAR){
+                            animal3 = wT.BEAR;
+                        }
+                        break;
+                    case 1:
+                        if(animal1 != wT.HAWK){
+                            animal3 = wT.HAWK;
+                        }
+                        break;
+                    case 2:
+                        if(animal1 != wT.ELK){
+                            animal3 = wT.ELK;
+                        }
+                        break;
+                    case 3:
+                        if(animal1 != wT.FOX){
+                            animal3 = wT.FOX;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            case Prairie:
+                switch((int) Math.round(Math.random()*2)){
+                    case 0:
+                        if(animal1 != wT.HAWK){
+                            animal3 = wT.HAWK;
+                        }
+                        break;
+                    case 1:
+                        if(animal1 != wT.ELK){
+                            animal3 = wT.ELK;
+                        }
+                        break;
+                    case 2:
+                        if(animal1 != wT.FOX){
+                            animal3 = wT.FOX;
+                        }
+                        break;
+                }
+            case Wetland:
+                switch((int) Math.round(Math.random()*2)){
+                    case 0:
+                        if(animal1 != wT.SALMON){
+                            animal3 = wT.SALMON;
+                        }
+                        break;
+                    case 1:
+                        if(animal1 != wT.HAWK){
+                            animal3 = wT.HAWK;
+                        }
+                        break;
+                    case 2:
+                        if(animal1 != wT.FOX){
+                            animal3 = wT.FOX;
+                        }
+                        break;
+                }
+            case River:
+                switch((int) Math.round(Math.random()*2)){
+                    case 0:
+                        animal1 = wT.SALMON;
+                        break;
+                    case 1:
+                        animal1 = wT.HAWK;
+                        break;
+                    case 2:
+                        animal1 = wT.BEAR;
+                        break;
+                }
+
+        }
+
     }
     public ArrayList<Tile> getStarterTiles() {
         return starterTiles;
@@ -267,6 +364,12 @@ public class Tile { // class for the tiles that will be inserted onto the board
         }
     }
     public void addWildlifetoken(wildlifeToken x){
+        if(x.animalType == animal1 || x.animalType == animal2 || x.animalType == animal3){
+            token = x;
+        }
+        else{
+            System.out.println("error wrong animal type");
+        }
 
     }
     public ht getLandType(){

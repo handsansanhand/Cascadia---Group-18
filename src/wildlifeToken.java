@@ -1,5 +1,6 @@
 public class wildlifeToken {
 
+
     wT animalType;
     wildlifeToken(wT animalType){
         this.animalType = animalType;
