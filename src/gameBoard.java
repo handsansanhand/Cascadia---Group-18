@@ -63,6 +63,11 @@ import java.util.Scanner;
                         default -> System.out.println("Invalid argument");
                     }
                 }
+            else if(highestAnimalTypeCount()==4)
+            {
+                cull(findMostCommonAnimal());
+                System.out.println("Too many " + findMostCommonAnimal() + "'s, an automatic cull has been implemented.");
+            }
             }
 
         public void cull(wT animalToCull)   //function that replaces the culled animals
