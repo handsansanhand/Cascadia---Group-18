@@ -121,15 +121,14 @@ public class playing {
     public void startTurn(int i)
     {
         System.out.println(gameBoard);
-        System.out.println("Pick a habitat token and wildlife token from the board. [0-4]");
         gameBoard.checkForCull();
+        System.out.println("Pick a habitat token and wildlife token from the board. [0-4]");
             switch (in.next()) {
                 case "0": {
                     Tile t = gameBoard.removeHabitatTile(0);
                     wildlifeToken w = gameBoard.removeWildlifeToken(0);
                     getPlayers().get(i).addToken(w); //adds the token to your hand
-                    int input = Integer.parseInt(in.next());
-                    getPlayers().get(i).getPlayerBoard().TileList.add(input, t);
+                    placeTile(i, t);
                     break;
                 }
                 case "1": {
