@@ -129,6 +129,7 @@ public class playing {
                     wildlifeToken w = gameBoard.removeWildlifeToken(0);
                     getPlayers().get(i).addToken(w); //adds the token to your hand
                     placeTile(i, t);
+                    System.out.println(getPlayers().get(i).getPlayerBoard());
                     break;
                 }
                 case "1": {
@@ -136,6 +137,7 @@ public class playing {
                         wildlifeToken w = gameBoard.removeWildlifeToken(1);
                         getPlayers().get(i).addToken(w); //adds the token to your hand
                         placeTile(i, t);
+                    System.out.println(getPlayers().get(i).getPlayerBoard());
                         break;
                     }
                     case "2": {
@@ -143,6 +145,7 @@ public class playing {
                         wildlifeToken w = gameBoard.removeWildlifeToken(2);
                         getPlayers().get(i).addToken(w); //adds the token to your hand
                         placeTile(i, t);
+                        System.out.println(getPlayers().get(i).getPlayerBoard());
                         break;
                     }
                     case "3": {
@@ -150,18 +153,59 @@ public class playing {
                         wildlifeToken w = gameBoard.removeWildlifeToken(3);
                         getPlayers().get(i).addToken(w); //adds the token to your hand
                         placeTile(i, t);
+                        System.out.println(getPlayers().get(i).getPlayerBoard());
                         break;
                     }
                 default:
-                {break;}
+                {throw new IllegalArgumentException("invalid input");}
+                }
+                System.out.println("Would you like to place a wildlife token? Y/N");
+                switch (in.next()) {
+                    case "y": {
+                        placeToken(i);
+                        nextTurn(i);
+                        break;
+                    }
+                    case "n": {
+                        nextTurn(i);
+                        break;
+                    }
+                    default: {
+                        System.out.println("invalid input");
+                    }
                 }
             }
 
 
+    public void placeToken(int i)
+    {
+        System.out.println("What token would you like to place?");  //asks the user what token they wanna place
+        System.out.println(getPlayers().get(i).printHand());
+        int inputToken = Integer.parseInt(in.next());
+        wildlifeToken tokenToPlace = getPlayers().get(i).hand.get(inputToken);
+
+        System.out.println("Where would you like to place the token?"); //ask for the location (tile number)
+        System.out.println(getPlayers().get(i).getPlayerBoard());
+        int inputPlacement = Integer.parseInt(in.next());
+        if (inputPlacement > getPlayers().get(i).getPlayerBoard().TileList.size()) {
+            System.out.println("Incorrect position");
+        } else //place token
+        {
+            try {
+                getPlayers().get(i).getPlayerBoard().TileList.get(inputPlacement).addWildlifetoken(tokenToPlace);
+            }
+            catch (IllegalArgumentException ex)
+            {
+                throw new IllegalArgumentException("invalid animal type for selected habitat tile");
+
+            }
+        }
+    }
 
     public void placeTile(int i, Tile t)
     {
         System.out.println("Where would you like to place the tile?");
+        System.out.println(getPlayers().get(i).getPlayerBoard());
         int input = Integer.parseInt(in.next());
         if (input > getPlayers().get(i).getPlayerBoard().TileList.size()) {
             System.out.println("Incorrect position");
@@ -180,8 +224,5 @@ public class playing {
         System.out.println("Press 'b' to view the game board");
         System.out.println("Press 'r' for the rules of the game"); //to display the instructions of the game ?? maybe a html
     }
-    public void displayPlacementOption()
-    {
-        System.out.println("Would you like to place a tile? Y / N");
-    }
+
 }
