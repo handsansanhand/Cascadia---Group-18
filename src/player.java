@@ -10,7 +10,6 @@ public class player {
     public void addToken(wildlifeToken x){
         hand.add(x);
     }
-
     String name;
     int score;
     Board playerBoard;
