@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public class Tile { // class for the tiles that will be inserted onto the board
+    static int count;
     Tile up,left,right,down; //points to the tiles above, below, to the left and to the right of the tile
     ht landType;
     ht landType2;
@@ -8,9 +9,31 @@ public class Tile { // class for the tiles that will be inserted onto the board
     wT animal2;
     wT animal3;
     wildlifeToken token;
-
+    public static void gameEnd(){
+        switch(playing.playerCount){
+            case 2:
+                if(count >= 37 ){
+                    System.out.println("Out of tiles");
+                    //System.exit(0);
+                }
+                break;
+            case 3:
+                if(count >= 54 ){
+                    System.out.println("Out of tiles");
+                    //System.exit(0);
+                }
+                break;
+            case 4:
+                if(count >= 71 ){
+                    System.out.println("Out of tiles");
+                    //System.exit(0);
+                }
+                break;
+        }
+    }
     Tile(ht landType, ht landType2) {
-        if(landType2 != null){
+        count++;
+        if(landType2 == ht.Empty){
             this.landType2 = landType2;
         }
         this.landType = landType;

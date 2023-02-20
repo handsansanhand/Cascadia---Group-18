@@ -25,19 +25,19 @@ public class Board { // class for the board object for each player
             case 1:
                 oldest.up = newest;
                 newest.down = oldest;
-            break;
+                break;
             case 2:
                 oldest.down = newest;
                 newest.up = oldest;
-            break;
+                break;
             case 3:
                 oldest.left = newest;
                 newest.right = oldest;
-            break;
+                break;
             case 4:
                 oldest.right = newest;
                 newest.left = oldest;
-            break;
+                break;
         }
         TileList.add(newest);
     }

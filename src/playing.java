@@ -5,12 +5,12 @@ import java.util.Scanner;
 public class playing {
     Scanner in = new Scanner(System.in);
 
-    int playerCount;
+    public static int playerCount;
     ArrayList<player> Players = new ArrayList<player>();
     gameBoard gameBoard = new gameBoard();
 
     public int getPlayerCount() {
-        return this.playerCount;
+        return playerCount;
     }
 
 
@@ -21,7 +21,7 @@ public class playing {
 
     public void setPlayerCount(int x) {
         // TODO Auto-generated method stub
-        this.playerCount = x;
+        playerCount = x;
     }
 
     public ArrayList<player> getPlayers()
