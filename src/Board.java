@@ -1,42 +1,50 @@
 import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Board { // class for the board object for each player
     ArrayList<Tile> TileList = new ArrayList<Tile>();
-    public void addTile(ht x, ht y){
-        TileList.add(new Tile(x, y));
+    public void starterTiles(){
+        TileList.add(Tile.randomTile());
+        TileList.add(Tile.randomTile());
+        TileList.add(Tile.randomTile());
+        TileList.get(0).up = TileList.get(1);
+        TileList.get(1).down = TileList.get(0);
+        TileList.get(0).down = TileList.get(2);
+        TileList.get(2).up = TileList.get(0);
+    }
+    public void addTile(Tile oldest, Tile newest){ // Tile newest is the one being placed and tile oldest is the reference tile
+        int input;
+        System.out.println("1 to place tile above\n2to place tile below\n3 to place tile to the left\n4 to place tile to the right");
+        Scanner in = new Scanner(System.in);
+        while(!in.hasNextInt()){
+            System.out.println("incorrect input please try again\n");
+            in.next();
+        }
+        input = in.nextInt();
+        switch(input){
+            case 1:
+                oldest.up = newest;
+                newest.down = oldest;
+            break;
+            case 2:
+                oldest.down = newest;
+                newest.up = oldest;
+            break;
+            case 3:
+                oldest.left = newest;
+                newest.right = oldest;
+            break;
+            case 4:
+                oldest.right = newest;
+                newest.left = oldest;
+            break;
+        }
+        TileList.add(newest);
     }
 
-    public Board(int num) //constructing the board will give the player a starter tile?
+    public Board(int num) //3 random starter tiles created in middle, up, down positions
     {
-        switch (num)
-        {
-            case 0:
-                addTile(ht.River,ht.Forest);
-                addTile(ht.Wetland,ht.Wetland);
-                addTile(ht.Mountain,ht.Prairie);
-                break;
-            case 1:
-                addTile(ht.Forest,ht.Wetland);
-                addTile(ht.Mountain,ht.Mountain);
-                addTile(ht.Prairie,ht.River);
-                break;
-            case 2:
-                addTile(ht.Mountain,ht.River);
-                addTile(ht.Forest,ht.Forest);
-                addTile(ht.Prairie,ht.River);
-                break;
-            case 3:
-                addTile(ht.Prairie,ht.Forest);
-                addTile(ht.River,ht.River);
-                addTile(ht.Wetland,ht.Mountain);
-                break;
-            case 4:
-                addTile(ht.Wetland,ht.River);
-                addTile(ht.Prairie,ht.Prairie);
-                addTile(ht.Mountain,ht.Forest);
-                break;
-            default:
-                break;
-        }
+        starterTiles();
     }
 
     public String printUserBoard()

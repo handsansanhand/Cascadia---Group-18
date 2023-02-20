@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public class Tile { // class for the tiles that will be inserted onto the board
+    Tile up,left,right,down; //points to the tiles above, below, to the left and to the right of the tile
     ht landType;
     ht landType2;
     wT animal1;
