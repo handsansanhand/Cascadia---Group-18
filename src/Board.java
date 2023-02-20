@@ -14,7 +14,7 @@ public class Board { // class for the board object for each player
     }
     public void addTile(Tile oldest, Tile newest){ // Tile newest is the one being placed and tile oldest is the reference tile
         int input;
-        System.out.println("1 to place tile above\n2to place tile below\n3 to place tile to the left\n4 to place tile to the right");
+        System.out.println("1 to place tile above\n2to place tile below\n3 to place tile to the left\n4 to place tile to the right\n");
         Scanner in = new Scanner(System.in);
         while(!in.hasNextInt()){
             System.out.println("incorrect input please try again\n");
@@ -23,18 +23,34 @@ public class Board { // class for the board object for each player
         input = in.nextInt();
         switch(input){
             case 1:
+                if(oldest.up != null){
+                    System.out.println("That position is filled\n");
+                    addTile(oldest, newest);
+                }
                 oldest.up = newest;
                 newest.down = oldest;
                 break;
             case 2:
+                if(oldest.down != null){
+                    System.out.println("That position is filled\n");
+                    addTile(oldest, newest);
+                }
                 oldest.down = newest;
                 newest.up = oldest;
                 break;
             case 3:
+                if(oldest.left != null){
+                    System.out.println("That position is filled\n");
+                    addTile(oldest, newest);
+                }
                 oldest.left = newest;
                 newest.right = oldest;
                 break;
             case 4:
+                if(oldest.right != null){
+                    System.out.println("That position is filled\n");
+                    addTile(oldest, newest);
+                }
                 oldest.right = newest;
                 newest.left = oldest;
                 break;
