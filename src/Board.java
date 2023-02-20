@@ -42,7 +42,7 @@ public class Board { // class for the board object for each player
         TileList.add(newest);
     }
 
-    public Board(int num) //3 random starter tiles created in middle, up, down positions
+    public Board(int num) //3 random starter tiles created in middle, up, down positions on the board
     {
         starterTiles();
     }
