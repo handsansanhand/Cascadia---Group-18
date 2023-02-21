@@ -1,0 +1,17 @@
+need to display wildlife tokens have not decided how to do it rigt now 
+currently converting @fmega698 and @handsansanhand code to my own so it can be used with the gui have the wildlife tokens coverted need to look over the rest and see wha i can implement 
+
+
+What we have so far on the gui
+randomise tiles
+tile pixel drawings for fiull tiles ie 100%
+still need to add some more mixed tiles ie the 50% ones 
+we have the name entry using text fields 
+we have a randomiser to choose who goes when 
+we have a score functions that scores based on the number of non uniues images
+in the board 
+the sxcore feature is semi broken right now 
+so we need to try sort that out
+we have a turn counter that counts how many tiles have been placed on the board
+we still have the bug that needzs to be fixed where a user can place multiple tiles in one turn wothout getting punished we can fix this whith a while loop and a bollean conditions
+we have 4 unique bard generated boards generated for each player we could fix this by using a game loop but i dont know how to do this 
