@@ -2,10 +2,11 @@ package backupcode;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
+//EACH 'BOARD' HOLDS AN ARRAYLIST OF TILES
 public class Board { // class for the board object for each player
     ArrayList<Tile> TileList = new ArrayList<Tile>();
     public void starterTiles(){
+        //STARTER TILES ARE A FIXED 5 COMBINATION OF CERTAIN TILES
         TileList.add(Tile.randomTile());
         TileList.add(Tile.randomTile());
         TileList.add(Tile.randomTile());

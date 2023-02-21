@@ -2,6 +2,7 @@ package backupcode;
 
 import java.util.Scanner;
 
+//CLASS THAT CURRENTLY PLAYS THE GAME AND CALLS ALL THE FUNCTIONS FROM THE PLAYING CLASS
 public class GamePanel {
 public static void main(String[] args) {
 	System.out.println("Welcome to Cascadia!");

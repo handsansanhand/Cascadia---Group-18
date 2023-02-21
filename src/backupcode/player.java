@@ -1,6 +1,9 @@
 package backupcode;
 
 import java.util.ArrayList;
+
+//THIS CLASS IS FOR EACH INDIVIDUAL PLAYER, THEIR NAME SCORE, 'HAND' AND THEIR OWN BOARD
+//EACH 'PLAYER' HAS THEIR OWN 'BOARD' CLASS TO PLACE THEIR HABITAT TILES
 public class player {
 
     public Board getPlayerBoard() { // return visual representation of board
