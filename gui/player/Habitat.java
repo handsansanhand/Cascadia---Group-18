@@ -31,7 +31,7 @@ public Habitat() {
 	habittats.add("forests");
 	habittats.add("mountains");
 	habittats.add("rivers");
-	habittats.add("deserts");
+	habittats.add("desserts");
 	habitattiles.add(dessert);
 	habitattiles.add(forest);
 	habitattiles.add(marine);
@@ -54,9 +54,9 @@ public static void addmoretiles() {
 }
 
 
-
+/*
 public static String StartingWildlifeToken(int x) {
-	String tile = habittats.get(x);
+	String tile = (x);
 	switch(tile) {
     case "mountains":
         switch((int) Math.round(Math.random()*2)){
@@ -134,7 +134,7 @@ public static String StartingWildlifeToken(int x) {
 }
 
 
-
+*/
 
 
 

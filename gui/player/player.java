@@ -65,7 +65,7 @@ public void shufflehabitats() {
 }
 
 
-public String getHabitat(int x) {
+public static  String getHabitat(int x) {
 	return habittats.get(x);
 }
 public static Image getstarttile(int currentplayer) {
@@ -149,5 +149,99 @@ public static void AddImageView(ImageView x) {
 
 }
 
+
+
+
+
+
+
+public static String StartingWildlifeToken(int x) {
+	String tile = player.getHabitat(x);
+	System.out.println(tile);
+	if(tile == "mountains") {
+		switch((int) Math.round(Math.random()*2)){
+        case 0:
+            animal1 = wT.BEAR;
+            break;
+        case 1:
+            animal1 = wT.HAWK;
+            break;
+        case 2:
+            animal1 = wT.ELK;
+            break;
+	}
+    	return animal1.toString();
+
+	}
+		if(tile == "forests") {
+	        switch((int) Math.round(Math.random()*3)){
+            case 0:
+                animal1 = wT.BEAR;
+                break;
+            case 1:
+                animal1 = wT.HAWK;
+                break;
+            case 2:
+                animal1 = wT.ELK;
+                break;
+            case 3:
+                animal1 = wT.FOX;
+                break;
+        }
+        	return animal1.toString();
+
+		}
+	        if(tile == "desserts") {
+	            switch((int) Math.round(Math.random()*2)){
+                case 0:
+                    animal1 = wT.HAWK;
+                    break;
+                case 1:
+                    animal1 = wT.ELK;
+                    break;
+                case 2:
+                    animal1 = wT.FOX;
+                    break;
+            }
+	        	return animal1.toString();
+
+	        }
+	        if(tile == "rivers") {
+	        	switch((int) Math.round(Math.random()*2)){
+                case 0:
+                    animal1 = wT.SALMON;
+                    break;
+                case 1:
+                    animal1 = wT.HAWK;
+                    break;
+                case 2:
+                    animal1 = wT.FOX;
+                    break;
+            }
+	        	return animal1.toString();
+
+	        }
+	        if(tile == "waters") {
+	        	switch((int) Math.round(Math.random()*2)){
+                case 0:
+                    animal1 = wT.SALMON;
+                    break;
+                case 1:
+                    animal1 = wT.HAWK;
+                    break;
+                case 2:
+                    animal1 = wT.BEAR;
+                    break;
+            }
+	        	return animal1.toString();
+
+	        }
+		
+	
+	
+	return "";
+
+
+}
 }
 

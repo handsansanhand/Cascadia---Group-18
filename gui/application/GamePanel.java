@@ -37,11 +37,11 @@ public class GamePanel extends player {
 
 		if (player.playercount == 2) {
 
-			label1.setText("order \n" + "1st " + player.getName(0)+" with habitat "+ player.getHabitat(0)+" Token "+Habitat.StartingWildlifeToken(0)  + "\n2nd " + player.getName(1)+" with habitat "+player.getHabitat(1)+" Token "+Habitat.StartingWildlifeToken(1));
+			label1.setText("order \n" + "1st " + player.getName(0)+" with habitat "+ player.getHabitat(0)+" Token "+player.StartingWildlifeToken(0)  + "\n2nd " + player.getName(1)+" with habitat "+player.getHabitat(1)+" Token "+player.StartingWildlifeToken(1));
 		}
 		if (player.playercount == 3) {
 
-			label1.setText("order \n" + "1st " + player.getName(0) +" with habitat "+player.getHabitat(0)+" Token "+Habitat.StartingWildlifeToken(0)+ "\n2nd " + player.getName(1)+" with habitat"+player.getHabitat(1)+" Token "+Habitat.StartingWildlifeToken(1)+ "\n3rd " + player.getName(2)+" with habitat "+player.getHabitat(2)+" Token "+Habitat.StartingWildlifeToken(2));
+			label1.setText("order \n" + "1st " + player.getName(0) +" with habitat "+player.getHabitat(0)+" Token "+player.StartingWildlifeToken(0)+ "\n2nd " + player.getName(1)+" with habitat "+player.getHabitat(1)+" Token "+player.StartingWildlifeToken(1)+ "\n3rd " + player.getName(2)+" with habitat "+player.getHabitat(2)+" Token "+player.StartingWildlifeToken(2));
 		}
 		if (player.playercount == 4) {
 
