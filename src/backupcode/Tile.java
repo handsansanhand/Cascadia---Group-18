@@ -11,6 +11,7 @@ public class Tile { // class for the tiles that will be inserted onto the board
     wT animal2;
     wT animal3;
     wildlifeToken token;
+    boolean isKeystoneTile=false; //this is to check if a tile is a keystone tile (meaning if it has only one landType i.e: Mountain / Empty)
     public static void gameEnd(){
         switch(playing.playerCount){
             case 2:
@@ -35,10 +36,12 @@ public class Tile { // class for the tiles that will be inserted onto the board
     }
     Tile(ht landType, ht landType2) {
         count++;
-        if(landType2 == ht.Empty){
-            this.landType2 = landType2;
-        }
+        this.landType2 = landType2;
         this.landType = landType;
+        if(landType2==ht.Empty)
+        {
+            isKeystoneTile = true;
+        }
         switch(landType) {
             case Mountain:
                 switch((int) Math.round(Math.random()*2)){
@@ -383,6 +386,8 @@ public class Tile { // class for the tiles that will be inserted onto the board
             default:
                 return new Tile(ht.Error, ht.Error);
         }
+        //check if its a keystoneTile
+
     }
     public void addWildlifetoken(wildlifeToken x){
         while(true){
@@ -398,11 +403,6 @@ public class Tile { // class for the tiles that will be inserted onto the board
                 System.out.println("incorrect wildlife token please try again\n");
             }
         }
-
-
-
-
-
     }
     public ht getLandType(){
         return landType;
@@ -414,7 +414,11 @@ public class Tile { // class for the tiles that will be inserted onto the board
     public String printTile()
     {
         String tileString = "";
-        tileString = getLandType().toString() + " / ";
+        if(isKeystoneTile)
+        {//check something that indicates that its a special tile ()
+            tileString = "*" + getLandType().toString() + "*";
+        }
+        else {tileString = getLandType().toString() + " / " + getLandType2().toString();}
         if(token!=null)
         {
             tileString = tileString +  " ( " + token + " )";
