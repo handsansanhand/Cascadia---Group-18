@@ -177,7 +177,6 @@ public class playing {
                 }
             }
         }
-        while (stillTokenPlace) {
             System.out.println("Would you like to place a wildlife token? Y/N");
             switch (in.next()) {
                 case "y": {
@@ -209,7 +208,6 @@ public class playing {
             nextTurn(i);
         }
 
-    }
 
     public void placeToken(int i)
     {
