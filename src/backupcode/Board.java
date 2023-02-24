@@ -4,11 +4,16 @@ import java.util.ArrayList;
 import java.util.Scanner;
 //EACH 'BOARD' HOLDS AN ARRAYLIST OF TILES
 public class Board { // class for the board object for each player
-    ArrayList<Tile> TileList = new ArrayList<Tile>();
-    Tile[][] TileBoard = new Tile[30][30];
-    public void starterTiles(){
-        //STARTER TILES ARE A FIXED 5 COMBINATION OF CERTAIN TILES
+    //ArrayList<Tile> TileList = new ArrayList<Tile>();
+    final int BOARD_HEIGHT=15;
+    final int BOARD_WIDTH=15;
+    Tile[][] TileBoard = new Tile[BOARD_WIDTH][BOARD_HEIGHT];
 
+    public void starterTiles(){
+        //STARTER TILES ARE A FIXED 5 COMBINATION OF CERTAIN TILES?
+        TileBoard[(BOARD_WIDTH/2) -1][0] = Tile.randomTile();
+        TileBoard[(BOARD_WIDTH/2)][1] = Tile.randomTile();
+        TileBoard[(BOARD_WIDTH/2) +1][0] = Tile.randomTile();
     }
     public void addTile(Tile oldest, Tile newest){ // Tile newest is the one being placed and tile oldest is the reference tile
         int input;
@@ -53,7 +58,11 @@ public class Board { // class for the board object for each player
                 newest.left = oldest;
                 break;
         }
-        TileList.add(newest);
+        //TileList.add(newest);
+    }
+    public void addTileCoOrdinates(int x, int y, Tile newTile)    //temporary tile adder using co ordinates until we get the other method working
+    {
+        TileBoard[x][y] = newTile;
     }
 
     public Board(int num) //3 random starter tiles created in middle, up, down positions on the board
@@ -61,12 +70,19 @@ public class Board { // class for the board object for each player
         starterTiles();
     }
 
-    public String printUserBoard()
-    {
-        String userBoard="Your Board: ";
-        for(int i=0;i<TileList.size();i++)
+    public String printUserBoard() {
+        String userBoard = "";
+        System.out.println("Your Board:");
+        for (int i = BOARD_HEIGHT-1; i>=0; i--) //TILEBOARD.LENGTH = HEIGHT // TILEBOARD[0].LENGTH = WIDTH
         {
-            userBoard = userBoard + "[ " + TileList.get(i).toString() + " ] ";
+            for (int j = BOARD_WIDTH-1; j >= 0; j--) {
+                if (TileBoard[j][i] == null) {
+                    userBoard = userBoard + "[ EMPTY ]";
+                } else {
+                    userBoard = userBoard + "[ " + TileBoard[j][i].toString() + " ] ";
+                }
+            }
+            userBoard = userBoard + "\n";
         }
         return userBoard;
     }

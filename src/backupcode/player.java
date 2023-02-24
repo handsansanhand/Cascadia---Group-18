@@ -35,7 +35,7 @@ public class player {
     }
     public String toString()
     {
-        return playerBoard.TileList.toString();
+        return playerBoard.toString();
     }
     public String printHand() //function for printing the hand the user has (wildlifetokens)
     {

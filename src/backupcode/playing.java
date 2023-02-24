@@ -180,7 +180,7 @@ public class playing {
             System.out.println("Would you like to place a wildlife token? Y/N");
             switch (in.next()) {
                 case "y": {
-                    placeToken(i);
+                   placeToken(i);
                     i++;
                     nextTurn(i);
                     stillTokenPlace = false;
@@ -209,6 +209,7 @@ public class playing {
         }
 
 
+
     public void placeToken(int i)
     {
         System.out.println("What token would you like to place?");  //asks the user what token they wanna place
@@ -218,32 +219,33 @@ public class playing {
 
         System.out.println("Where would you like to place the token?"); //ask for the location (tile number)
         System.out.println(getPlayers().get(i).getPlayerBoard());
-        int inputPlacement = Integer.parseInt(in.next());
-        if (inputPlacement > getPlayers().get(i).getPlayerBoard().TileList.size()) {
+        String input = in.next();
+        String[] numbers = input.split(",");
+        int x = Integer.parseInt(numbers[0].trim());
+        int y = Integer.parseInt(numbers[1].trim());
+        if (y > getPlayers().get(i).getPlayerBoard().TileBoard.length || x> getPlayers().get(i).getPlayerBoard().TileBoard[0].length) {
             System.out.println("Incorrect position");
         } else //place token
         {
-            try {
-                getPlayers().get(i).getPlayerBoard().TileList.get(inputPlacement).addWildlifetoken(tokenToPlace);
-            }
-            catch (IllegalArgumentException ex)
-            {
-                throw new IllegalArgumentException("invalid animal type for selected habitat tile");
 
-            }
+                getPlayers().get(i).getPlayerBoard().TileBoard[x][y].addWildlifetoken(tokenToPlace);
         }
     }
 
+
     public void placeTile(int i, Tile t)
     {
-        System.out.println("Where would you like to place the tile?");
+        System.out.println("Where would you like to place the tile? [X,Y]");
         System.out.println(getPlayers().get(i).getPlayerBoard());
-        int input = Integer.parseInt(in.next());
-        if (input > getPlayers().get(i).getPlayerBoard().TileList.size()) {
+        String input = in.next();
+        String[] numbers = input.split(",");
+        int x = Integer.parseInt(numbers[0].trim());
+        int y = Integer.parseInt(numbers[1].trim());
+       /* if (input > getPlayers().get(i).getPlayerBoard().TileList.size()) {
             System.out.println("Incorrect position");
-        } else //place tile
+        } else //place tile*/
         {
-            getPlayers().get(i).getPlayerBoard().TileList.add(input, t);
+            getPlayers().get(i).getPlayerBoard().addTileCoOrdinates(x,y,t);
         }
     }
 
