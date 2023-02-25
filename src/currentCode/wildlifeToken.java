@@ -1,28 +1,28 @@
-package backupcode;
+package currentCode;
 
 public class wildlifeToken {
 
 
-    wT animalType;
-    wildlifeToken(wT animalType){
+    tokenEnum animalType;
+    wildlifeToken(tokenEnum animalType){
         this.animalType = animalType;
     }
 
     public static wildlifeToken generateWildlifeToken(){ //returns a tile object of random habitat tile
         switch((int) Math.round(Math.random()*4)){
             case 0:
-                return new wildlifeToken(wT.HAWK);
+                return new wildlifeToken(tokenEnum.HAWK);
             case 1:
-                return new wildlifeToken(wT.BEAR);
+                return new wildlifeToken(tokenEnum.BEAR);
             case 2:
-                return new wildlifeToken(wT.ELK);
+                return new wildlifeToken(tokenEnum.ELK);
             case 3:
-                return new wildlifeToken(wT.SALMON);
+                return new wildlifeToken(tokenEnum.SALMON);
             default:
-                return new wildlifeToken(wT.FOX);
+                return new wildlifeToken(tokenEnum.FOX);
         }
     }
-    public wT getAnimalType(){
+    public tokenEnum getAnimalType(){
         return animalType;
     }
     
