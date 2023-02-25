@@ -1,9 +1,8 @@
-package backupcode;
+package currentCode;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 //EACH 'BOARD' HOLDS AN ARRAYLIST OF TILES
-public class Board { // class for the board object for each player
+public class tileBoard { // class for the board object for each player
     //ArrayList<Tile> TileList = new ArrayList<Tile>();
     final int BOARD_HEIGHT=15;
     final int BOARD_WIDTH=15;
@@ -65,7 +64,7 @@ public class Board { // class for the board object for each player
         TileBoard[x][y] = newTile;
     }
 
-    public Board(int num) //3 random starter tiles created in middle, up, down positions on the board
+    public tileBoard(int num) //3 random starter tiles created in middle, up, down positions on the board
     {
         starterTiles();
     }

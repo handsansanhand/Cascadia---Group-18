@@ -1,4 +1,4 @@
-package backupcode;
+package currentCode;
 
 import java.util.ArrayList;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 //EACH 'PLAYER' HAS THEIR OWN 'BOARD' CLASS TO PLACE THEIR HABITAT TILES
 public class player {
 
-    public Board getPlayerBoard() { // return visual representation of board
+    public tileBoard getPlayerBoard() { // return visual representation of board
         return playerBoard;
     }
 
@@ -16,13 +16,13 @@ public class player {
     }
     String name;
     int score;
-    Board playerBoard;
+    tileBoard playerBoard;
 
     public player(String x, int i)
     {
         this.name = x;
         this.score = 0;
-        this.playerBoard = new Board(i);
+        this.playerBoard = new tileBoard(i);
 
     }
 

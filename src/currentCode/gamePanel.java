@@ -1,13 +1,13 @@
-package backupcode;
+package currentCode;
 
 import java.util.Scanner;
 
 //CLASS THAT CURRENTLY PLAYS THE GAME AND CALLS ALL THE FUNCTIONS FROM THE PLAYING CLASS
-public class GamePanel {
+public class gamePanel {
 public static void main(String[] args) {
 	System.out.println("Welcome to Cascadia!");
 	int x = 0;
-	playing playing = new playing();
+	gameState gameState = new gameState();
 	Scanner in = new Scanner(System.in);
 	System.out.println("Enter number of players");
 	while(in.hasNext()) {
@@ -26,9 +26,9 @@ public static void main(String[] args) {
 			in.next();
 		}
 	}
-	playing.setPlayerCount(x);
-	playing.initializeGame();
-	playing.playGame();
+	gameState.setPlayerCount(x);
+	gameState.initializeGame();
+	gameState.playGame();
 
 	 x = 0;
 	 in.close();	

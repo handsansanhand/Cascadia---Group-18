@@ -1,8 +1,6 @@
-package backupcode;
+package currentCode;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.Scanner;
 
 //class that holds the wildlife scoring cards, habitat tiles(ht) and wildlife tokens
@@ -28,8 +26,8 @@ import java.util.Scanner;
         {
             int highestCount=0;
             int temp=0;
-            wT[] tokens = wT.values();
-            for(wT animal: tokens)
+            tokenEnum[] tokens = tokenEnum.values();
+            for(tokenEnum animal: tokens)
             {
                 temp = countAnimals(animal);
                 if(temp>highestCount)
@@ -49,7 +47,7 @@ import java.util.Scanner;
                 Scanner in = new Scanner(System.in);
                     switch (in.next()) {
                         case "y" -> {
-                            wT animaltocull = findMostCommonAnimal();
+                            tokenEnum animaltocull = findMostCommonAnimal();
                             cull(animaltocull);
                             System.out.println("The " + animaltocull + "'s have been culled.");
                             System.out.println("The new board is: \n" + this.toString());
@@ -84,7 +82,7 @@ import java.util.Scanner;
         return temp;
     }
 
-        public void cull(wT animalToCull)   //function that replaces the culled animals
+        public void cull(tokenEnum animalToCull)   //function that replaces the culled animals
         {
             for(int i=0;i<boardWildlifeTokens.size();i++)
             {
@@ -96,12 +94,12 @@ import java.util.Scanner;
                 }
             }
         }
-        public wT findMostCommonAnimal()    //function that returns the animal type of the most frequent animal on the board
+        public tokenEnum findMostCommonAnimal()    //function that returns the animal type of the most frequent animal on the board
         {
-            wT highestAnimal=wT.ELK;
-            wT temp;
-            wT[] tokens = wT.values();
-            for(wT animal: tokens)
+            tokenEnum highestAnimal= tokenEnum.ELK;
+            tokenEnum temp;
+            tokenEnum[] tokens = tokenEnum.values();
+            for(tokenEnum animal: tokens)
             {
                 temp = animal;
                 if(countAnimals(temp)>countAnimals(highestAnimal))
@@ -112,7 +110,7 @@ import java.util.Scanner;
             return highestAnimal;
         }
 
-        public int countAnimals(wT animalType) //function that counts the amount of animaltype in the current wildlifetokens(used for culling)
+        public int countAnimals(tokenEnum animalType) //function that counts the amount of animaltype in the current wildlifetokens(used for culling)
         {
             int count =0;
             for(int i=0;i<boardWildlifeTokens.toArray().length;i++)
