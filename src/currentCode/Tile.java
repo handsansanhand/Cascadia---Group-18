@@ -2,6 +2,7 @@ package currentCode;
 
 public class Tile { // class for the tiles that will be inserted onto the board
     static int count;
+    public int x,y;
     Tile up,left,right,down; //points to the tiles above, below, to the left and to the right of the tile
     habitatEnum landType;
     habitatEnum landType2;
@@ -386,6 +387,10 @@ public class Tile { // class for the tiles that will be inserted onto the board
         }
         //check if its a keystoneTile
 
+    }
+    public void setTileCoordinates(int x, int y){
+        this.x = x;
+        this.y = y;
     }
     public void addWildlifetoken(wildlifeToken x){
         int attempts = 3;
