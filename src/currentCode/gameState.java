@@ -224,7 +224,8 @@ public class gameState {
 
         int x = Integer.parseInt(numbers[0].trim());
         int y = Integer.parseInt(numbers[1].trim());
-        while (true) {
+        int attempts=3;
+        while (attempts>0) {
             try {
                 if (y > getPlayers().get(i).getPlayerBoard().TileBoard.length || x > getPlayers().get(i).getPlayerBoard().TileBoard[0].length) {
                     System.out.println("incorrect position");
@@ -256,6 +257,7 @@ public class gameState {
                 }
             } catch (IllegalArgumentException ex) {
                 System.out.println("Incorrect position, please try again.");
+                attempts--;
                 input = in.next();
                 numbers = input.split(",");
                 x = Integer.parseInt(numbers[0].trim());
