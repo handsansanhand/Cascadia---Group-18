@@ -1,19 +1,18 @@
-package backupcode;
-
-import java.util.ArrayList;
+package currentCode;
 
 public class Tile { // class for the tiles that will be inserted onto the board
     static int count;
+    public int x,y;
     Tile up,left,right,down; //points to the tiles above, below, to the left and to the right of the tile
-    ht landType;
-    ht landType2;
-    wT animal1;
-    wT animal2;
-    wT animal3;
+    habitatEnum landType;
+    habitatEnum landType2;
+    tokenEnum animal1;
+    tokenEnum animal2;
+    tokenEnum animal3;
     wildlifeToken token;
     boolean isKeystoneTile=false; //this is to check if a tile is a keystone tile (meaning if it has only one landType i.e: Mountain / Empty)
     public static void gameEnd(){
-        switch(playing.playerCount){
+        switch(gameState.playerCount){
             case 2:
                 if(count >= 37 ){
                     System.out.println("Out of tiles");
@@ -34,11 +33,11 @@ public class Tile { // class for the tiles that will be inserted onto the board
                 break;
         }
     }
-    Tile(ht landType, ht landType2) {
+    Tile(habitatEnum landType, habitatEnum landType2) {
         count++;
         this.landType2 = landType2;
         this.landType = landType;
-        if(landType2==ht.Empty)
+        if(landType2==habitatEnum.Empty)
         {
             isKeystoneTile = true;
         }
@@ -46,64 +45,64 @@ public class Tile { // class for the tiles that will be inserted onto the board
             case Mountain:
                 switch((int) Math.round(Math.random()*2)){
                     case 0:
-                        animal1 = wT.BEAR;
+                        animal1 = tokenEnum.BEAR;
                         break;
                     case 1:
-                        animal1 = wT.HAWK;
+                        animal1 = tokenEnum.HAWK;
                         break;
                     case 2:
-                        animal1 = wT.ELK;
+                        animal1 = tokenEnum.ELK;
                         break;
                 }
             case Forest:
                 switch((int) Math.round(Math.random()*3)){
                     case 0:
-                        animal1 = wT.BEAR;
+                        animal1 = tokenEnum.BEAR;
                         break;
                     case 1:
-                        animal1 = wT.HAWK;
+                        animal1 = tokenEnum.HAWK;
                         break;
                     case 2:
-                        animal1 = wT.ELK;
+                        animal1 = tokenEnum.ELK;
                         break;
                     case 3:
-                        animal1 = wT.FOX;
+                        animal1 = tokenEnum.FOX;
                         break;
                 }
             case Prairie:
                 switch((int) Math.round(Math.random()*2)){
                     case 0:
-                        animal1 = wT.HAWK;
+                        animal1 = tokenEnum.HAWK;
                         break;
                     case 1:
-                        animal1 = wT.ELK;
+                        animal1 = tokenEnum.ELK;
                         break;
                     case 2:
-                        animal1 = wT.FOX;
+                        animal1 = tokenEnum.FOX;
                         break;
                 }
             case Wetland:
                 switch((int) Math.round(Math.random()*2)){
                     case 0:
-                        animal1 = wT.SALMON;
+                        animal1 = tokenEnum.SALMON;
                         break;
                     case 1:
-                        animal1 = wT.HAWK;
+                        animal1 = tokenEnum.HAWK;
                         break;
                     case 2:
-                        animal1 = wT.FOX;
+                        animal1 = tokenEnum.FOX;
                         break;
                 }
             case River:
                 switch((int) Math.round(Math.random()*2)){
                     case 0:
-                        animal1 = wT.SALMON;
+                        animal1 = tokenEnum.SALMON;
                         break;
                     case 1:
-                        animal1 = wT.HAWK;
+                        animal1 = tokenEnum.HAWK;
                         break;
                     case 2:
-                        animal1 = wT.BEAR;
+                        animal1 = tokenEnum.BEAR;
                         break;
                 }
 
@@ -112,95 +111,95 @@ public class Tile { // class for the tiles that will be inserted onto the board
             case Mountain:
                 switch((int) Math.round(Math.random()*2)){
                     case 0:
-                        if(animal1 != wT.BEAR){
-                            animal2 = wT.BEAR;
+                        if(animal1 != tokenEnum.BEAR){
+                            animal2 = tokenEnum.BEAR;
                         }
                         break;
                     case 1:
-                        if(animal1 != wT.HAWK){
-                            animal2 = wT.HAWK;
+                        if(animal1 != tokenEnum.HAWK){
+                            animal2 = tokenEnum.HAWK;
                         }
                         break;
                     case 2:
-                        if(animal1 != wT.ELK){
-                            animal2 = wT.ELK;
+                        if(animal1 != tokenEnum.ELK){
+                            animal2 = tokenEnum.ELK;
                         }
                         break;
                 }
             case Forest:
                 switch((int) Math.round(Math.random()*3)){
                     case 0:
-                        if(animal1 != wT.BEAR){
-                            animal2 = wT.BEAR;
+                        if(animal1 != tokenEnum.BEAR){
+                            animal2 = tokenEnum.BEAR;
                         }
                         break;
                     case 1:
-                        if(animal1 != wT.HAWK){
-                            animal2 = wT.HAWK;
+                        if(animal1 != tokenEnum.HAWK){
+                            animal2 = tokenEnum.HAWK;
                         }
                         break;
                     case 2:
-                        if(animal1 != wT.ELK){
-                            animal2 = wT.ELK;
+                        if(animal1 != tokenEnum.ELK){
+                            animal2 = tokenEnum.ELK;
                         }
                         break;
                     case 3:
-                        if(animal1 != wT.FOX){
-                            animal2 = wT.FOX;
+                        if(animal1 != tokenEnum.FOX){
+                            animal2 = tokenEnum.FOX;
                         }
                         break;
                 }
             case Prairie:
                 switch((int) Math.round(Math.random()*2)){
                     case 0:
-                        if(animal1 != wT.HAWK){
-                            animal2 = wT.HAWK;
+                        if(animal1 != tokenEnum.HAWK){
+                            animal2 = tokenEnum.HAWK;
                         }
                         break;
                     case 1:
-                        if(animal1 != wT.ELK){
-                            animal2 = wT.ELK;
+                        if(animal1 != tokenEnum.ELK){
+                            animal2 = tokenEnum.ELK;
                         }
                         break;
                     case 2:
-                        if(animal1 != wT.FOX){
-                            animal2 = wT.FOX;
+                        if(animal1 != tokenEnum.FOX){
+                            animal2 = tokenEnum.FOX;
                         }
                         break;
                 }
             case Wetland:
                 switch((int) Math.round(Math.random()*2)){
                     case 0:
-                        if(animal1 != wT.SALMON){
-                            animal2 = wT.SALMON;
+                        if(animal1 != tokenEnum.SALMON){
+                            animal2 = tokenEnum.SALMON;
                         }
                         break;
                     case 1:
-                        if(animal1 != wT.HAWK){
-                            animal2 = wT.HAWK;
+                        if(animal1 != tokenEnum.HAWK){
+                            animal2 = tokenEnum.HAWK;
                         }
                         break;
                     case 2:
-                        if(animal1 != wT.FOX){
-                            animal2 = wT.FOX;
+                        if(animal1 != tokenEnum.FOX){
+                            animal2 = tokenEnum.FOX;
                         }
                         break;
                 }
             case River:
                 switch((int) Math.round(Math.random()*2)){
                     case 0:
-                        if(animal1 != wT.SALMON){
-                            animal2 = wT.SALMON;
+                        if(animal1 != tokenEnum.SALMON){
+                            animal2 = tokenEnum.SALMON;
                         }
                         break;
                     case 1:
-                        if(animal1 != wT.HAWK){
-                            animal2 = wT.HAWK;
+                        if(animal1 != tokenEnum.HAWK){
+                            animal2 = tokenEnum.HAWK;
                         }
                         break;
                     case 2:
-                        if(animal1 != wT.BEAR){
-                            animal2 = wT.BEAR;
+                        if(animal1 != tokenEnum.BEAR){
+                            animal2 = tokenEnum.BEAR;
                         }
                         break;
                 }
@@ -212,18 +211,18 @@ public class Tile { // class for the tiles that will be inserted onto the board
             case Mountain:
                 switch((int) Math.round(Math.random()*5)){
                     case 0:
-                        if(animal1 != wT.BEAR){
-                            animal3 = wT.BEAR;
+                        if(animal1 != tokenEnum.BEAR){
+                            animal3 = tokenEnum.BEAR;
                         }
                         break;
                     case 1:
-                        if(animal1 != wT.HAWK){
-                            animal3 = wT.HAWK;
+                        if(animal1 != tokenEnum.HAWK){
+                            animal3 = tokenEnum.HAWK;
                         }
                         break;
                     case 2:
-                        if(animal1 != wT.ELK){
-                            animal3 = wT.ELK;
+                        if(animal1 != tokenEnum.ELK){
+                            animal3 = tokenEnum.ELK;
                         }
                         break;
                     default:
@@ -232,23 +231,23 @@ public class Tile { // class for the tiles that will be inserted onto the board
             case Forest:
                 switch((int) Math.round(Math.random()*7)){
                     case 0:
-                        if(animal1 != wT.BEAR){
-                            animal3 = wT.BEAR;
+                        if(animal1 != tokenEnum.BEAR){
+                            animal3 = tokenEnum.BEAR;
                         }
                         break;
                     case 1:
-                        if(animal1 != wT.HAWK){
-                            animal3 = wT.HAWK;
+                        if(animal1 != tokenEnum.HAWK){
+                            animal3 = tokenEnum.HAWK;
                         }
                         break;
                     case 2:
-                        if(animal1 != wT.ELK){
-                            animal3 = wT.ELK;
+                        if(animal1 != tokenEnum.ELK){
+                            animal3 = tokenEnum.ELK;
                         }
                         break;
                     case 3:
-                        if(animal1 != wT.FOX){
-                            animal3 = wT.FOX;
+                        if(animal1 != tokenEnum.FOX){
+                            animal3 = tokenEnum.FOX;
                         }
                         break;
                     default:
@@ -257,49 +256,49 @@ public class Tile { // class for the tiles that will be inserted onto the board
             case Prairie:
                 switch((int) Math.round(Math.random()*2)){
                     case 0:
-                        if(animal1 != wT.HAWK){
-                            animal3 = wT.HAWK;
+                        if(animal1 != tokenEnum.HAWK){
+                            animal3 = tokenEnum.HAWK;
                         }
                         break;
                     case 1:
-                        if(animal1 != wT.ELK){
-                            animal3 = wT.ELK;
+                        if(animal1 != tokenEnum.ELK){
+                            animal3 = tokenEnum.ELK;
                         }
                         break;
                     case 2:
-                        if(animal1 != wT.FOX){
-                            animal3 = wT.FOX;
+                        if(animal1 != tokenEnum.FOX){
+                            animal3 = tokenEnum.FOX;
                         }
                         break;
                 }
             case Wetland:
                 switch((int) Math.round(Math.random()*2)){
                     case 0:
-                        if(animal1 != wT.SALMON){
-                            animal3 = wT.SALMON;
+                        if(animal1 != tokenEnum.SALMON){
+                            animal3 = tokenEnum.SALMON;
                         }
                         break;
                     case 1:
-                        if(animal1 != wT.HAWK){
-                            animal3 = wT.HAWK;
+                        if(animal1 != tokenEnum.HAWK){
+                            animal3 = tokenEnum.HAWK;
                         }
                         break;
                     case 2:
-                        if(animal1 != wT.FOX){
-                            animal3 = wT.FOX;
+                        if(animal1 != tokenEnum.FOX){
+                            animal3 = tokenEnum.FOX;
                         }
                         break;
                 }
             case River:
                 switch((int) Math.round(Math.random()*2)){
                     case 0:
-                        animal1 = wT.SALMON;
+                        animal1 = tokenEnum.SALMON;
                         break;
                     case 1:
-                        animal1 = wT.HAWK;
+                        animal1 = tokenEnum.HAWK;
                         break;
                     case 2:
-                        animal1 = wT.BEAR;
+                        animal1 = tokenEnum.BEAR;
                         break;
                 }
 
@@ -311,83 +310,87 @@ public class Tile { // class for the tiles that will be inserted onto the board
             case 0:
                 switch((int) Math.round(Math.random()*3)){
                     case 0:
-                        return new Tile(ht.Mountain, ht.Empty);
+                        return new Tile(habitatEnum.Mountain, habitatEnum.Empty);
                     case 1:
-                        return new Tile(ht.Forest, ht.Mountain);
+                        return new Tile(habitatEnum.Forest, habitatEnum.Mountain);
                     case 2:
-                        return new Tile(ht.Prairie, ht.Mountain);
+                        return new Tile(habitatEnum.Prairie, habitatEnum.Mountain);
                     case 3:
-                        return new Tile(ht.Wetland, ht.Mountain);
+                        return new Tile(habitatEnum.Wetland, habitatEnum.Mountain);
                     case 4:
-                        return new Tile(ht.River, ht.Mountain);
+                        return new Tile(habitatEnum.River, habitatEnum.Mountain);
                     default:
-                        return new Tile(ht.Error, ht.Error);
+                        return new Tile(habitatEnum.Error, habitatEnum.Error);
                 }
             case 1:
                 switch((int) Math.round(Math.random()*4)){
                     case 0:
-                        return new Tile(ht.Mountain, ht.Forest);
+                        return new Tile(habitatEnum.Mountain, habitatEnum.Forest);
                     case 1:
-                        return new Tile(ht.Forest, ht.Empty);
+                        return new Tile(habitatEnum.Forest, habitatEnum.Empty);
                     case 2:
-                        return new Tile(ht.Prairie, ht.Forest);
+                        return new Tile(habitatEnum.Prairie, habitatEnum.Forest);
                     case 3:
-                        return new Tile(ht.Wetland, ht.Forest);
+                        return new Tile(habitatEnum.Wetland, habitatEnum.Forest);
                     case 4:
-                        return new Tile(ht.River, ht.Forest);
+                        return new Tile(habitatEnum.River, habitatEnum.Forest);
                     default:
-                        return new Tile(ht.Error, ht.Error);
+                        return new Tile(habitatEnum.Error, habitatEnum.Error);
                 }
             case 2:
                 switch((int) Math.round(Math.random()*4)){
                     case 0:
-                        return new Tile(ht.Mountain, ht.Prairie);
+                        return new Tile(habitatEnum.Mountain, habitatEnum.Prairie);
                     case 1:
-                        return new Tile(ht.Forest, ht.Prairie);
+                        return new Tile(habitatEnum.Forest, habitatEnum.Prairie);
                     case 2:
-                        return new Tile(ht.Prairie, ht.Empty);
+                        return new Tile(habitatEnum.Prairie, habitatEnum.Empty);
                     case 3:
-                        return new Tile(ht.Wetland, ht.Prairie);
+                        return new Tile(habitatEnum.Wetland, habitatEnum.Prairie);
                     case 4:
-                        return new Tile(ht.River, ht.Prairie);
+                        return new Tile(habitatEnum.River, habitatEnum.Prairie);
                     default:
-                        return new Tile(ht.Error, ht.Error);
+                        return new Tile(habitatEnum.Error, habitatEnum.Error);
                 }
             case 3:
                 switch((int) Math.round(Math.random()*4)){
                     case 0:
-                        return new Tile(ht.Mountain, ht.Wetland);
+                        return new Tile(habitatEnum.Mountain, habitatEnum.Wetland);
                     case 1:
-                        return new Tile(ht.Forest, ht.Wetland);
+                        return new Tile(habitatEnum.Forest, habitatEnum.Wetland);
                     case 2:
-                        return new Tile(ht.Prairie, ht.Wetland);
+                        return new Tile(habitatEnum.Prairie, habitatEnum.Wetland);
                     case 3:
-                        return new Tile(ht.Wetland, ht.Empty);
+                        return new Tile(habitatEnum.Wetland, habitatEnum.Empty);
                     case 4:
-                        return new Tile(ht.River, ht.Wetland);
+                        return new Tile(habitatEnum.River, habitatEnum.Wetland);
                     default:
-                        return new Tile(ht.Error, ht.Error);
+                        return new Tile(habitatEnum.Error, habitatEnum.Error);
                 }
             case 4:
                 switch((int) Math.round(Math.random()*4)){
                     case 0:
-                        return new Tile(ht.Mountain, ht.River);
+                        return new Tile(habitatEnum.Mountain, habitatEnum.River);
                     case 1:
-                        return new Tile(ht.Forest, ht.River);
+                        return new Tile(habitatEnum.Forest, habitatEnum.River);
                     case 2:
-                        return new Tile(ht.Prairie, ht.River);
+                        return new Tile(habitatEnum.Prairie, habitatEnum.River);
                     case 3:
-                        return new Tile(ht.Wetland, ht.River);
+                        return new Tile(habitatEnum.Wetland, habitatEnum.River);
                     case 4:
-                        return new Tile(ht.River, ht.Empty);
+                        return new Tile(habitatEnum.River, habitatEnum.Empty);
                     default:
-                        return new Tile(ht.Error, ht.Error);
+                        return new Tile(habitatEnum.Error, habitatEnum.Error);
                 }
             default:
-                return new Tile(ht.Error, ht.Error);
+                return new Tile(habitatEnum.Error, habitatEnum.Error);
         }
-        //check if its a keystoneTile
 
+
+    }
+    public void setTileCoordinates(int x, int y){
+        this.x = x;
+        this.y = y;
     }
     public void addWildlifetoken(wildlifeToken x){
                 if (x.animalType == animal1 || x.animalType == animal2 || x.animalType == animal3) {
@@ -403,10 +406,10 @@ public class Tile { // class for the tiles that will be inserted onto the board
         return token;
     }
 
-    public ht getLandType(){
+    public habitatEnum getLandType(){
         return landType;
     }
-    public ht getLandType2(){
+    public habitatEnum getLandType2(){
         return landType2;
     }
 

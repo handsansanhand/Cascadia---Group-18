@@ -278,7 +278,7 @@ public class gameState {
             System.out.println("Incorrect position");
         } else //place tile*/
         {
-            getPlayers().get(i).getPlayerBoard().addTileCoOrdinates(x,y,t);
+            //getPlayers().get(i).getPlayerBoard().addTile(x,y,t);
         }
     }
 
