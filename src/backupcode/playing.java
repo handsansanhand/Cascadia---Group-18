@@ -229,8 +229,9 @@ public class playing {
         {
 
                 getPlayers().get(i).getPlayerBoard().TileBoard[x][y].addWildlifetoken(tokenToPlace);
+            }
         }
-    }
+
 
 
     public void placeTile(int i, Tile t)

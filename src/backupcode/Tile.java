@@ -390,20 +390,23 @@ public class Tile { // class for the tiles that will be inserted onto the board
 
     }
     public void addWildlifetoken(wildlifeToken x){
-        while(true){
-            try{
-                if(x.animalType == animal1 || x.animalType == animal2 || x.animalType == animal3){
+        int attempts = 3;
+        while (attempts > 0) {
+            try {
+                if (x.animalType == animal1 || x.animalType == animal2 || x.animalType == animal3) {
                     token = x;
-                    break;
-                }
-                else{
+                    return;
+                } else {
                     throw new IllegalArgumentException();
                 }
-            }catch (IllegalArgumentException ex){
+            } catch (IllegalArgumentException ex) {
                 System.out.println("incorrect wildlife token please try again\n");
+                attempts--;
             }
         }
     }
+
+
     public ht getLandType(){
         return landType;
     }
