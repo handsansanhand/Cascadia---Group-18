@@ -82,7 +82,7 @@ public class Board { // class for the board object for each player
                     userBoard = userBoard + "[ " + TileBoard[j][i].toString() + " ] ";
                 }
             }
-            userBoard = userBoard + "\n";
+            userBoard = userBoard + "  " + i + "\n";
         }
         return userBoard;
     }

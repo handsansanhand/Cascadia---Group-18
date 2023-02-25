@@ -216,9 +216,9 @@ public class playing {
         System.out.println(getPlayers().get(i).printHand());
         int inputToken = Integer.parseInt(in.next());
         wildlifeToken tokenToPlace = getPlayers().get(i).hand.get(inputToken);
-
-        System.out.println("Where would you like to place the token?"); //ask for the location (tile number)
         System.out.println(getPlayers().get(i).getPlayerBoard());
+        System.out.println("Where would you like to place the token?"); //ask for the location (tile number)
+        System.out.println("Token: " + tokenToPlace);
         String input = in.next();
         String[] numbers = input.split(",");
         int x = Integer.parseInt(numbers[0].trim());
@@ -235,8 +235,8 @@ public class playing {
 
     public void placeTile(int i, Tile t)
     {
-        System.out.println("Where would you like to place the tile? [X,Y]");
         System.out.println(getPlayers().get(i).getPlayerBoard());
+        System.out.println("Where would you like to place the tile? [X,Y]");
         String input = in.next();
         String[] numbers = input.split(",");
         int x = Integer.parseInt(numbers[0].trim());
