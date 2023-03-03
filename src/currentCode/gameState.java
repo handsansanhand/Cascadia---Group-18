@@ -248,7 +248,9 @@ public class gameState {
 
                getPlayers().get(i).getPlayerBoard().TileBoard[x][y].addWildlifetoken(tokenToPlace);
 
-                if (getPlayers().get(i).getPlayerBoard().TileBoard[x][y].getToken() == tokenToPlace) {
+                if (getPlayers().get(i).getPlayerBoard().TileBoard[x][y].getToken() == tokenToPlace) //you can place a token
+                {
+
                     System.out.println("Token placed successfully!");
                     getPlayers().get(i).hand.remove(inputToken);
                     break;

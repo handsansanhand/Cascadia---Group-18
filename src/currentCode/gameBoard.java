@@ -143,6 +143,108 @@ import java.util.Scanner;
             }
             return wTString;
         }
+        public boolean checkForBonus(Tile placementTile, wildlifeToken placementtoken, player currentPlayer)
+        {
+            if(placementTile.isKeystoneTile && (placementTile.animal1==placementtoken.getAnimalType()))
+            {
+                currentPlayer.natureTokens--;
+                return true;
+            }
+            return false;
+        }
+        public Tile chooseTile() //function for spending a wildlife token to choose a tile
+        {
+            Tile returnTile = null;
+            System.out.println("Press 1 for Mountains, 2 for Rivers, 3 for Wetlands, 4 for Forest, 5 for Prairie");
+            Scanner in = new Scanner(System.in);
+            boolean stillPicking = true;
+            while (stillPicking) {
+                switch (in.next()) {
+                    case "1": {
+                        returnTile = new Tile(habitatEnum.Mountain, habitatEnum.Empty);
+                        stillPicking = false;
+                        break;
+                    }
+                    case "2": {
+                        returnTile = new Tile(habitatEnum.River, habitatEnum.Empty);
+                        stillPicking = false;
+                        break;
+
+                    }
+                    case "3": {
+                        returnTile = new Tile(habitatEnum.Wetland, habitatEnum.Empty);
+                        stillPicking = false;
+                        break;
+                    }
+                    case "4": {
+                        returnTile = new Tile(habitatEnum.Forest, habitatEnum.Empty);
+                        stillPicking = false;
+                        break;
+                    }
+                    case "5": {
+                        returnTile = new Tile(habitatEnum.Prairie, habitatEnum.Empty);
+                        stillPicking = false;
+                        break;
+                    }
+                    default: {
+                        System.out.println("invalid input");
+                    }
+
+                }
+            }
+            return returnTile;
+        }
+
+    public wildlifeToken chooseToken() //function for spending a wildlife token to choose a tile
+    {
+        wildlifeToken returnToken = null;
+        System.out.println("Press 1 for Bear, 2 for Salmon, 3 for Elk, 4 for Hawk, 5 for Fox");
+        Scanner in = new Scanner(System.in);
+        boolean stillPicking = true;
+        while (stillPicking) {
+            switch (in.next()) {
+                case "1": {
+                    returnToken = new wildlifeToken(tokenEnum.BEAR);
+                    stillPicking = false;
+                    break;
+                }
+                case "2": {
+                    returnToken = new wildlifeToken(tokenEnum.SALMON);
+                    stillPicking = false;
+                    break;
+
+                }
+                case "3": {
+                    returnToken = new wildlifeToken(tokenEnum.ELK);
+                    stillPicking = false;
+                    break;
+                }
+                case "4": {
+                    returnToken = new wildlifeToken(tokenEnum.HAWK);
+                    stillPicking = false;
+                    break;
+                }
+                case "5": {
+                    returnToken = new wildlifeToken(tokenEnum.FOX);
+                    stillPicking = false;
+                    break;
+                }
+                default: {
+                    System.out.println("invalid input");
+                }
+
+            }
+        }
+        return returnToken;
+    }
+    public void spendToken(player currentPlayer)
+    {
+        currentPlayer.natureTokens--;
+        currentPlayer.getPlayerBoard().addTile(null, chooseTile());
+        currentPlayer.addToken(chooseToken());
+    }
+
+
 
         public String toString() //temporary tostring method for veiwing the board TEMPORARY
         {
