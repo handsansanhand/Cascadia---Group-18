@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="559.0" prefWidth="675.0" style="-fx-background-color: blue;">
+         <children>
+            <Label alignment="CENTER" layoutX="66.0" layoutY="28.0" prefHeight="53.0" prefWidth="499.0" text="Enter Player Names" textFill="#04e422" underline="true">
+               <font>
+                  <Font name="Britannic Bold" size="45.0" />
+               </font>
+            </Label>
+            <Label layoutX="106.0" layoutY="222.0" prefHeight="38.0" prefWidth="151.0" text="Player 1" textFill="#00ff48">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Label>
+            <Label layoutX="106.0" layoutY="314.0" prefHeight="38.0" prefWidth="151.0" text="Player 2" textFill="#00ff48">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Label>
+            <TextField id="textbox2" layoutX="316.0" layoutY="314.0" prefHeight="38.0" prefWidth="149.0" promptText="Enter name" style="-fx-background-radius: 100;" />
+            <TextField id="textbox1" layoutX="316.0" layoutY="222.0" prefHeight="38.0" prefWidth="149.0" promptText="Enter name" style="-fx-background-radius: 100;" />
+            <Button id="Button5" layoutX="514.0" layoutY="399.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="121.0" style="-fx-background-color: #04e422; -fx-background-radius: 100;" text="Continue">
+               <font>
+                  <Font name="System Bold Italic" size="21.0" />
+               </font>
+            </Button>
+         </children></AnchorPane>
+   </children>
+</AnchorPane>
