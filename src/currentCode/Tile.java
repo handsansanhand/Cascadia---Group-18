@@ -416,15 +416,25 @@ public class Tile { // class for the tiles that will be inserted onto the board
     public String printTile()
     {
         String tileString = "";
+        String animals="";
+        animals = animal1 + "/" + animal2 + "/" + animal3;
         if(isKeystoneTile)
         {//check something that indicates that its a special tile ()
-            tileString = "*" + getLandType().toString() + "*";
+            if(token!=null) {
+                tileString = "*" + getLandType().toString() + "*" + "\033[32m" + "[" + token + "]" + "\033[0m";
+            }
+            else
+            {
+                tileString = "*" + getLandType().toString() + "[" + animals + "]";
+            }
         }
-        else {tileString = getLandType().toString() + " / " + getLandType2().toString();}
-        if(token!=null)
-        {
-            tileString = tileString +  " ( " + token + " )";
-        }
+        else { // not a keystone tile
+            if(token!=null) { //with a token
+                tileString = getLandType().toString() + " / " + getLandType2().toString() + "\033[32m" + "[" + token + "]" + "\033[0m";
+            }
+        else{
+                tileString = getLandType().toString() + " / " + getLandType2().toString() + "["  +animals+ "]";
+            }}
         return tileString;
     }
     public String toString()
