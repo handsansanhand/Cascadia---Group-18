@@ -438,8 +438,50 @@ public class Tile { // class for the tiles that will be inserted onto the board
         return tileString;
     }
     public String toString()
-    {
-        return printTile();
+        {
+            String str1 = null,str2 = null;
+            switch(landType){
+                case Forest:
+                    str1 = "Forest";
+                    break;
+                case Wetland:
+                    str1 = "Wetland";
+                    break;
+                case River:
+                    str1 = "River";
+                    break;
+                case Prairie:
+                    str1 = "Prairie";
+                    break;
+                case Mountain:
+                    str1 = "Mountain";
+                    break;
+
+            }
+            switch(landType2){
+                case Empty:
+                    str2 = "";
+                    break;
+                case Forest:
+                    str2 = "Forest";
+                    break;
+                case Wetland:
+                    str2 = "Wetland";
+                    break;
+                case River:
+                    str2 = "River";
+                    break;
+                case Prairie:
+                    str2 = "Prairie";
+                    break;
+                case Mountain:
+                    str2 = "Mountain";
+                    break;
+            }
+            return str1 + " " + str2;
+        }
     }
 
-}
+
+
+
