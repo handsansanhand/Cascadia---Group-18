@@ -8,7 +8,7 @@ public class wildlifeToken {
         this.animalType = animalType;
     }
 
-    public static wildlifeToken generateWildlifeToken(){ //returns a tile object of random habitat tile
+    public static wildlifeToken generateWildlifeToken(){ //generates random wildlife toke object
         switch((int) Math.round(Math.random()*4)){
             case 0:
                 return new wildlifeToken(tokenEnum.HAWK);
