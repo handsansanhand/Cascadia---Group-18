@@ -10,6 +10,12 @@ public class player {
     }
 
     ArrayList<wildlifeToken> hand = new ArrayList<>();
+    Tile handTile;
+
+    public Tile getHandTile() {
+        return handTile;
+    }
+
     public void addToken(wildlifeToken x){
         hand.add(x);
     }

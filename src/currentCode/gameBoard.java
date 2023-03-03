@@ -152,7 +152,7 @@ import java.util.Scanner;
             }
             return false;
         }
-        public Tile chooseTile() //function for spending a wildlife token to choose a tile
+        public Tile chooseTile(player currentPlayer) //function for spending a wildlife token to choose a tile
         {
             Tile returnTile = null;
             System.out.println("Press 1 for Mountains, 2 for Rivers, 3 for Wetlands, 4 for Forest, 5 for Prairie");
@@ -189,13 +189,12 @@ import java.util.Scanner;
                     default: {
                         System.out.println("invalid input");
                     }
-
                 }
             }
             return returnTile;
         }
 
-    public wildlifeToken chooseToken() //function for spending a wildlife token to choose a tile
+    public wildlifeToken chooseToken(player currentPlayer) //function for spending a wildlife token to choose a tile
     {
         wildlifeToken returnToken = null;
         System.out.println("Press 1 for Bear, 2 for Salmon, 3 for Elk, 4 for Hawk, 5 for Fox");
@@ -237,11 +236,13 @@ import java.util.Scanner;
         }
         return returnToken;
     }
-    public void spendToken(player currentPlayer)
+    public Tile spendToken(player currentPlayer)
     {
         currentPlayer.natureTokens--;
-        currentPlayer.getPlayerBoard().addTile(null, chooseTile());
-        currentPlayer.addToken(chooseToken());
+        currentPlayer.addToken(chooseToken(currentPlayer));
+        //currentPlayer.getPlayerBoard().addTile(null, chooseTile(currentPlayer));
+        //currentPlayer.addToken(chooseToken(currentPlayer));
+        return chooseTile(currentPlayer);
     }
 
 
