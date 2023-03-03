@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class Tile { // class for the tiles that will be inserted onto the board
     static int count;
     Tile up,left,right,down; //points to the tiles above, below, to the left and to the right of the tile
-    ht landType;
-    ht landType2;
+    ht landType; //this should never be empty
+    ht landType2; // if tile only has one land type this should be empty enum
     wT animal1;
     wT animal2;
     wT animal3;
@@ -427,7 +427,45 @@ public class Tile { // class for the tiles that will be inserted onto the board
     }
     public String toString()
     {
-        return printTile();
-    }
+        String str1 = null,str2 = null;
+        switch(landType){
+            case Forest:
+                str1 = "Forest";
+                break;
+            case Wetland:
+                str1 = "Wetland";
+                break;
+            case River:
+                str1 = "River";
+                break;
+            case Prairie:
+                str1 = "Prairie";
+                break;
+            case Mountain:
+                str1 = "Mountain";
+                break;
 
+        }
+        switch(landType2){
+            case Empty:
+                str2 = "";
+                break;
+            case Forest:
+                str2 = "Forest";
+                break;
+            case Wetland:
+                str2 = "Wetland";
+                break;
+            case River:
+                str2 = "River";
+                break;
+            case Prairie:
+                str2 = "Prairie";
+                break;
+            case Mountain:
+                str2 = "Mountain";
+                break;
+        }
+        return str1 + " " + str2;
+    }
 }

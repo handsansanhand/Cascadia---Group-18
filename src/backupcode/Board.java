@@ -4,11 +4,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 //EACH 'BOARD' HOLDS AN ARRAYLIST OF TILES
 public class Board { // class for the board object for each player
-    ArrayList<Tile> TileList = new ArrayList<Tile>();
     Tile[][] TileBoard = new Tile[30][30];
     public void starterTiles(){
-        //STARTER TILES ARE A FIXED 5 COMBINATION OF CERTAIN TILES
 
+        //STARTER TILES ARE A FIXED 5 COMBINATION OF CERTAIN TILES
+        TileList.add(Tile.randomTile());
+        TileList.add(Tile.randomTile());
+        TileList.add(Tile.randomTile());
+        TileList.get(0).up = TileList.get(1);
+        TileList.get(1).down = TileList.get(0);
+        TileList.get(0).down = TileList.get(2);
+        TileList.get(2).up = TileList.get(0);
     }
     public void addTile(Tile oldest, Tile newest){ // Tile newest is the one being placed and tile oldest is the reference tile
         int input;
