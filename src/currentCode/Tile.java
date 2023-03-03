@@ -303,6 +303,11 @@ public class Tile { // class for the tiles that will be inserted onto the board
                 }
 
         }
+        if(isKeystoneTile)
+        {
+            animal2 =null;
+            animal3 = null;
+        }
 
     }
     public static Tile randomTile(){ //returns a tile object of random habitat tile
