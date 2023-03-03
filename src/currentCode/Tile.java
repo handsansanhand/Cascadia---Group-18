@@ -420,6 +420,12 @@ public class Tile { // class for the tiles that will be inserted onto the board
         animals = animal1 + "/" + animal2 + "/" + animal3;
         if(isKeystoneTile)
         {//check something that indicates that its a special tile ()
+            tileString = "*" + getLandType().toString() + "*";
+        }
+        else {tileString = getLandType().toString() + " / " + getLandType2().toString();}
+        if(token!=null)
+        {
+            tileString = tileString +  " ( " + token + " )";
             if(token!=null) {
                 tileString = "*" + getLandType().toString() + "*" + "\033[32m" + "[" + token + "]" + "\033[0m";
             }
@@ -432,12 +438,44 @@ public class Tile { // class for the tiles that will be inserted onto the board
             if(token!=null) { //with a token
                 tileString = getLandType().toString() + " / " + getLandType2().toString() + "\033[32m" + "[" + token + "]" + "\033[0m";
             }
-        else{
+            else{
                 tileString = getLandType().toString() + " / " + getLandType2().toString() + "["  +animals+ "]";
             }}
         return tileString;
     }
     public String toString()
+        {
+            String tileString = "";
+            String animals="";
+            animals = animal1 + "/" + animal2 + "/" + animal3;
+            if(isKeystoneTile)
+            {//check something that indicates that its a special tile ()
+                tileString = "*" + getLandType().toString() + "*";
+            }
+            else {tileString = getLandType().toString() + " / " + getLandType2().toString();}
+            if(token!=null)
+            {
+                tileString = tileString +  " ( " + token + " )";
+                if(token!=null) {
+                    tileString = "*" + getLandType().toString() + "*" + "\033[32m" + "[" + token + "]" + "\033[0m";
+                }
+                else
+                {
+                    tileString = "*" + getLandType().toString() + "[" + animals + "]";
+                }
+            }
+            else { // not a keystone tile
+                if(token!=null) { //with a token
+                    tileString = getLandType().toString() + " / " + getLandType2().toString() + "\033[32m" + "[" + token + "]" + "\033[0m";
+                }
+                else{
+                    tileString = getLandType().toString() + " / " + getLandType2().toString() + "["  +animals+ "]";
+                }}
+            return tileString;
+
+            }
+
+        public String uiPrintTIle()
         {
             String str1 = null,str2 = null;
             switch(landType){
