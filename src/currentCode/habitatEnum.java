@@ -1,6 +1,6 @@
-package backupcode;
+package currentCode;
 
-public enum ht { // (habitatTypes
+public enum habitatEnum { // (habitatTypes
         Forest,
         Wetland,
         River,

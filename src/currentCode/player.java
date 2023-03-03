@@ -1,12 +1,11 @@
-package backupcode;
+package currentCode;
 
 import java.util.ArrayList;
 
 //THIS CLASS IS FOR EACH INDIVIDUAL PLAYER, THEIR NAME SCORE, 'HAND' AND THEIR OWN BOARD
 //EACH 'PLAYER' HAS THEIR OWN 'BOARD' CLASS TO PLACE THEIR HABITAT TILES
 public class player {
-
-    public Board getPlayerBoard() { // return visual representation of board
+    public tileBoard getPlayerBoard() { // return visual representation of board
         return playerBoard;
     }
 
@@ -16,13 +15,13 @@ public class player {
     }
     String name;
     int score;
-    Board playerBoard;
+    tileBoard playerBoard;
 
     public player(String x, int i)
     {
         this.name = x;
         this.score = 0;
-        this.playerBoard = new Board(i);
+        this.playerBoard = new tileBoard(i);
 
     }
 
@@ -35,7 +34,7 @@ public class player {
     }
     public String toString()
     {
-        return playerBoard.TileList.toString();
+        return playerBoard.toString();
     }
     public String printHand() //function for printing the hand the user has (wildlifetokens)
     {
