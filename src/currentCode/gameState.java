@@ -230,7 +230,7 @@ public class gameState {
         public void placeWildlifeToken(wildlifeToken tokenToPlace, int i, int inputToken) {
             System.out.println(getPlayers().get(i).getPlayerBoard());
             System.out.println("Where would you like to place the token?"); //ask for the location (tile number)
-            System.out.println("Token: " + tokenToPlace);
+            System.out.println("Token: " + tokenToPlace.colorToString());
             String input = in.next();
             String[] numbers = input.split(",");
             int x = Integer.parseInt(numbers[0].trim());
@@ -281,11 +281,22 @@ public class gameState {
 
     public void placeToken(int i)   //placing wildlife tokens
     {
+        int input;
         System.out.println("What token would you like to place?");  //asks the user what token they wanna place
         System.out.println(getPlayers().get(i).printHand());
-        int inputToken = Integer.parseInt(in.next());
-        wildlifeToken tokenToPlace = getPlayers().get(i).hand.get(inputToken);
-        placeWildlifeToken(tokenToPlace, i, inputToken);
+        Scanner in = new Scanner(System.in);
+        while(!in.hasNextInt()){
+
+            System.out.println("incorrect input please try again\n");
+            in.next();
+        }
+        input = in.nextInt();
+        while(input > getPlayers().get(i).hand.size() || input < 0){
+            System.out.println("incorrect input please try again\n");
+            input = Integer.parseInt(in.next());
+        }
+        wildlifeToken tokenToPlace = getPlayers().get(i).hand.get(input);
+        placeWildlifeToken(tokenToPlace, i, input);
     }
 
 
