@@ -233,7 +233,6 @@ public class gameState {
             System.out.println("Token: " + tokenToPlace);
             String input = in.next();
             String[] numbers = input.split(",");
-
             int x = Integer.parseInt(numbers[0].trim());
             int y = Integer.parseInt(numbers[1].trim());
             int attempts = 3;
@@ -291,22 +290,30 @@ public class gameState {
 
 
 
-    public void placeTile(int i, Tile t)
-    {
+    public void placeTile(int i, Tile t) {
         System.out.println(getPlayers().get(i).getPlayerBoard());
-        System.out.println("Where would you like to place the tile? [X,Y]");
+        System.out.println("Pick a reference tile on the board: ");
         System.out.println(getPlayers().get(i).getHandTile());
         String input = in.next();
         String[] numbers = input.split(",");
         int x = Integer.parseInt(numbers[0].trim());
         int y = Integer.parseInt(numbers[1].trim());
-       /* if (input > getPlayers().get(i).getPlayerBoard().TileList.size()) {
-            System.out.println("Incorrect position");
-        } else //place tile*/
-        {
-            //getPlayers().get(i).getPlayerBoard().addTile(x,y,t);
+            if (x > getPlayers().get(i).getPlayerBoard().BOARD_WIDTH || y > getPlayers().get(i).getPlayerBoard().BOARD_HEIGHT) {
+                System.out.println("Incorrect position");
+            }
+            while(getPlayers().get(i).getPlayerBoard().getTile(x,y)==null)
+            {
+                System.out.println("That tile doesnt exist");
+                input = in.next();
+                numbers = input.split(",");
+                x = Integer.parseInt(numbers[0].trim());
+                y = Integer.parseInt(numbers[1].trim());
+            }
+                Tile refTile =  getPlayers().get(i).getPlayerBoard().getTile(x,y);
+                getPlayers().get(i).getPlayerBoard().addTile(refTile,t);
         }
-    }
+
+
 
     public void displayControls()
     {
