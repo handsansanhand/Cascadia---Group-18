@@ -26,6 +26,16 @@ public class Tile { // class for the tiles that will be inserted onto the board
     public static final String BOLD = "\u001B[1m";  // WHITE
     public static final String PINK = "\u001B[38;5;198m";  // pink?
 
+    // Background
+    public static final String BLACK_BACKGROUND = "\033[40m";  // BLACK
+    public static final String RED_BACKGROUND = "\033[41m";    // RED
+    public static final String GREEN_BACKGROUND = "\033[42m";  // GREEN
+    public static final String YELLOW_BACKGROUND = "\033[43m"; // YELLOW
+    public static final String BLUE_BACKGROUND = "\033[44m";   // BLUE
+    public static final String PURPLE_BACKGROUND = "\033[45m"; // PURPLE
+    public static final String CYAN_BACKGROUND = "\033[46m";   // CYAN
+    public static final String WHITE_BACKGROUND = "\033[47m";  // WHITE
+
 
 
     static int count;
@@ -476,7 +486,7 @@ public class Tile { // class for the tiles that will be inserted onto the board
         return tileString;
     }
 
-    public String getHabitatColor(habitatEnum habitat)
+    public static String getHabitatColor(habitatEnum habitat)
     {
         String returnString="";
         switch (habitat)
@@ -489,7 +499,7 @@ public class Tile { // class for the tiles that will be inserted onto the board
         }
         return returnString;
     }
-    public String getAnimalColor(tokenEnum animal)
+    public static String getAnimalColor(tokenEnum animal)
     {
         String returnString="";
         switch (animal)
@@ -505,16 +515,16 @@ public class Tile { // class for the tiles that will be inserted onto the board
     public String toString() {
         String tileString = "";
         String animals = "";
-        animals = animals + getAnimalColor(animal1) + animal1.toString()+RESET;
+        animals = animals + getAnimalColor(animal1) + animal1 +RESET;
         if (animal2 != null && !animal2.equals(animal1)) {
-            animals = animals + "/" + getAnimalColor(animal2) + animal2.toString()+ RESET;
+            animals = animals + "/" + getAnimalColor(animal2) + animal2 + RESET;
         }
         if (animal3 != null && !animal3.equals(animal1) && !animal3.equals(animal2)) {
-            animals = animals + "/" + getAnimalColor(animal3) + animal3.toString()+ RESET;
+            animals = animals + "/" + getAnimalColor(animal3) + animal3 + RESET;
         }
         if (isKeystoneTile) {//check something that indicates that its a special tile ()
             if (token != null) { //filled keystone tile
-                tileString = "[*" + getHabitatColor(getLandType()) + getLandType().toString() + RESET + "*" + "\033[32m" + " [" + token + "]" + "\033[0m";
+                tileString = "[*" + getHabitatColor(getLandType()) + getLandType().toString() + RESET + "*" + GREEN_BOLD + " [" + token + "]" + RESET;
             } else //empty keystone tile
             {
                 tileString = "[*" + getHabitatColor(getLandType()) + getLandType().toString() + RESET + "*" + " [" + animals + "]";

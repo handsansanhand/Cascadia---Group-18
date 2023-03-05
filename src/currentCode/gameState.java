@@ -196,7 +196,7 @@ public class gameState {
             }
         }
             System.out.println("Would you like to place a wildlife token? Y/N");
-        System.out.println("Your hand: " + getPlayers().get(i).hand);
+        System.out.println(getPlayers().get(i).printHand());
             switch (in.next()) {
                 case "y": {
                    placeToken(i);
@@ -308,8 +308,17 @@ public class gameState {
                 numbers = input.split(",");
                 x = Integer.parseInt(numbers[0].trim());
                 y = Integer.parseInt(numbers[1].trim());
+                if(getPlayers().get(i).getPlayerBoard().getTile(x,y).up!=null && getPlayers().get(i).getPlayerBoard().getTile(x,y).down!=null && getPlayers().get(i).getPlayerBoard().getTile(x,y).left!=null && getPlayers().get(i).getPlayerBoard().getTile(x,y).right!=null)
+                {
+                    System.out.println("Invalid placement");
+                    input = in.next();
+                    numbers = input.split(",");
+                    x = Integer.parseInt(numbers[0].trim());
+                    y = Integer.parseInt(numbers[1].trim());
+                }
             }
-                Tile refTile =  getPlayers().get(i).getPlayerBoard().getTile(x,y);
+
+            Tile refTile =  getPlayers().get(i).getPlayerBoard().getTile(x,y);
                 getPlayers().get(i).getPlayerBoard().addTile(refTile,t);
         }
 

@@ -47,9 +47,9 @@ public class player {
         String handString = "Hand: ";
         for(int i = 0;i< hand.size();i++)
         {
-            handString = handString + hand.get(i).toString() + ", ";
+            handString = handString + Tile.getAnimalColor(hand.get(i).getAnimalType()) + hand.get(i).animalType.toString() + Tile.RESET + ", ";
         }
-        return handString;
+        return handString.substring(0, handString.length() - 2);
     }
 
 }
