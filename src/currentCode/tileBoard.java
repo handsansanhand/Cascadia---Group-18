@@ -112,13 +112,14 @@ public class tileBoard { // class for the board object for each player
         {
             for (int j = BOARD_WIDTH-1; j >= 0; j--) {
                 if (TileBoard[j][i] == null) {
-                    userBoard = userBoard + "[ EMPTY ]";
+                    userBoard = userBoard + "\u001B[30m" + String.format("[ %5s ]", "EMPTY") + "\u001B[0m";
                 } else {
-                    userBoard = userBoard + "[ " + TileBoard[j][i].toString() + " ] ";
+                    userBoard = userBoard + String.format("[%-25s]", TileBoard[j][i].toString());
                 }
             }
             userBoard = userBoard + "  " + i + "\n";
         }
+
         return userBoard;
     }
 

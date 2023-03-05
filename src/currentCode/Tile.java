@@ -1,6 +1,33 @@
 package currentCode;
 
 public class Tile { // class for the tiles that will be inserted onto the board
+    public static final String RESET = "\033[0m";
+
+    public static final String BLACK = "\033[0;30m";   // BLACK
+    public static final String RED = "\033[0;31m";     // RED
+    public static final String GREEN = "\033[0;32m";   // GREEN (forest)
+    public static final String LIGHT_GREEN = "\u001B[92m";   // GREEN (forest)
+    public static final String YELLOW = "\033[0;33m";  // YELLOW (prairie?)
+    public static final String BLUE = "\033[0;34m";    // BLUE (rivers)
+    public static final String PURPLE = "\033[0;35m";  // PURPLE
+    public static final String CYAN = "\033[0;36m";    // CYAN (wetlands)
+    public static final String WHITE = "\033[0;37m";   // WHITE (mountains)
+    public static final String BROWN = "\u001B[33m";   // WHITE (mountains)
+    public static final String ORANGE = "\u001B[38;5;208m";   // WHITE (mountains)
+
+    public static final String BLACK_BOLD = "\033[1;30m";  // BLACK
+    public static final String RED_BOLD = "\033[1;31m";    // RED
+    public static final String GREEN_BOLD = "\033[1;32m";  // GREEN
+    public static final String YELLOW_BOLD = "\033[1;33m"; // YELLOW
+    public static final String BLUE_BOLD = "\033[1;34m";   // BLUE
+    public static final String PURPLE_BOLD = "\033[1;35m"; // PURPLE
+    public static final String CYAN_BOLD = "\033[1;36m";   // CYAN
+    public static final String WHITE_BOLD = "\033[1;37m";  // WHITE
+    public static final String BOLD = "\u001B[1m";  // WHITE
+    public static final String PINK = "\u001B[38;5;198m";  // pink?
+
+
+
     static int count;
     public int x,y;
     Tile up,left,right,down; //points to the tiles above, below, to the left and to the right of the tile
@@ -431,10 +458,10 @@ public class Tile { // class for the tiles that will be inserted onto the board
         }
         if (isKeystoneTile) {//check something that indicates that its a special tile ()
             if (token != null) { //filled keystone tile
-                tileString = "[*" + getLandType().toString() + "*" + "\033[32m" + " [" + token + "]" + "\033[0m";
+                tileString = "*" + getLandType().toString() + "*" + "\033[32m" + " [" + token + "]" + "\033[0m";
             } else //empty keystone tile
             {
-                tileString = "[*" + getLandType().toString() + "*" + " [" + animals + "]";
+                tileString = "*" + getLandType().toString() + "*" + " [" + animals + "]";
             }
         } else //not a keystone tile
         {
@@ -448,31 +475,58 @@ public class Tile { // class for the tiles that will be inserted onto the board
         }
         return tileString;
     }
+
+    public String getHabitatColor(habitatEnum habitat)
+    {
+        String returnString="";
+        switch (habitat)
+        {
+            case River -> returnString=BLUE;
+            case Forest -> returnString=GREEN;
+            case Prairie -> returnString=YELLOW;
+            case Mountain -> returnString=WHITE;
+            case Wetland -> returnString=CYAN;
+        }
+        return returnString;
+    }
+    public String getAnimalColor(tokenEnum animal)
+    {
+        String returnString="";
+        switch (animal)
+        {
+            case BEAR -> returnString=BOLD+BROWN;
+            case HAWK -> returnString=RED_BOLD;
+            case ELK -> returnString=BOLD + LIGHT_GREEN;
+            case SALMON -> returnString=BOLD + PINK;
+            case FOX -> returnString=BOLD + ORANGE;
+        }
+        return returnString;
+    }
     public String toString() {
         String tileString = "";
         String animals = "";
-        animals = animals + animal1;
+        animals = animals + getAnimalColor(animal1) + animal1.toString()+RESET;
         if (animal2 != null && !animal2.equals(animal1)) {
-            animals = animals + "/" + animal2;
+            animals = animals + "/" + getAnimalColor(animal2) + animal2.toString()+ RESET;
         }
         if (animal3 != null && !animal3.equals(animal1) && !animal3.equals(animal2)) {
-            animals = animals + "/" + animal3;
+            animals = animals + "/" + getAnimalColor(animal3) + animal3.toString()+ RESET;
         }
         if (isKeystoneTile) {//check something that indicates that its a special tile ()
             if (token != null) { //filled keystone tile
-                tileString = "[*" + getLandType().toString() + "*" + "\033[32m" + " [" + token + "]" + "\033[0m";
+                tileString = "[*" + getHabitatColor(getLandType()) + getLandType().toString() + RESET + "*" + "\033[32m" + " [" + token + "]" + "\033[0m";
             } else //empty keystone tile
             {
-                tileString = "[*" + getLandType().toString() + "*" + " [" + animals + "]";
+                tileString = "[*" + getHabitatColor(getLandType()) + getLandType().toString() + RESET + "*" + " [" + animals + "]";
             }
         } else //not a keystone tile
         {
             if (token != null) //and filled with token
             {
-                tileString = getLandType().toString() + " / " + getLandType2().toString() + "\033[32m" + "[" + token + "]" + "\033[0m";
+                tileString = getHabitatColor(getLandType()) + getLandType().toString() + RESET + " / " + getHabitatColor(getLandType2()) + getLandType2().toString() + RESET + "\033[32m" + "[" + token + "]" + "\033[0m";
             } else //empty non keystone tile
             {
-                tileString = getLandType().toString() + " / " + getLandType2().toString() + " [" + animals + "]";
+                tileString = getHabitatColor(getLandType()) + getLandType().toString() + RESET + " / " + getHabitatColor(getLandType2()) + getLandType2().toString() + RESET + " [" + animals + "]";
             }
         }
         return tileString;

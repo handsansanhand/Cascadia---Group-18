@@ -1,5 +1,6 @@
 package currentCode;
 
+
 public enum habitatEnum { // (habitatTypes
         Forest,
         Wetland,
