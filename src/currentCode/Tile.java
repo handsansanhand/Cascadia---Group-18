@@ -524,10 +524,10 @@ public class Tile { // class for the tiles that will be inserted onto the board
         }
         if (isKeystoneTile) {//check something that indicates that its a special tile ()
             if (token != null) { //filled keystone tile
-                tileString = "[*" + getHabitatColor(getLandType()) + getLandType().toString() + RESET + "*" + GREEN_BOLD + " [" + token + "]" + RESET;
+                tileString = "*" + getHabitatColor(getLandType()) + getLandType().toString() + RESET + "*" + GREEN_BOLD + " [" + token + "]" + RESET;
             } else //empty keystone tile
             {
-                tileString = "[*" + getHabitatColor(getLandType()) + getLandType().toString() + RESET + "*" + " [" + animals + "]";
+                tileString = "*" + getHabitatColor(getLandType()) + getLandType().toString() + RESET + "*" + " [" + animals + "]";
             }
         } else //not a keystone tile
         {

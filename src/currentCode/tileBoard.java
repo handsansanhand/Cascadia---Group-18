@@ -39,61 +39,70 @@ public class tileBoard { // class for the board object for each player
 
 
     }
-    public void addTile(Tile oldest, Tile newest){ // Tile newest is the one being placed and tile oldest is the reference tile
+    public void addTile(Tile oldest, Tile newest) { // Tile newest is the one being placed and tile oldest is the reference tile
         int input;
-        System.out.println("1 to place tile above\n2 to place tile below\n3 to place tile to the right\n4 to place tile to the left\n");
-        Scanner in = new Scanner(System.in);
-        while(!in.hasNextInt()){
-
-            System.out.println("incorrect input please try again\n");
-            in.next();
-        }
-        input = in.nextInt();
-        while(input > 5 || input < 1){
-            System.out.println("incorrect input please try again\n");
+        while (true) {
+            System.out.println("1 to place tile above\n2 to place tile below\n3 to place tile to the right\n4 to place tile to the left\n");
+            Scanner in = new Scanner(System.in);
+            if (!in.hasNextInt()) {
+                System.out.println("incorrect input please try again\n");
+                in.next();
+                continue;
+            }
             input = in.nextInt();
-        }
-        switch(input){
-            case 1:
-                if(oldest.up != null){
-                    System.out.println("That position is filled\n");
-                    addTile(oldest, newest);
-                }
-                oldest.up = newest;
-                newest.down = oldest;
-                TileBoard[oldest.x][oldest.y-1] = newest;
-                newest.setTileCoordinates(oldest.x, oldest.y-1);
-                break;
-            case 2:
-                if(oldest.down != null){
-                    System.out.println("That position is filled\n");
-                    addTile(oldest, newest);
-                }
-                oldest.down = newest;
-                newest.up = oldest;
-                TileBoard[oldest.x][oldest.y+1] = newest;
-                newest.setTileCoordinates(oldest.x, oldest.y+1);
-                break;
-            case 3:
-                if(oldest.left != null){
-                    System.out.println("That position is filled\n");
-                    addTile(oldest, newest);
-                }
-                oldest.left = newest;
-                newest.right = oldest;
-                TileBoard[oldest.x-1][oldest.y] = newest;
-                newest.setTileCoordinates(oldest.x-1, oldest.y);
-                break;
-            case 4:
-                if(oldest.right != null){
-                    System.out.println("That position is filled\n");
-                    addTile(oldest, newest);
-                }
-                oldest.right = newest;
-                newest.left = oldest;
-                TileBoard[oldest.x+1][oldest.y] = newest;
-                newest.setTileCoordinates(oldest.x+1, oldest.y);
-                break;
+            while (input > 5 || input < 1) {
+                System.out.println("incorrect input please try again\n");
+                continue;
+            }
+            switch (input) {
+                case 1:
+                    if (oldest.up != null) {
+                        System.out.println("That position is filled\n");
+                        continue;
+                    }
+                        oldest.up = newest;
+                        newest.down = oldest;
+                        TileBoard[oldest.x][oldest.y+1] = newest;
+                        newest.setTileCoordinates(oldest.x, oldest.y + 1);
+                        return;
+
+                case 2:
+                    if (oldest.down != null) {
+                        System.out.println("That position is filled\n");
+                        continue;
+                    }
+                        oldest.down = newest;
+                        newest.up = oldest;
+                        TileBoard[oldest.x][oldest.y - 1] = newest;
+                        newest.setTileCoordinates(oldest.x, oldest.y - 1);
+                        return;
+
+                case 3:
+                    if (oldest.left != null) {
+                        System.out.println("That position is filled\n");
+                        continue;
+                    }
+                        oldest.left = newest;
+                        newest.right = oldest;
+                        TileBoard[oldest.x-1][oldest.y] = newest;
+                        newest.setTileCoordinates(oldest.x - 1, oldest.y);
+                        return;
+
+                case 4:
+                    if (oldest.right != null) {
+                        System.out.println("That position is filled\n");
+                        continue;
+                    }
+                        oldest.right = newest;
+                        newest.left = oldest;
+                        TileBoard[oldest.x + 1][oldest.y] = newest;
+                        newest.setTileCoordinates(oldest.x + 1, oldest.y);
+                        return;
+
+                default:
+                    System.out.println("incorrect input please try again\n");
+                    break;
+            }
         }
     }
     public tileBoard(int num) //3 random starter tiles created in middle, up, down positions on the board

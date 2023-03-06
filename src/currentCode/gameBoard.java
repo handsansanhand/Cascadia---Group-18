@@ -130,7 +130,7 @@ import java.util.Scanner;
             String hTString = "Habitat Tiles: ";
             for(int i=0;i<boardHabitatTiles.size();i++)
             {
-                hTString = hTString + "[ " + boardHabitatTiles.get(i).toString() + " ] ";
+                hTString = hTString +  "(" + i + ")" + "[ " + boardHabitatTiles.get(i).toString() + " ] ";
             }
             return hTString;
         }
@@ -139,7 +139,7 @@ import java.util.Scanner;
             String wTString = "Wildlife Tokens: ";
             for(int i=0;i<boardWildlifeTokens.size();i++)
             {
-                wTString = wTString + "[ " + boardWildlifeTokens.get(i).toString() + " ] ";
+                wTString = wTString + "(" + i + ")" + "[ " + boardWildlifeTokens.get(i).toString() + " ] ";
             }
             return wTString;
         }
