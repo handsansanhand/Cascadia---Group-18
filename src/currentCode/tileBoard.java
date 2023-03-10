@@ -110,8 +110,8 @@ public class tileBoard { // class for the board object for each player
         starterTiles();
     }
 
-    public Tile getTile(int x, int y) {
-        return TileBoard[x][y];
+    public Tile[][] getTile() {
+        return TileBoard;
     }
 
     public String printUserBoard() {

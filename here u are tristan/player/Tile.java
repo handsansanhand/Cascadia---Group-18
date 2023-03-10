@@ -1,16 +1,17 @@
 package player;
 
+import java.awt.Color;
+
 import javafx.scene.shape.Rectangle;
 
 public class Tile { // class for the tiles that will be inserted onto the board
     private Rectangle rectangles;
-    public boolean isEmpty; 
     int boardWidth = 15 * 50;
     int boardHeight = 15 * 50;
     int startX = (890 - boardWidth) / 2;  
     int startY = (580 - boardHeight) / 2;
-    int row = 0;
-    int col = 0;
+    static int row = 0;
+    static int col = 0;
 	public static final String RESET = "\033[0m";
 
     public static final String BLACK = "\033[0;30m";   // BLACK
@@ -59,10 +60,10 @@ public class Tile { // class for the tiles that will be inserted onto the board
 //    wildlifeToken token;
     boolean isKeystoneTile=false; //this is to check if a tile is a keystone tile (meaning if it has only one landType i.e: Mountain / Empty)
 
-    Tile(habitatEnum landType, habitatEnum landType2) {
-    	if(isEmpty == true) {
-    		
+    Tile(habitatEnum landType, habitatEnum landType2, boolean x) {
+    	if(x == true) {
     		rectangles = new Rectangle(startX + col * 50, startY + row * 50, 50, 50);
+            rectangles.setFill(Color.WHITE);
     	   row++;
     	   col++;
     	}

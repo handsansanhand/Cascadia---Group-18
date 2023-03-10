@@ -110,14 +110,12 @@ public class tileBoard {
             }
         }
     }
-    public tileBoard(int num) //3 random starter tiles created in middle, up, down positions on the board
+    public tileBoard() //3 random starter tiles created in middle, up, down positions on the board
     {
-        
-
         for (int row = 0; row < BOARD_HEIGHT; row++) {
             for (int col = 0; col < BOARD_WIDTH; col++) {
-            	TileBoard[row][col] = new Tile(habitatEnum.Empty, habitatEnum.Empty);
-            	TileBoard[row][col].isEmpty = true;
+            	TileBoard[row][col] = new Tile(habitatEnum.Empty, habitatEnum.Empty, true);
+            	
             }
         }
         starterTiles();

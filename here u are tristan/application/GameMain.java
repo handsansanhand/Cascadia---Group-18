@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import currentCode.tileBoard;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -51,8 +52,8 @@ public class GameMain extends player {
 			Pane root = new Pane();
 
 			root = loader.load();
-			Board tileBoard = new TileBoard();
-			Rectangle[][] rectangles = tileBoard.getRectangles();
+			Board ptileBoard = new tileBoard();
+			//ptileBoard.tileBoard[0][0].rectangles.setFill(java.awt.Color.BLACK); example of how to access rectangle and change its color
 
 			// rec1-4 display random hab tiles
 			Rectangle rec1 = (Rectangle) root.lookup("#rec1");
