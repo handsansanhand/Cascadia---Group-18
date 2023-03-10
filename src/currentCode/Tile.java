@@ -4,8 +4,8 @@ public class Tile { // class for the tiles that will be inserted onto the board
     static int count;
     public int x,y;
     Tile up,left,right,down; //points to the tiles above, below, to the left and to the right of the tile
-    habitatEnum landType;
-    habitatEnum landType2;
+    habitatEnum landType; //should never be empty
+    habitatEnum landType2; //if only one habitat type should be empty
     tokenEnum animal1;
     tokenEnum animal2;
     tokenEnum animal3;
