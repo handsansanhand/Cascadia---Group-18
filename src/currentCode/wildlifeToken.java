@@ -25,6 +25,11 @@ public class wildlifeToken {
     public tokenEnum getAnimalType(){
         return animalType;
     }
+
+    public String colorToString()
+    {
+        return Tile.getAnimalColor(animalType) + animalType + Tile.RESET;
+    }
     
     public String toString()
     {
