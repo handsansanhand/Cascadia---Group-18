@@ -533,10 +533,10 @@ public class Tile { // class for the tiles that will be inserted onto the board
         {
             if (token != null) //and filled with token
             {
-                tileString = getHabitatColor(getLandType()) + getLandType().toString() + RESET + " / " + getHabitatColor(getLandType2()) + getLandType2().toString() + RESET + "\033[32m" + "[" + token + "]" + "\033[0m";
+                tileString = getHabitatColor(getLandType()) + getLandType().toString() + RESET + "\033[32m" + "[" + token + "]" + "\033[0m"+ getHabitatColor(getLandType2()) + getLandType2().toString() + RESET ;
             } else //empty non keystone tile
             {
-                tileString = getHabitatColor(getLandType()) + getLandType().toString() + RESET + " / " + getHabitatColor(getLandType2()) + getLandType2().toString() + RESET + " [" + animals + "]";
+                tileString = getHabitatColor(getLandType()) + getLandType().toString() + RESET + " [" + animals + "] " + getHabitatColor(getLandType2()) + getLandType2().toString() + RESET;
             }
         }
         return tileString;

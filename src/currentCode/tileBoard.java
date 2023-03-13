@@ -39,10 +39,37 @@ public class tileBoard { // class for the board object for each player
 
 
     }
+
+    public void printReference(Tile tile)
+    {
+        String returnString="";
+        String tileRightString="";
+        String tileLeftString="";
+        String tileUpString="";
+        String tileDownString="";
+        if(tile.right == null)
+        {tileRightString = tileRightString + "[("  + 3 + ")]";} else{tileRightString = tileRightString + "[" +tile.right+ "]";}
+        if(tile.left == null)
+        {tileLeftString = tileLeftString + "[("  + 4 + ")]";} else{tileLeftString = tileLeftString + "[" +tile.left+ "]";}
+        if(tile.up == null)
+        {tileUpString = tileUpString + "[("  + 1 + ")]";} else {tileUpString = tileUpString + "[" +tile.up+ "]";}
+        if(tile.down == null)
+        {tileDownString = tileDownString + "[("  + 2 + ")]";} else {tileDownString = tileDownString + "[" + tile.down + "]";}
+
+        returnString = returnString + "      " + tileUpString + "\n";
+        returnString = returnString + tileLeftString;
+        returnString = returnString + " [" + tile + "] ";
+        returnString = returnString + tileRightString;
+        returnString = returnString + "\n       " + tileDownString;
+        System.out.println(returnString);
+    }
     public void addTile(Tile oldest, Tile newest) { // Tile newest is the one being placed and tile oldest is the reference tile
         int input;
         while (true) {
-            System.out.println("1 to place tile above\n2 to place tile below\n3 to place tile to the right\n4 to place tile to the left\n");
+            System.out.println("Tile to be placed: " + newest);
+            System.out.println("1 to place tile above\n2 to place tile below\n3 to place tile to the right\n4 to place tile to the left");
+            System.out.println("Or press 0 to select a different tile");
+            printReference(oldest);
             Scanner in = new Scanner(System.in);
             if (!in.hasNextInt()) {
                 System.out.println("incorrect input please try again\n");
@@ -50,11 +77,25 @@ public class tileBoard { // class for the board object for each player
                 continue;
             }
             input = in.nextInt();
-            while (input > 5 || input < 1) {
+            while (input > 5 || input < 0) {
                 System.out.println("incorrect input please try again\n");
                 continue;
             }
             switch (input) {
+                case 0:
+                {
+                    System.out.println("Enter the x and y coordinates of the tile you want to select (e.g. 2,3):");
+                    String inp = in.next();
+                    String[] numbers = inp.split(",");
+                    int x = Integer.parseInt(numbers[0].trim());
+                    int y = Integer.parseInt(numbers[1].trim());
+                    if (TileBoard[x][y] == null) {
+                        System.out.println("No tile found at coordinates (" + x + ", " + y + ")");
+                        continue;
+                    }
+                    oldest = TileBoard[x][y];
+                    break;
+                }
                 case 1:
                     if (oldest.up != null) {
                         System.out.println("That position is filled\n");
@@ -112,6 +153,9 @@ public class tileBoard { // class for the board object for each player
 
     public Tile getTile(int x, int y) {
         return TileBoard[x][y];
+    }
+    public Tile[][] getTileBoard() {
+        return TileBoard;
     }
 
     public String printUserBoard() {
