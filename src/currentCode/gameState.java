@@ -124,18 +124,18 @@ public class gameState {
     public void startTurn(int i) {
         boolean stillTurn = true;
         boolean stillTokenPlace = true;
-        System.out.println(gameBoard);
+        System.out.println("Pick a habitat token and wildlife token from the board. [0-4]");
+        System.out.println("Or press w to spend a nature token. NATURE TOKENS: " + getPlayers().get(i).natureTokens);
         gameBoard.checkForCull();
         while (stillTurn) {
-            System.out.println("Pick a habitat token and wildlife token from the board. [0-4]");
-            System.out.println("Or press w to spend a nature token to pick a habitat token + wildlife token of ur choice: NATURE TOKENS: " + getPlayers().get(i).natureTokens);
+            System.out.println(gameBoard);
             switch (in.next()) {
                 case "0": {
                     Tile t = gameBoard.removeHabitatTile(0);
                     getPlayers().get(i).handTile = t;
                     wildlifeToken w = gameBoard.removeWildlifeToken(0);
                     getPlayers().get(i).addToken(w); //adds the token to your hand
-                 //   placeTile(i, t);
+                    placeTile(i, t);
                     System.out.println(getPlayers().get(i).getPlayerBoard());
                     stillTurn = false;
                     break;
@@ -145,7 +145,7 @@ public class gameState {
                     getPlayers().get(i).handTile = t;
                     wildlifeToken w = gameBoard.removeWildlifeToken(1);
                     getPlayers().get(i).addToken(w); //adds the token to your hand
-                //    placeTile(i, t);
+                    placeTile(i, t);
                     System.out.println(getPlayers().get(i).getPlayerBoard());
                     stillTurn = false;
                     break;
@@ -155,7 +155,7 @@ public class gameState {
                     getPlayers().get(i).handTile = t;
                     wildlifeToken w = gameBoard.removeWildlifeToken(2);
                     getPlayers().get(i).addToken(w); //adds the token to your hand
-                 //   placeTile(i, t);
+                    placeTile(i, t);
                     System.out.println(getPlayers().get(i).getPlayerBoard());
                     stillTurn = false;
                     break;
@@ -165,7 +165,7 @@ public class gameState {
                     getPlayers().get(i).handTile = t;
                     wildlifeToken w = gameBoard.removeWildlifeToken(3);
                     getPlayers().get(i).addToken(w); //adds the token to your hand
-                 //   placeTile(i, t);
+                   placeTile(i, t);
                     System.out.println(getPlayers().get(i).getPlayerBoard());
                     stillTurn = false;
                     break;
@@ -181,49 +181,93 @@ public class gameState {
                     {
                         System.out.println("not enough nature tokens");
                         break;}
-                    Tile t = gameBoard.chooseTile(getPlayers().get(i));
-                    getPlayers().get(i).handTile = t;
-                    wildlifeToken w = gameBoard.chooseToken(getPlayers().get(i));
-                    placeTile(i, t);
-                    System.out.println(getPlayers().get(i).getPlayerBoard());
-                    stillTurn=false;
+                    spendNatureToken(i);
+                    System.out.println("Pick a habitat token and wildlife token from the board. [0-4]");
+                    System.out.println("Or press w to spend a nature token. NATURE TOKENS: " + getPlayers().get(i).natureTokens);
                     break;
                 }
                 default: {
+                    System.out.println("invalid input");
+                    System.out.println("Pick a habitat token and wildlife token from the board. [0-4]");
+                    System.out.println("Or press w to spend a nature token. NATURE TOKENS: " + getPlayers().get(i).natureTokens);
                     break;
                 }
             }
         }
-            System.out.println("Would you like to place a wildlife token? Y/N");
-        System.out.println(getPlayers().get(i).printHand());
-            switch (in.next()) {
-                case "y": {
-                   placeToken(i);
-                    i++;
-                    nextTurn(i);
-                    stillTokenPlace = false;
-                    break;
-                }
-                case "n": {
-                    i++;
-                    nextTurn(i);
-                    stillTokenPlace = false;
-                    break;
-                }
-                case "c": {
-                    displayControls();
-                    System.out.println("\nWould you like to place a wildlife token?. [0-4]");
-                    System.out.println(gameBoard);
-                    break;
-                }
-                default: {
-                    break;
+        if(!getPlayers().get(i).hand.isEmpty()) {
+            while (stillTokenPlace) {
+                System.out.println("Would you like to place a wildlife token? Y/N");
+                System.out.println(getPlayers().get(i).printHand());
+                switch (in.next()) {
+                    case "y": {
+                        placeToken(i);
+                        i++;
+                        nextTurn(i);
+                        stillTokenPlace = false;
+                        break;
+                    }
+                    case "n": {
+                        i++;
+                        nextTurn(i);
+                        stillTokenPlace = false;
+                        break;
+                    }
+                    case "c": {
+                        displayControls();
+                        System.out.println("\nWould you like to place a wildlife token?. [0-4]");
+                        System.out.println(gameBoard);
+                        break;
+                    }
+                    default: {
+                        System.out.println("incorrect input");
+                    }
                 }
             }
+        } else{
+            i++;
+            nextTurn(i);}
             if (i + 1 == playerCount) {
                 i = 0;
             }
             nextTurn(i);
+        }
+
+        public void spendNatureToken(int currentPlayer)
+        {
+            boolean stillSpending=true;
+            Scanner in = new Scanner(System.in);
+            System.out.println(gameBoard);
+            System.out.println("Press 1 to choose a wildlife token and habitat tile of your choosing");
+            System.out.println("Press 2 to replace any number of wildlife tokens");
+            while(stillSpending) {
+                while(!in.hasNextInt())
+                {
+                    System.out.println("invalid input");
+                    in.next();
+                }
+                switch (in.nextInt())
+                {
+                    case 1:
+                    {
+                        Tile t = gameBoard.chooseTile(getPlayers().get(currentPlayer));
+                        getPlayers().get(currentPlayer).handTile = t;
+                        wildlifeToken w = gameBoard.chooseToken(getPlayers().get(currentPlayer));
+                        placeTile(currentPlayer, t);
+                        System.out.println(getPlayers().get(currentPlayer).getPlayerBoard());
+                        stillSpending=false;
+                        return;
+                    }
+                    case 2:{
+                        gameBoard.spendTokenWipingBoard(getPlayers().get(currentPlayer));
+                        System.out.println("New Board is:");
+                        return;
+                    }
+                    default:{
+                        System.out.println("invalid input");
+                    }
+
+                }
+            }
         }
 
         public void placeWildlifeToken(wildlifeToken tokenToPlace, int i, int inputToken) {

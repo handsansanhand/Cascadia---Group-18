@@ -40,27 +40,32 @@ import java.util.Scanner;
 
         public void checkForCull() //lets users know if a cull is available
         {
+            boolean stillCulling=true;
             if(highestAnimalTypeCount()==3) //only when there are 3 of the same animal
             {
-                System.out.println("A cull is available! Would you like to cull?"); //cull
-                System.out.println("Y / N");
-                Scanner in = new Scanner(System.in);
+                while (stillCulling) {
+                    System.out.println("A cull is available! Would you like to cull?"); //cull
+                    System.out.println("Y / N");
+                    Scanner in = new Scanner(System.in);
                     switch (in.next()) {
                         case "y" -> {
                             tokenEnum animaltocull = findMostCommonAnimal();
                             cull(animaltocull);
                             System.out.println("The " + animaltocull + "'s have been culled.");
                             System.out.println("The new board is: \n" + this.toString());
+                            stillCulling=false;
                             break;
                         }
                         case "n" -> {
                             System.out.println("No cull happened");
                             System.out.println("The board is: \n" + this.toString());
+                            stillCulling=false;
                             break;
                         }
                         default -> System.out.println("Invalid argument");
                     }
                 }
+            }
             else if(highestAnimalTypeCount()==4)
             {
                 cull(findMostCommonAnimal());
@@ -187,6 +192,7 @@ import java.util.Scanner;
                     }
                 }
             }
+            currentPlayer.natureTokens--;
             currentPlayer.handTile = returnTile;
             return returnTile;
         }
@@ -241,7 +247,9 @@ import java.util.Scanner;
 
     public void spendTokenWipingBoard(player currentPlayer)
     {
+        boolean a=true;
         Scanner sc = new Scanner(System.in);
+        int numToCull=0;
         if(currentPlayer.natureTokens==0)
         {
             System.out.println("not enough nature tokens");
@@ -250,18 +258,60 @@ import java.util.Scanner;
         else {
             currentPlayer.natureTokens--;
             System.out.println(printWildlifeTokens());
-            System.out.println("how many would you like to cull?");
-            while(!sc.hasNextInt())
-            {
-                System.out.println("invalid input");
-                sc.nextInt();
+            int input;
+            while(a) {
+                System.out.println("how many would you like to replace?");
+                while (!sc.hasNextInt()) {
+                    System.out.println("Invalid input");
+                    sc.next(); // consume remaining input
+                }
+                switch (sc.nextInt()) {
+                    case 1:{numToCull = 1;
+                                a=false;
+                    break;}
+                    case 2:{numToCull = 2;
+                        a=false;
+                    break;}
+                    case 3:{numToCull = 3;
+                        a=false;
+                    break;}
+                    case 4:{numToCull = 4;
+                        a=false;
+                    break;}
+                    default:
+                    {
+                        System.out.println("invalid input, please try again:");
+                    }
+                }
             }
-            switch (sc.nextInt())
+            //get the ones to cull
+            System.out.println("What tokens would you like to replace?");
+            for(int i=0; i<numToCull;i++)
             {
-                case 1:
+                System.out.println(printWildlifeTokens());
+                System.out.println("Replacements left: " + (numToCull-i));
+                while(!sc.hasNextInt())
+                {
+                    System.out.println("invalid input");
+                    sc.next(); // discard the invalid input
+                }
+                int tokenToReplace = sc.nextInt();
+                sc.nextLine(); // consume the newline character
 
+                switch (tokenToReplace)
+                {
+                    case 0 -> replaceWildlifeToken(0);
+                    case 1 -> replaceWildlifeToken(1);
+                    case 2 -> replaceWildlifeToken(2);
+                    case 3 -> replaceWildlifeToken(3);
+                }
             }
         }
+    }
+
+    public void replaceWildlifeToken(int i) //helper function for spending a naturetoken to wipe a particular token
+    {
+        boardWildlifeTokens.set(i, wildlifeToken.generateWildlifeToken());
     }
 
 
