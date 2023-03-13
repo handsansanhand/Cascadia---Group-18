@@ -135,7 +135,7 @@ public class gameState {
                     getPlayers().get(i).handTile = t;
                     wildlifeToken w = gameBoard.removeWildlifeToken(0);
                     getPlayers().get(i).addToken(w); //adds the token to your hand
-                    placeTile(i, t);
+                 //   placeTile(i, t);
                     System.out.println(getPlayers().get(i).getPlayerBoard());
                     stillTurn = false;
                     break;
@@ -145,7 +145,7 @@ public class gameState {
                     getPlayers().get(i).handTile = t;
                     wildlifeToken w = gameBoard.removeWildlifeToken(1);
                     getPlayers().get(i).addToken(w); //adds the token to your hand
-                    placeTile(i, t);
+                //    placeTile(i, t);
                     System.out.println(getPlayers().get(i).getPlayerBoard());
                     stillTurn = false;
                     break;
@@ -155,7 +155,7 @@ public class gameState {
                     getPlayers().get(i).handTile = t;
                     wildlifeToken w = gameBoard.removeWildlifeToken(2);
                     getPlayers().get(i).addToken(w); //adds the token to your hand
-                    placeTile(i, t);
+                 //   placeTile(i, t);
                     System.out.println(getPlayers().get(i).getPlayerBoard());
                     stillTurn = false;
                     break;
@@ -165,7 +165,7 @@ public class gameState {
                     getPlayers().get(i).handTile = t;
                     wildlifeToken w = gameBoard.removeWildlifeToken(3);
                     getPlayers().get(i).addToken(w); //adds the token to your hand
-                    placeTile(i, t);
+                 //   placeTile(i, t);
                     System.out.println(getPlayers().get(i).getPlayerBoard());
                     stillTurn = false;
                     break;
@@ -181,13 +181,12 @@ public class gameState {
                     {
                         System.out.println("not enough nature tokens");
                         break;}
-                    Tile t = gameBoard.spendToken(getPlayers().get(i));
+                    Tile t = gameBoard.chooseTile(getPlayers().get(i));
+                    getPlayers().get(i).handTile = t;
                     wildlifeToken w = gameBoard.chooseToken(getPlayers().get(i));
                     placeTile(i, t);
                     System.out.println(getPlayers().get(i).getPlayerBoard());
-                    placeToken(i);
-                    i++;
-                    nextTurn(i);
+                    stillTurn=false;
                     break;
                 }
                 default: {

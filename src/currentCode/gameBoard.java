@@ -151,11 +151,12 @@ import java.util.Scanner;
                 System.out.println(currentPlayer.name + " earned a nature token !");
             }
         }
+
         public Tile chooseTile(player currentPlayer) //function for spending a wildlife token to choose a tile
         {
             Tile returnTile = null;
             System.out.println("Choose a tile:");
-            System.out.println(boardHabitatTiles);
+            System.out.println(printHabitatTiles());
             Scanner in = new Scanner(System.in);
             boolean stillPicking = true;
             while (stillPicking) {
@@ -186,6 +187,7 @@ import java.util.Scanner;
                     }
                 }
             }
+            currentPlayer.handTile = returnTile;
             return returnTile;
         }
 
@@ -193,7 +195,7 @@ import java.util.Scanner;
     {
         wildlifeToken returnToken = null;
         System.out.println("Pick a wildlife token [0-3]:");
-        System.out.println(boardWildlifeTokens);
+        System.out.println(printWildlifeTokens());
         Scanner in = new Scanner(System.in);
         boolean stillPicking = true;
         while (stillPicking) {
@@ -225,15 +227,41 @@ import java.util.Scanner;
 
             }
         }
+        currentPlayer.hand.add(returnToken);
         return returnToken;
     }
-    public Tile spendToken(player currentPlayer)
+    public Tile spendTokenPickingTile(player currentPlayer) //function for spending a nature token for choosing a tile of your choice
     {
         currentPlayer.natureTokens--;
         currentPlayer.addToken(chooseToken(currentPlayer));
         //currentPlayer.getPlayerBoard().addTile(null, chooseTile(currentPlayer));
         //currentPlayer.addToken(chooseToken(currentPlayer));
         return chooseTile(currentPlayer);
+    }
+
+    public void spendTokenWipingBoard(player currentPlayer)
+    {
+        Scanner sc = new Scanner(System.in);
+        if(currentPlayer.natureTokens==0)
+        {
+            System.out.println("not enough nature tokens");
+            return;
+        }
+        else {
+            currentPlayer.natureTokens--;
+            System.out.println(printWildlifeTokens());
+            System.out.println("how many would you like to cull?");
+            while(!sc.hasNextInt())
+            {
+                System.out.println("invalid input");
+                sc.nextInt();
+            }
+            switch (sc.nextInt())
+            {
+                case 1:
+
+            }
+        }
     }
 
 

@@ -12,8 +12,8 @@ public class player {
     ArrayList<wildlifeToken> hand = new ArrayList<>();
     Tile handTile;
 
-    public Tile getHandTile() {
-        return handTile;
+    public String getHandTile() {
+        return handTile.toString();
     }
 
     public void addToken(wildlifeToken x){

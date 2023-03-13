@@ -23,6 +23,8 @@ import player.Board;
 import player.Tile;
 import player.player;
 
+//import static player.Board.rectangles;
+
 public class GameMain extends player {
 	private static Scene scene;
 	public static int i = 0;
