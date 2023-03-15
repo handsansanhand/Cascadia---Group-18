@@ -66,10 +66,11 @@ public class tileBoard { // class for the board object for each player
     public void addTile(Tile oldest, Tile newest) { // Tile newest is the one being placed and tile oldest is the reference tile
         int input;
         while (true) {
-            System.out.println("Tile to be placed: " + newest);
             System.out.println("1 to place tile above\n2 to place tile below\n3 to place tile to the left\n4 to place tile to the right");
-            System.out.println("Or press 0 to select a different tile");
-            System.out.println("Or press 5 to view your board");
+            System.out.println("press 0 to select a different tile");
+            System.out.println("press 5 to view your board");
+            System.out.println("press 6 to rotate your tile");
+            System.out.println("Tile to be placed: [" + newest + "]");
             printReference(oldest);
             Scanner in = new Scanner(System.in);
             if (!in.hasNextInt()) {
@@ -78,13 +79,14 @@ public class tileBoard { // class for the board object for each player
                 continue;
             }
             input = in.nextInt();
-            while (input > 5 || input < 0) {
+            while (input > 6 || input < 0) {
                 System.out.println("incorrect input please try again\n");
                 continue;
             }
             switch (input) {
                 case 0:
                 {
+                    System.out.println(printUserBoard());
                     System.out.println("Enter the x and y coordinates of the tile you want to select (e.g. 2,3):");
                     String inp = in.next();
                     String[] numbers = inp.split(",");
@@ -142,8 +144,10 @@ public class tileBoard { // class for the board object for each player
                         return;
                 case 5:
                     System.out.println(printUserBoard());
-                    return;
-
+                    continue;
+                case 6:
+                    Tile.rotateTile(newest);
+                    continue;
                 default:
                     System.out.println("incorrect input please try again\n");
                     break;
@@ -166,6 +170,7 @@ public class tileBoard { // class for the board object for each player
         String userBoard = "";
         System.out.println("Your Board:");
         boolean[] columnIsEmpty = new boolean[BOARD_WIDTH];
+        boolean[] rowIsEmpty = new boolean[BOARD_HEIGHT];
         for (int j = 0; j < BOARD_WIDTH; j++) {
             boolean hasTile = false;
             for (int i = 0; i < BOARD_HEIGHT; i++) {
@@ -179,7 +184,6 @@ public class tileBoard { // class for the board object for each player
             }
         }
         for (int i = BOARD_HEIGHT - 1; i >= 0; i--) {
-            boolean rowIsEmpty = true;
             for (int j = BOARD_WIDTH - 1; j >= 0; j--) {
                 if (!columnIsEmpty[j] && TileBoard[j][i] != null) {
                     String tileString = TileBoard[j][i].toString();
@@ -188,18 +192,17 @@ public class tileBoard { // class for the board object for each player
                     int numRightPaddingChars = numPaddingChars - numLeftPaddingChars;
                     String paddedTileString = String.format("%" + numLeftPaddingChars + "s%s%" + numRightPaddingChars + "s", "", tileString, "");
                     userBoard = userBoard + "[" + paddedTileString + "]";
-                    rowIsEmpty = false;
+                    rowIsEmpty[i] = false;
                 } else if (!columnIsEmpty[j]) {
                     userBoard = userBoard + "                                          ";
-                    rowIsEmpty = false;
+                    rowIsEmpty[i] = false;
                 }
             }
-            if (!rowIsEmpty) {
-                userBoard = userBoard + "  " + i + "\n";
-            }
+           userBoard += "\n";
         }
         return userBoard;
     }
+
 
 
     // helper method to remove ANSI color codes from a string

@@ -515,7 +515,7 @@ public class Tile { // class for the tiles that will be inserted onto the board
     public String toString() {
         String tileString = "";
         String animals = "";
-        animals = animals + getAnimalColor(animal1) + animal1 +RESET;
+        animals = animals + getAnimalColor(animal1) + animal1 + RESET;
         if (animal2 != null && !animal2.equals(animal1)) {
             animals = animals + "/" + getAnimalColor(animal2) + animal2 + RESET;
         }
@@ -540,6 +540,13 @@ public class Tile { // class for the tiles that will be inserted onto the board
             }
         }
         return tileString;
+    }
+    public static void rotateTile(Tile tile)
+    {
+        habitatEnum tmp;
+        tmp = tile.landType;
+        tile.landType = tile.landType2;
+        tile.landType2 = tmp;
     }
 
         public String uiPrintTIle()

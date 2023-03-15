@@ -353,7 +353,7 @@ public class gameState {
     public void placeTile(int i, Tile t) {
         System.out.println(getPlayers().get(i).getPlayerBoard());
         System.out.println("Pick a reference tile on the board: ");
-        System.out.println("Your tile that will be placed: " + getPlayers().get(i).getHandTile());
+        System.out.println("Your tile that will be placed: [" + getPlayers().get(i).getHandTile() +"]");
         String input = in.next();
         String[] numbers = input.split(",");
         int x = Integer.parseInt(numbers[0].trim());
