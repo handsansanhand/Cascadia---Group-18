@@ -46,19 +46,20 @@ import java.util.Scanner;
                 while (stillCulling) {
                     System.out.println("A cull is available! Would you like to cull?"); //cull
                     System.out.println("Y / N");
+                    System.out.println("The board: " + this);
                     Scanner in = new Scanner(System.in);
                     switch (in.next()) {
                         case "y" -> {
                             tokenEnum animaltocull = findMostCommonAnimal();
                             cull(animaltocull);
                             System.out.println("The " + animaltocull + "'s have been culled.");
-                            System.out.println("The new board is: \n" + this.toString());
+                            System.out.println("The new board is: \n");
                             stillCulling=false;
                             break;
                         }
                         case "n" -> {
                             System.out.println("No cull happened");
-                            System.out.println("The board is: \n" + this.toString());
+                            System.out.println("The board is: \n");
                             stillCulling=false;
                             break;
                         }

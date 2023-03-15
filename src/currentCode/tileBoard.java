@@ -48,9 +48,9 @@ public class tileBoard { // class for the board object for each player
         String tileUpString="";
         String tileDownString="";
         if(tile.right == null)
-        {tileRightString = tileRightString + "[("  + 3 + ")]";} else{tileRightString = tileRightString + "[" +tile.right+ "]";}
+        {tileRightString = tileRightString + "[("  + 4 + ")]";} else{tileRightString = tileRightString + "[" +tile.right+ "]";}
         if(tile.left == null)
-        {tileLeftString = tileLeftString + "[("  + 4 + ")]";} else{tileLeftString = tileLeftString + "[" +tile.left+ "]";}
+        {tileLeftString = tileLeftString + "[("  + 3 + ")]";} else{tileLeftString = tileLeftString + "[" +tile.left+ "]";}
         if(tile.up == null)
         {tileUpString = tileUpString + "[("  + 1 + ")]";} else {tileUpString = tileUpString + "[" +tile.up+ "]";}
         if(tile.down == null)
@@ -67,8 +67,9 @@ public class tileBoard { // class for the board object for each player
         int input;
         while (true) {
             System.out.println("Tile to be placed: " + newest);
-            System.out.println("1 to place tile above\n2 to place tile below\n3 to place tile to the right\n4 to place tile to the left");
+            System.out.println("1 to place tile above\n2 to place tile below\n3 to place tile to the left\n4 to place tile to the right");
             System.out.println("Or press 0 to select a different tile");
+            System.out.println("Or press 5 to view your board");
             printReference(oldest);
             Scanner in = new Scanner(System.in);
             if (!in.hasNextInt()) {
@@ -125,8 +126,8 @@ public class tileBoard { // class for the board object for each player
                     }
                         oldest.left = newest;
                         newest.right = oldest;
-                        TileBoard[oldest.x-1][oldest.y] = newest;
-                        newest.setTileCoordinates(oldest.x - 1, oldest.y);
+                        TileBoard[oldest.x+1][oldest.y] = newest;
+                        newest.setTileCoordinates(oldest.x + 1, oldest.y);
                         return;
 
                 case 4:
@@ -136,9 +137,12 @@ public class tileBoard { // class for the board object for each player
                     }
                         oldest.right = newest;
                         newest.left = oldest;
-                        TileBoard[oldest.x + 1][oldest.y] = newest;
-                        newest.setTileCoordinates(oldest.x + 1, oldest.y);
+                        TileBoard[oldest.x - 1][oldest.y] = newest;
+                        newest.setTileCoordinates(oldest.x - 1, oldest.y);
                         return;
+                case 5:
+                    System.out.println(printUserBoard());
+                    return;
 
                 default:
                     System.out.println("incorrect input please try again\n");
@@ -161,19 +165,46 @@ public class tileBoard { // class for the board object for each player
     public String printUserBoard() {
         String userBoard = "";
         System.out.println("Your Board:");
-        for (int i = BOARD_HEIGHT-1; i>=0; i--) //TILEBOARD.LENGTH = HEIGHT // TILEBOARD[0].LENGTH = WIDTH
-        {
-            for (int j = BOARD_WIDTH-1; j >= 0; j--) {
-                if (TileBoard[j][i] == null) {
-                    userBoard = userBoard + "\u001B[30m" + String.format("[ %5s ]", "EMPTY") + "\u001B[0m";
-                } else {
-                    userBoard = userBoard + String.format("[%-25s]", TileBoard[j][i].toString());
+        boolean[] columnIsEmpty = new boolean[BOARD_WIDTH];
+        for (int j = 0; j < BOARD_WIDTH; j++) {
+            boolean hasTile = false;
+            for (int i = 0; i < BOARD_HEIGHT; i++) {
+                if (TileBoard[j][i] != null) {
+                    hasTile = true;
+                    break;
                 }
             }
-            userBoard = userBoard + "  " + i + "\n";
+            if (!hasTile) {
+                columnIsEmpty[j] = true;
+            }
         }
-
+        for (int i = BOARD_HEIGHT - 1; i >= 0; i--) {
+            boolean rowIsEmpty = true;
+            for (int j = BOARD_WIDTH - 1; j >= 0; j--) {
+                if (!columnIsEmpty[j] && TileBoard[j][i] != null) {
+                    String tileString = TileBoard[j][i].toString();
+                    int numPaddingChars = 40 - removeANSIColors(tileString).length();
+                    int numLeftPaddingChars = numPaddingChars / 2;
+                    int numRightPaddingChars = numPaddingChars - numLeftPaddingChars;
+                    String paddedTileString = String.format("%" + numLeftPaddingChars + "s%s%" + numRightPaddingChars + "s", "", tileString, "");
+                    userBoard = userBoard + "[" + paddedTileString + "]";
+                    rowIsEmpty = false;
+                } else if (!columnIsEmpty[j]) {
+                    userBoard = userBoard + "                                          ";
+                    rowIsEmpty = false;
+                }
+            }
+            if (!rowIsEmpty) {
+                userBoard = userBoard + "  " + i + "\n";
+            }
+        }
         return userBoard;
+    }
+
+
+    // helper method to remove ANSI color codes from a string
+    private String removeANSIColors(String str) {
+        return str.replaceAll("\u001B\\[[;\\d]*m", "");
     }
 
     public String toString(){ //visual representation of board here
