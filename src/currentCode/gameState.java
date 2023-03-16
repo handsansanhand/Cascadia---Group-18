@@ -124,12 +124,9 @@ public class gameState {
     public void startTurn(int i) {
         boolean stillTurn = true;
         boolean stillTokenPlace = true;
-        System.out.println("Pick a habitat token and wildlife token from the board. [0-4]");
-        System.out.println("Press w to spend a nature token. NATURE TOKENS: " + getPlayers().get(i).natureTokens);
-        System.out.println("Press v to view your board");
+        printInstructions(i);
         gameBoard.checkForCull();
         while (stillTurn) {
-            System.out.println("Pick a habitat token and wildlife token from the board. [0-4]");
             System.out.println(gameBoard);
             switch (in.next()) {
                 case "0": {
@@ -173,8 +170,7 @@ public class gameState {
                     break;
                 }
                 case "c": {
-                    displayControls();
-                    System.out.println("\nPick a habitat token and wildlife token from the board. [0-4]");
+                    printInstructions(i);
                     break;
                 }
                 case "w": {
@@ -183,19 +179,22 @@ public class gameState {
                         System.out.println("not enough nature tokens");
                         break;}
                     spendNatureToken(i);
-                    System.out.println("Pick a habitat token and wildlife token from the board. [0-4]");
-                    System.out.println("Or press w to spend a nature token. NATURE TOKENS: " + getPlayers().get(i).natureTokens);
+                   printInstructions(i);
                     break;
                 }
                 case "v":
                 {
                     System.out.println(getPlayers().get(i).getPlayerBoard().printUserBoard());
+                    printInstructions(i);
+                    break;
+                }
+                case "h":
+                {
+                    System.out.println(getPlayers().get(i).printHand());
                     break;
                 }
                 default: {
-                    System.out.println("invalid input");
-                    System.out.println("Pick a habitat token and wildlife token from the board. [0-4]");
-                    System.out.println("Or press w to spend a nature token. NATURE TOKENS: " + getPlayers().get(i).natureTokens);
+                    printInstructions(i);
                     break;
                 }
             }
@@ -236,6 +235,13 @@ public class gameState {
                 i = 0;
             }
             nextTurn(i);
+        }
+        public void printInstructions(int player)
+        {
+            System.out.println("Pick a habitat token and wildlife token from the board. [0-3]");
+            System.out.println("Press s to spend a nature token. NATURE TOKENS: " + getPlayers().get(player).natureTokens);
+            System.out.println("Press v to view your board");
+            System.out.println("Press h to see your hand");
         }
 
         public void spendNatureToken(int currentPlayer)
