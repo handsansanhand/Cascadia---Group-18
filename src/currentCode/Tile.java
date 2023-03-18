@@ -48,28 +48,7 @@ public class Tile { // class for the tiles that will be inserted onto the board
     tokenEnum animal3;
     wildlifeToken token;
     boolean isKeystoneTile=false; //this is to check if a tile is a keystone tile (meaning if it has only one landType i.e: Mountain / Empty)
-    public static void gameEnd(){
-        switch(gameState.playerCount){
-            case 2:
-                if(count >= 37 ){
-                    System.out.println("Out of tiles");
-                    //System.exit(0);
-                }
-                break;
-            case 3:
-                if(count >= 54 ){
-                    System.out.println("Out of tiles");
-                    //System.exit(0);
-                }
-                break;
-            case 4:
-                if(count >= 71 ){
-                    System.out.println("Out of tiles");
-                    //System.exit(0);
-                }
-                break;
-        }
-    }
+    
     Tile(habitatEnum landType, habitatEnum landType2) {
         count++;
         this.landType2 = landType2;

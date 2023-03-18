@@ -28,7 +28,7 @@ public class gameState {
         playerCount = x;
     }
 
-    public ArrayList<player> getPlayers()
+    public static ArrayList<player> getPlayers()
     {
         return Players;
     }
@@ -120,8 +120,34 @@ public class gameState {
 
         }
     }
+    public static void gameEnd(){
+        if(getPlayers().get(0).turnCount >= 20 || getPlayers().get(1).turnCount >= 20 || getPlayers().get(2).turnCount >= 20 || getPlayers().get(3).turnCount >=20){
+            System.out.println("Maximum turn count exceeded, Game should end");
+        }
+        switch(gameState.playerCount){
+            case 2:
+                if(Tile.count >= 37 ){
+                    System.out.println("Out of tiles");
+                    //System.exit(0);
+                }
+                break;
+            case 3:
+                if(Tile.count >= 54 ){
+                    System.out.println("Out of tiles");
+                    //System.exit(0);
+                }
+                break;
+            case 4:
+                if(Tile.count >= 71 ){
+                    System.out.println("Out of tiles");
+                    //System.exit(0);
+                }
+                break;
+        }
+    }
 
     public void startTurn(int i) {
+        getPlayers().get(i).turnCount += 1; //variable incremented for each player when they have a turn. every player should have exactly 20 turns (from rulebook)
         boolean stillTurn = true;
         boolean stillTokenPlace = true;
         printInstructions(i);

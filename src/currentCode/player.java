@@ -19,6 +19,7 @@ public class player {
     public void addToken(wildlifeToken x){
         hand.add(x);
     }
+    int turnCount=0;
     String name;
     int score;
     tileBoard playerBoard;
