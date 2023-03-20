@@ -54,12 +54,14 @@ import java.util.Scanner;
                             cull(animaltocull);
                             System.out.println("The " + animaltocull + "'s have been culled.");
                             System.out.println("The new board is: \n");
+                            System.out.println(this);
                             stillCulling=false;
                             break;
                         }
                         case "n" -> {
                             System.out.println("No cull happened");
                             System.out.println("The board is: \n");
+                            System.out.println(this);
                             stillCulling=false;
                             break;
                         }

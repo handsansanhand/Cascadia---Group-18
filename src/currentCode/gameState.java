@@ -10,7 +10,7 @@ public class gameState {
     Scanner in = new Scanner(System.in);
 
     public static int playerCount;
-    ArrayList<player> Players = new ArrayList<player>();
+    static ArrayList<player> Players = new ArrayList<player>();
     gameBoard gameBoard = new gameBoard();
 
     public int getPlayerCount() {
@@ -152,8 +152,8 @@ public class gameState {
         boolean stillTokenPlace = true;
         printInstructions(i);
         gameBoard.checkForCull();
+        System.out.println(getPlayers().get(i).name + "'s turn!");
         while (stillTurn) {
-            System.out.println(gameBoard);
             switch (in.next()) {
                 case "0": {
                     Tile t = gameBoard.removeHabitatTile(0);
@@ -199,7 +199,7 @@ public class gameState {
                     printInstructions(i);
                     break;
                 }
-                case "w": {
+                case "s": {
                     if(getPlayers().get(i).natureTokens==0)
                     {
                         System.out.println("not enough nature tokens");
@@ -220,7 +220,7 @@ public class gameState {
                     break;
                 }
                 default: {
-                    printInstructions(i);
+                    System.out.println("Invalid argument, press 'c' for instructions");
                     break;
                 }
             }
@@ -264,10 +264,12 @@ public class gameState {
         }
         public void printInstructions(int player)
         {
-            System.out.println("Pick a habitat token and wildlife token from the board. [0-3]");
+            System.out.println("CURRENT TURN: " + getPlayers().get(player).name);
             System.out.println("Press s to spend a nature token. NATURE TOKENS: " + getPlayers().get(player).natureTokens);
             System.out.println("Press v to view your board");
             System.out.println("Press h to see your hand");
+            System.out.println("Pick a habitat token and wildlife token from the board. [0-3]");
+            System.out.println(gameBoard);
         }
 
         public void spendNatureToken(int currentPlayer)
