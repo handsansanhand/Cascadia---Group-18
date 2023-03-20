@@ -65,11 +65,11 @@ public class tileBoard { // class for the board object for each player
     }
     public void addTile(Tile oldest, Tile newest) { // Tile newest is the one being placed and tile oldest is the reference tile
         int input;
+        System.out.println("1 to place tile above\n2 to place tile below\n3 to place tile to the left\n4 to place tile to the right");
+        System.out.println("press 0 to select a different tile");
+        System.out.println("press 5 to view your board");
+        System.out.println("press 6 to rotate your tile");
         while (true) {
-            System.out.println("1 to place tile above\n2 to place tile below\n3 to place tile to the left\n4 to place tile to the right");
-            System.out.println("press 0 to select a different tile");
-            System.out.println("press 5 to view your board");
-            System.out.println("press 6 to rotate your tile");
             System.out.println("Tile to be placed: [" + newest + "]");
             printReference(oldest);
             Scanner in = new Scanner(System.in);

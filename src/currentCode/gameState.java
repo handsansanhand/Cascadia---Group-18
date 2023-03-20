@@ -219,6 +219,11 @@ public class gameState {
                     System.out.println(getPlayers().get(i).printHand());
                     break;
                 }
+                case "t": //temporary case that tests the scoring
+                {
+                 Scoring.scoreHabitatCorridors(getPlayers().get(i));
+                 break;
+                }
                 default: {
                     System.out.println("Invalid argument, press 'c' for instructions");
                     break;
