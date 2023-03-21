@@ -318,6 +318,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
 
             break;
         }
+        return 0;
     }
 
 }
