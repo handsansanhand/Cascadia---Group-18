@@ -28,19 +28,19 @@ public class Scoring {
                 if(user.getPlayerBoard().TileBoard[i][j] != null) {
                     if (user.getPlayerBoard().TileBoard[i][j].landType2 == enumToCount) //if it matches
                     {
-                        totalCount++;
                         columnmCount++;
                         //it is found, use recursion
                         columnmCount = keepCountingLandType2(enumToCount, columnmCount, i, j, user);
+                        totalCount += columnmCount; // move the increment here
                     }
                 }
                 if(user.getPlayerBoard().TileBoard[i][j] != null)
                 {
                     if(user.getPlayerBoard().TileBoard[i][j].landType == enumToCount) {
-                        totalCount++;
-                       columnmCount++;
+                        columnmCount++;
                         //it is found, use recursion
                         columnmCount = keepCountingLandType1(enumToCount, columnmCount, i, j, user);
+                        totalCount += columnmCount; // move the increment here
                     }
                 }
                 if(columnmCount>highestCount)
@@ -55,39 +55,54 @@ public class Scoring {
 
     public static int keepCountingLandType2(habitatEnum enumToCount, int totalCount, int i, int j, player user) {
         int leftCount = 0;
-
+        boolean hasRight=false;
 
         if (user.getPlayerBoard().TileBoard[i - 1][j] != null) { //the tile to the right's is not null
             if (user.getPlayerBoard().TileBoard[i - 1][j].landType == enumToCount) { //and matches
                 totalCount++;
+                hasRight=true;
             }
         }
         if (user.getPlayerBoard().TileBoard[i][j + 1] != null && user.getPlayerBoard().TileBoard[i][j + 1].landType2 == enumToCount) //recursive call, when the tile above it matches
         {
             totalCount = keepCountingLandType2(enumToCount,totalCount+1,i,j+1,user);
+           // totalCount++; // move the increment here
         }
-        else if (user.getPlayerBoard().TileBoard[i][j + 1] == null || user.getPlayerBoard().TileBoard[i][j + 1].landType2 != enumToCount)
+        else if (user.getPlayerBoard().TileBoard[i][j + 1] == null || user.getPlayerBoard().TileBoard[i][j + 1].landType2 != enumToCount) //no more vertical tiles to count
         {
-           return totalCount;
+            if(hasRight && user.getPlayerBoard().TileBoard[i-1][j].landType==enumToCount)
+            {
+                totalCount = keepCountingLandType1(enumToCount,totalCount-1,i-1,j,user);
+            }
+            else{
+           return totalCount;}
         }
         return totalCount;
     }
     public static int keepCountingLandType1(habitatEnum enumToCount, int totalCount, int i, int j, player user)
     {
         int rightCount = 0;
+        boolean hasLeft=false;
 
         if (user.getPlayerBoard().TileBoard[i + 1][j] != null) { //the tile to the right's is not null
             if (user.getPlayerBoard().TileBoard[i + 1][j].landType2 == enumToCount || (user.getPlayerBoard().TileBoard[i + 1][j].isKeystoneTile && user.getPlayerBoard().TileBoard[i + 1][j].landType==enumToCount)) { //and matches
                 totalCount++;
+                hasLeft=true;
             }
         }
         if(user.getPlayerBoard().TileBoard[i][j+1]!=null && user.getPlayerBoard().TileBoard[i][j+1].landType==enumToCount) //recursive call
         {
             totalCount = keepCountingLandType1(enumToCount,totalCount+1,i,j+1,user);
+          //  totalCount++; // move the increment here
         }
-        else if(user.getPlayerBoard().TileBoard[i][j+1]==null || user.getPlayerBoard().TileBoard[i][j+1].landType!=enumToCount)
+        else if(user.getPlayerBoard().TileBoard[i][j+1]==null || user.getPlayerBoard().TileBoard[i][j+1].landType!=enumToCount) //no more vertical tiles to count
         {
-           return totalCount;
+            if(hasLeft && user.getPlayerBoard().TileBoard[i+1][j].landType==enumToCount)
+            {
+                totalCount = keepCountingLandType1(enumToCount,totalCount-1,i+1,j,user);
+            }
+            else{
+           return totalCount;}
         }
         return totalCount;
     }
