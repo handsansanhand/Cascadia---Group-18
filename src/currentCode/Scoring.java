@@ -30,16 +30,16 @@ public class Scoring {
                         totalCount++;
                         columnmCount++;
                         //it is found, use recursion
-                        columnmCount = columnmCount + keepCountingLandType2(enumToCount, columnmCount, i, j, user);
+                        columnmCount = keepCountingLandType2(enumToCount, columnmCount, i, j, user);
                     }
                 }
                 if(user.getPlayerBoard().TileBoard[i][j] != null)
                 {
                     if(user.getPlayerBoard().TileBoard[i][j].landType == enumToCount) {
-                        totalCount++;
-                        columnmCount++;
+                        //totalCount++;
+                       // columnmCount++;
                         //it is found, use recursion
-                        columnmCount = columnmCount + keepCountingLandType1(enumToCount, columnmCount, i, j, user);
+                        //columnmCount = columnmCount + keepCountingLandType1(enumToCount, columnmCount, i, j, user);
                     }
                 }
                 if(columnmCount>highestCount)
@@ -54,47 +54,19 @@ public class Scoring {
 
     public static int keepCountingLandType2(habitatEnum enumToCount, int totalCount, int i, int j, player user)
     {
-         if(user.getPlayerBoard().TileBoard[i][j].isKeystoneTile) {
-        if(user.getPlayerBoard().TileBoard[i][j+1]!=null && user.getPlayerBoard().TileBoard[i][j+1].landType==enumToCount)
-        {
-            totalCount = totalCount + keepCountingLandType1(enumToCount,totalCount,i,j+1,user);
+        if(user.getPlayerBoard().TileBoard[i-1][j]!=null) {
+            if (user.getPlayerBoard().TileBoard[i - 1][j].landType == enumToCount) {
+                totalCount++;
+            }
         }
-        if(user.getPlayerBoard().TileBoard[i][j+1]!=null && user.getPlayerBoard().TileBoard[i][j+1].landType2==enumToCount)
+        if(user.getPlayerBoard().TileBoard[i][j+1]!=null && user.getPlayerBoard().TileBoard[i][j+1].landType2==enumToCount) //recursive call
         {
-            totalCount = totalCount + keepCountingLandType2(enumToCount,totalCount,i,j+1,user);
+            totalCount += keepCountingLandType2(enumToCount,totalCount,i,j+1,user);
         }
-    }
         else if(user.getPlayerBoard().TileBoard[i][j+1]==null || user.getPlayerBoard().TileBoard[i][j+1].landType2!=enumToCount)
         {
-            return 0;
-        }
-        else if(user.getPlayerBoard().TileBoard[i][j+1].landType2 == enumToCount || (user.getPlayerBoard().TileBoard[i][j+1].landType2==habitatEnum.Empty && user.getPlayerBoard().TileBoard[i][j+1].landType==enumToCount))
-        {
-            totalCount = totalCount + keepCountingLandType2(enumToCount,totalCount,i,j+1,user);
+            return totalCount;
         }
         return totalCount;
     }
-    public static int keepCountingLandType1(habitatEnum enumToCount, int totalCount, int i, int j, player user)
-    {
-         if(user.getPlayerBoard().TileBoard[i][j].isKeystoneTile) {
-        if(user.getPlayerBoard().TileBoard[i][j+1]!=null && user.getPlayerBoard().TileBoard[i][j+1].landType==enumToCount)
-        {
-            totalCount = totalCount + keepCountingLandType1(enumToCount,totalCount,i,j+1,user);
-        }
-        if(user.getPlayerBoard().TileBoard[i][j+1]!=null && user.getPlayerBoard().TileBoard[i][j+1].landType2==enumToCount)
-        {
-            totalCount = totalCount + keepCountingLandType2(enumToCount,totalCount,i,j+1,user);
-        }
-    }
-        else if(user.getPlayerBoard().TileBoard[i][j+1]==null || user.getPlayerBoard().TileBoard[i][j+1].landType!=enumToCount)
-        {
-            return 0;
-        }
-       else if(user.getPlayerBoard().TileBoard[i][j+1].landType == enumToCount)
-        {
-            totalCount = totalCount + keepCountingLandType1(enumToCount,totalCount,i,j+1,user);
-        }
-        return totalCount;
-    }
-
 }
