@@ -64,7 +64,7 @@ public class Scoring {
         }
         if (user.getPlayerBoard().TileBoard[i][j + 1] != null && user.getPlayerBoard().TileBoard[i][j + 1].landType2 == enumToCount) //recursive call, when the tile above it matches
         {
-            totalCount += keepCountingLandType2(enumToCount,totalCount,i,j+1,user);
+            totalCount = keepCountingLandType2(enumToCount,totalCount+1,i,j+1,user);
         }
         else if (user.getPlayerBoard().TileBoard[i][j + 1] == null || user.getPlayerBoard().TileBoard[i][j + 1].landType2 != enumToCount)
         {
@@ -77,13 +77,13 @@ public class Scoring {
         int rightCount = 0;
 
         if (user.getPlayerBoard().TileBoard[i + 1][j] != null) { //the tile to the right's is not null
-            if (user.getPlayerBoard().TileBoard[i + 1][j].landType2 == enumToCount) { //and matches
+            if (user.getPlayerBoard().TileBoard[i + 1][j].landType2 == enumToCount || (user.getPlayerBoard().TileBoard[i + 1][j].isKeystoneTile && user.getPlayerBoard().TileBoard[i + 1][j].landType==enumToCount)) { //and matches
                 totalCount++;
             }
         }
         if(user.getPlayerBoard().TileBoard[i][j+1]!=null && user.getPlayerBoard().TileBoard[i][j+1].landType==enumToCount) //recursive call
         {
-            totalCount += keepCountingLandType1(enumToCount,totalCount,i,j+1,user);
+            totalCount = keepCountingLandType1(enumToCount,totalCount+1,i,j+1,user);
         }
         else if(user.getPlayerBoard().TileBoard[i][j+1]==null || user.getPlayerBoard().TileBoard[i][j+1].landType!=enumToCount)
         {
