@@ -251,7 +251,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                 for(int j=0;j<=tileBoard.BOARD_WIDTH;j++){
                     if(user.getPlayerBoard().TileBoard[i][j] != null) {
                         if(user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.BEAR){
-                                numOfPairs += helperPairCheckA(user.getPlayerBoard().TileBoard[i][j], tokenEnum.BEAR, 0);
+                                numOfPairs += helperPairCheckA(user.getPlayerBoard().TileBoard[i][j], tokenEnum.FOX, 0);
                         }
                     }
             }
@@ -265,7 +265,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                 for(int j=0;j<=tileBoard.BOARD_WIDTH;j++){
                     if(user.getPlayerBoard().TileBoard[i][j] != null) {
                         if(user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.BEAR){
-                                numOfPairs += helperPairCheckA(user.getPlayerBoard().TileBoard[i][j], tokenEnum.BEAR, 0);
+                                numOfPairs += helperPairCheckA(user.getPlayerBoard().TileBoard[i][j], tokenEnum.ELK, 0);
                         }
                     }
             }
@@ -279,7 +279,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                 for(int j=0;j<=tileBoard.BOARD_WIDTH;j++){
                     if(user.getPlayerBoard().TileBoard[i][j] != null) {
                         if(user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.BEAR){
-                                numOfPairs += helperPairCheckA(user.getPlayerBoard().TileBoard[i][j], tokenEnum.BEAR, 0);
+                                numOfPairs += helperPairCheckA(user.getPlayerBoard().TileBoard[i][j], tokenEnum.HAWK, 0);
                         }
                     }
             }
@@ -293,7 +293,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                 for(int j=0;j<=tileBoard.BOARD_WIDTH;j++){
                     if(user.getPlayerBoard().TileBoard[i][j] != null) {
                         if(user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.BEAR){
-                                numOfPairs += helperPairCheckA(user.getPlayerBoard().TileBoard[i][j], tokenEnum.BEAR, 0);
+                                numOfPairs += helperPairCheckA(user.getPlayerBoard().TileBoard[i][j], tokenEnum.SALMON, 0);
                         }
                     }
             }
