@@ -23,20 +23,223 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
         Random rand = new Random();
         cardType = rand.nextInt(15); // Constructor creates random card type
     }
-    public int helperPairCheckA(Tile x, tokenEnum animal, int y){ // Helper function for card type A to check if any of the surrounding tiles contains the animal. More than 2 of the type of animal is not considered a pair and are disqualifed from gaining points
-        /*
+    public int helperGroupCheckBear(Tile x, tokenEnum animal, int y, int z){ // Helper function for card type A to check if any of the surrounding tiles contains the animal. More than 2 of the type of animal is not considered a pair and are disqualifed from gaining points
+        /* y
          * 0 = nothing
          * 1 = exclude up
          * 2 = exclude down
          * 3 = exclude left
          * 4 = exclude right
          */
+        /* z
+         * 0 = pairs
+         * 1 = groups of three
+         */
+        if(z == 1){
+            if(y==0){
+                if(x.up.token.animalType == animal){
+                    if(x.down.token.animalType == animal || x.left.token.animalType == animal || x.right.token.animalType == animal){
+                        return 0;
+                    }
+                    if(helperGroupCheckBear(x.up, animal, 2, 0) == 1){
+                        return 1;
+                    }
+                    else{
+                        return 0;
+                    }
+                }
+                else if(x.down.token.animalType == animal){
+                    if(x.left.token.animalType == animal || x.right.token.animalType == animal){
+                        return 0;
+                    }
+                    if(helperGroupCheckBear(x.down, animal, 1 , 0) == 1){
+                        return 1;
+                    }
+                    else{
+                        return 0;
+                    }
+        
+                }
+                else if(x.left.token.animalType == animal){
+                    if(x.right.token.animalType == animal){
+                        return 0;
+                    }
+                    if(helperGroupCheckBear(x.left, animal, 4, 0) == 1){
+                        return 1;
+                    }
+                    else{
+                        return 0;
+                    }
+                }
+                else if(x.right.token.animalType == animal){
+                    if(helperGroupCheckBear(x.right, animal, 3, 0) == 1){
+                        return 1;
+                    }
+                    else{
+                        return 0;
+                    }
+                }
+                else{
+                    return 0;
+                }
+            }
+    
+            if(y==1){
+                if(x.down.token.animalType == animal){
+                    if(x.left.token.animalType == animal || x.right.token.animalType == animal){
+                        return 0;
+                    }
+                    if(helperGroupCheckBear(x.down, animal, 1, 0) == 1){
+                        return 1;
+                    }
+                    else{
+                        return 0;
+                    }
+        
+                }
+                else if(x.left.token.animalType == animal){
+                    if(x.right.token.animalType == animal){
+                        return 0;
+                    }
+                    if(helperGroupCheckBear(x.left, animal, 4, 0) == 1){
+                        return 1;
+                    }
+                    else{
+                        return 0;
+                    }
+                }
+                else if(x.right.token.animalType == animal){
+                    if(helperGroupCheckBear(x.right, animal, 3, 0) == 1){
+                        return 1;
+                    }
+                    else{
+                        return 0;
+                    }
+                }
+                else{
+                    return 0;
+                }
+            }
+            if(y==2){
+                if(x.up.token.animalType == animal){
+                    if(x.down.token.animalType == animal || x.left.token.animalType == animal || x.right.token.animalType == animal){
+                        return 0;
+                    }
+                    if(helperGroupCheckBear(x.up, animal, 2, 0) == 1){
+                        return 1;
+                    }
+                    else{
+                        return 0;
+                    }
+                }
+                else if(x.left.token.animalType == animal){
+                    if(x.right.token.animalType == animal){
+                        return 0;
+                    }
+                    if(helperGroupCheckBear(x.left, animal, 4, 0) == 1){
+                        return 1;
+                    }
+                    else{
+                        return 0;
+                    }
+                }
+                else if(x.right.token.animalType == animal){
+                    if(helperGroupCheckBear(x.right, animal, 3, 0) == 1){
+                        return 1;
+                    }
+                    else{
+                        return 0;
+                    }
+                }
+                else{
+                    return 0;
+                }
+            }
+            if(y==3){
+                if(x.up.token.animalType == animal){
+                    if(x.down.token.animalType == animal || x.left.token.animalType == animal || x.right.token.animalType == animal){
+                        return 0;
+                    }
+                    if(helperGroupCheckBear(x.up, animal, 2, 0) == 1){
+                        return 1;
+                    }
+                    else{
+                        return 0;
+                    }
+                }
+                else if(x.down.token.animalType == animal){
+                    if(x.left.token.animalType == animal || x.right.token.animalType == animal){
+                        return 0;
+                    }
+                    if(helperGroupCheckBear(x.down, animal, 1, 0) == 1){
+                        return 1;
+                    }
+                    else{
+                        return 0;
+                    }
+        
+                }
+                else if(x.right.token.animalType == animal){
+                    if(helperGroupCheckBear(x.right, animal, 3, 0) == 1){
+                        return 1;
+                    }
+                    else{
+                        return 0;
+                    }
+                }
+                else{
+                    return 0;
+                }
+            }
+            if(y==4){
+                if(x.up.token.animalType == animal){
+                    if(x.down.token.animalType == animal || x.left.token.animalType == animal || x.right.token.animalType == animal){
+                        return 0;
+                    }
+                    if(helperGroupCheckBear(x.up, animal, 2, 0) == 1){
+                        return 1;
+                    }
+                    else{
+                        return 0;
+                    }
+                }
+                else if(x.down.token.animalType == animal){
+                    if(x.left.token.animalType == animal || x.right.token.animalType == animal){
+                        return 0;
+                    }
+                    if(helperGroupCheckBear(x.down, animal, 1, 0) == 1){
+                        return 1;
+                    }
+                    else{
+                        return 0;
+                    }
+        
+                }
+                else if(x.left.token.animalType == animal){
+                    if(x.right.token.animalType == animal){
+                        return 0;
+                    }
+                    if(helperGroupCheckBear(x.left, animal, 4, 0) == 1){
+                        return 1;
+                    }
+                    else{
+                        return 0;
+                    }
+                }
+                else{
+                    return 0;
+                }
+            }
+            else{
+                return 0;
+            }
+        }
         if(y==0){
             if(x.up.token.animalType == animal){
                 if(x.down.token.animalType == animal || x.left.token.animalType == animal || x.right.token.animalType == animal){
                     return 0;
                 }
-                if(helperPairCheckA(x.up, animal, 1) == 2){
+                if(helperGroupCheckBear(x.up, animal, 2, 0) == 1){
                     return 0;
                 }
                 else{
@@ -47,7 +250,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                 if(x.left.token.animalType == animal || x.right.token.animalType == animal){
                     return 0;
                 }
-                if(helperPairCheckA(x.down, animal, 1) == 1){
+                if(helperGroupCheckBear(x.down, animal, 1 , 0) == 1){
                     return 0;
                 }
                 else{
@@ -59,7 +262,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                 if(x.right.token.animalType == animal){
                     return 0;
                 }
-                if(helperPairCheckA(x.left, animal, 1) == 4){
+                if(helperGroupCheckBear(x.left, animal, 4, 0) == 1){
                     return 0;
                 }
                 else{
@@ -67,7 +270,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                 }
             }
             else if(x.right.token.animalType == animal){
-                if(helperPairCheckA(x.right, animal, 1) == 3){
+                if(helperGroupCheckBear(x.right, animal, 3, 0) == 1){
                     return 0;
                 }
                 else{
@@ -84,7 +287,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                 if(x.left.token.animalType == animal || x.right.token.animalType == animal){
                     return 0;
                 }
-                if(helperPairCheckA(x.down, animal, 1) == 1){
+                if(helperGroupCheckBear(x.down, animal, 1, 0) == 1){
                     return 0;
                 }
                 else{
@@ -96,7 +299,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                 if(x.right.token.animalType == animal){
                     return 0;
                 }
-                if(helperPairCheckA(x.left, animal, 1) == 4){
+                if(helperGroupCheckBear(x.left, animal, 4, 0) == 1){
                     return 0;
                 }
                 else{
@@ -104,7 +307,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                 }
             }
             else if(x.right.token.animalType == animal){
-                if(helperPairCheckA(x.right, animal, 1) == 3){
+                if(helperGroupCheckBear(x.right, animal, 3, 0) == 1){
                     return 0;
                 }
                 else{
@@ -120,7 +323,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                 if(x.down.token.animalType == animal || x.left.token.animalType == animal || x.right.token.animalType == animal){
                     return 0;
                 }
-                if(helperPairCheckA(x.up, animal, 1) == 2){
+                if(helperGroupCheckBear(x.up, animal, 2, 0) == 1){
                     return 0;
                 }
                 else{
@@ -131,7 +334,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                 if(x.right.token.animalType == animal){
                     return 0;
                 }
-                if(helperPairCheckA(x.left, animal, 1) == 4){
+                if(helperGroupCheckBear(x.left, animal, 4, 0) == 1){
                     return 0;
                 }
                 else{
@@ -139,7 +342,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                 }
             }
             else if(x.right.token.animalType == animal){
-                if(helperPairCheckA(x.right, animal, 1) == 3){
+                if(helperGroupCheckBear(x.right, animal, 3, 0) == 1){
                     return 0;
                 }
                 else{
@@ -155,7 +358,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                 if(x.down.token.animalType == animal || x.left.token.animalType == animal || x.right.token.animalType == animal){
                     return 0;
                 }
-                if(helperPairCheckA(x.up, animal, 1) == 2){
+                if(helperGroupCheckBear(x.up, animal, 2, 0) == 1){
                     return 0;
                 }
                 else{
@@ -166,7 +369,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                 if(x.left.token.animalType == animal || x.right.token.animalType == animal){
                     return 0;
                 }
-                if(helperPairCheckA(x.down, animal, 1) == 1){
+                if(helperGroupCheckBear(x.down, animal, 1, 0) == 1){
                     return 0;
                 }
                 else{
@@ -175,7 +378,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
     
             }
             else if(x.right.token.animalType == animal){
-                if(helperPairCheckA(x.right, animal, 1) == 3){
+                if(helperGroupCheckBear(x.right, animal, 3, 0) == 1){
                     return 0;
                 }
                 else{
@@ -191,7 +394,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                 if(x.down.token.animalType == animal || x.left.token.animalType == animal || x.right.token.animalType == animal){
                     return 0;
                 }
-                if(helperPairCheckA(x.up, animal, 1) == 2){
+                if(helperGroupCheckBear(x.up, animal, 2, 0) == 1){
                     return 0;
                 }
                 else{
@@ -202,7 +405,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                 if(x.left.token.animalType == animal || x.right.token.animalType == animal){
                     return 0;
                 }
-                if(helperPairCheckA(x.down, animal, 1) == 1){
+                if(helperGroupCheckBear(x.down, animal, 1, 0) == 1){
                     return 0;
                 }
                 else{
@@ -214,7 +417,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                 if(x.right.token.animalType == animal){
                     return 0;
                 }
-                if(helperPairCheckA(x.left, animal, 1) == 4){
+                if(helperGroupCheckBear(x.left, animal, 4, 0) == 1){
                     return 0;
                 }
                 else{
@@ -230,74 +433,50 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
         }
     }
     public int calculateCardScore(player user){
-        int numOfPairs=0;
+        int numOfGroups=0;
         switch(cardType){
             case 0:
                 for(int i=0;i<=tileBoard.BOARD_HEIGHT;i++){
                     for(int j=0;j<=tileBoard.BOARD_WIDTH;j++){
                         if(user.getPlayerBoard().TileBoard[i][j] != null) {
                             if(user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.BEAR){
-                                    numOfPairs += helperPairCheckA(user.getPlayerBoard().TileBoard[i][j], tokenEnum.BEAR, 0);
+                                    numOfGroups += helperGroupCheckBear(user.getPlayerBoard().TileBoard[i][j], tokenEnum.BEAR, 0, 0);
                             }
                         }
                 }
             }
             break;
             case 1:
-            
+                for(int i=0;i<=tileBoard.BOARD_HEIGHT;i++){
+                    for(int j=0;j<=tileBoard.BOARD_WIDTH;j++){
+                        if(user.getPlayerBoard().TileBoard[i][j] != null) {
+                            if(user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.BEAR){
+                                    numOfGroups += helperGroupCheckBear(user.getPlayerBoard().TileBoard[i][j], tokenEnum.BEAR, 0, 1);
+                            }
+                        }
+                }
+            }
             break;
             case 2:
-            for(int i=0;i<=tileBoard.BOARD_HEIGHT;i++){
-                for(int j=0;j<=tileBoard.BOARD_WIDTH;j++){
-                    if(user.getPlayerBoard().TileBoard[i][j] != null) {
-                        if(user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.BEAR){
-                                numOfPairs += helperPairCheckA(user.getPlayerBoard().TileBoard[i][j], tokenEnum.FOX, 0);
-                        }
-                    }
-            }
-        }
+    
             break;
             case 3:
 
             break;
             case 4:
-            for(int i=0;i<=tileBoard.BOARD_HEIGHT;i++){
-                for(int j=0;j<=tileBoard.BOARD_WIDTH;j++){
-                    if(user.getPlayerBoard().TileBoard[i][j] != null) {
-                        if(user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.BEAR){
-                                numOfPairs += helperPairCheckA(user.getPlayerBoard().TileBoard[i][j], tokenEnum.ELK, 0);
-                        }
-                    }
-            }
-        }
+         
             break;
             case 5:
 
             break;
             case 6:
-            for(int i=0;i<=tileBoard.BOARD_HEIGHT;i++){
-                for(int j=0;j<=tileBoard.BOARD_WIDTH;j++){
-                    if(user.getPlayerBoard().TileBoard[i][j] != null) {
-                        if(user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.BEAR){
-                                numOfPairs += helperPairCheckA(user.getPlayerBoard().TileBoard[i][j], tokenEnum.HAWK, 0);
-                        }
-                    }
-            }
-        }
+       
             break;
             case 7:
 
             break;
             case 8:
-            for(int i=0;i<=tileBoard.BOARD_HEIGHT;i++){
-                for(int j=0;j<=tileBoard.BOARD_WIDTH;j++){
-                    if(user.getPlayerBoard().TileBoard[i][j] != null) {
-                        if(user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.BEAR){
-                                numOfPairs += helperPairCheckA(user.getPlayerBoard().TileBoard[i][j], tokenEnum.SALMON, 0);
-                        }
-                    }
-            }
-        } 
+          
             break;
             case 9:
 
