@@ -62,7 +62,7 @@ public class Scoring {
                 hasRight=true;
             }
         }
-        //no? ok can i go accross?
+        //ok can i go accross?
 
             if(hasRight && canGoRight) //i can go right
             {
@@ -87,7 +87,6 @@ public class Scoring {
         }
         //icant do any of these things
        // else{totalCount++;}
-
         return totalCount+1;
     }
     public static int keepCountingLandType1(habitatEnum enumToCount, int totalCount, int i, int j, player user, boolean canGoLeft)
@@ -105,6 +104,7 @@ public class Scoring {
         else if (user.getPlayerBoard().TileBoard[i][j]!=null && user.getPlayerBoard().TileBoard[i][j].isKeystoneTile && user.getPlayerBoard().TileBoard[i - 1][j]!=null && user.getPlayerBoard().TileBoard[i - 1][j].landType == enumToCount) { //i am a keystone tile with an available tile to the RIGHT
             {
                 keystoneJumpAvailable = true;
+                totalCount = keepCountingLandType1(enumToCount,totalCount-1,i-1,j,user,false);
             }
         }
 
@@ -117,11 +117,12 @@ public class Scoring {
 
             }
             //or else i could leap to the right (cannot go back left)
+            /*
             else if(keystoneJumpAvailable)
             {
                 totalCount = keepCountingLandType1(enumToCount,totalCount,i-1,j,user,false);
                // totalCount++;
-            }
+            }*/
 
             //ok i cant go left,
             //can i go up?
@@ -133,7 +134,7 @@ public class Scoring {
             }
             else if(user.getPlayerBoard().TileBoard[i][j+1]!=null && user.getPlayerBoard().TileBoard[i][j].isKeystoneTile && user.getPlayerBoard().TileBoard[i][j+1].landType2==enumToCount)
             {//if im a keystone tile
-                totalCount += keepCountingLandType2(enumToCount,totalCount,i,j+1,user,true);
+                totalCount = keepCountingLandType2(enumToCount,totalCount,i,j+1,user,false);
                 //totalCount++;
             }
             //icant do any of these things
