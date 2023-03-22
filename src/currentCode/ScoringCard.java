@@ -1,4 +1,5 @@
 package currentCode;
+import java.util.ArrayList;
 import java.util.Random;
 public class ScoringCard{ // This is the class for a single Scoring Card object. We will need to initialise 5 of these objects and use the calculate function on each one to return the score
     int cardType; // variable to identify card type out of the 15 available
@@ -433,14 +434,16 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
         }
     }
     public int calculateCardScore(player user){
-        int numOfGroups=0;
+        ArrayList<tokenEnum> animalList = new ArrayList();
+        int temp=0;
+        int ScoreNum=0;
         switch(cardType){
             case 0:
                 for(int i=0;i<=tileBoard.BOARD_HEIGHT;i++){
                     for(int j=0;j<=tileBoard.BOARD_WIDTH;j++){
                         if(user.getPlayerBoard().TileBoard[i][j] != null) {
                             if(user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.BEAR){
-                                    numOfGroups += helperGroupCheckBear(user.getPlayerBoard().TileBoard[i][j], tokenEnum.BEAR, 0, 0);
+                                    ScoreNum += helperGroupCheckBear(user.getPlayerBoard().TileBoard[i][j], tokenEnum.BEAR, 0, 0);
                             }
                         }
                 }
@@ -451,14 +454,69 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                     for(int j=0;j<=tileBoard.BOARD_WIDTH;j++){
                         if(user.getPlayerBoard().TileBoard[i][j] != null) {
                             if(user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.BEAR){
-                                    numOfGroups += helperGroupCheckBear(user.getPlayerBoard().TileBoard[i][j], tokenEnum.BEAR, 0, 1);
+                                    ScoreNum += helperGroupCheckBear(user.getPlayerBoard().TileBoard[i][j], tokenEnum.BEAR, 0, 1);
                             }
                         }
                 }
             }
             break;
             case 2:
-    
+            for(int i=0;i<=tileBoard.BOARD_HEIGHT;i++){
+                for(int j=0;j<=tileBoard.BOARD_WIDTH;j++){
+                    if(user.getPlayerBoard().TileBoard[i][j] != null) {
+                        if(user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.FOX){
+                            if(user.getPlayerBoard().TileBoard[i][j].up != null){
+                               if(user.getPlayerBoard().TileBoard[i][j].up.token !=null){
+                                    animalList.add(user.getPlayerBoard().TileBoard[i][j].up.token.animalType);
+                                    ScoreNum += 1;
+                               }
+                            }
+                            if(user.getPlayerBoard().TileBoard[i][j].down != null){
+                                if(user.getPlayerBoard().TileBoard[i][j].down.token !=null){
+                                    temp=0;
+                                    for(int k=0;k<animalList.size();k++){
+                                        if(animalList.get(k) == user.getPlayerBoard().TileBoard[i][j].down.token.animalType){
+                                            temp++;
+                                        }
+                                    }
+                                    if(temp==0){
+                                        animalList.add(user.getPlayerBoard().TileBoard[i][j].down.token.animalType);
+                                        ScoreNum += 1;                                     
+                                    }
+                            }
+                        }
+                            if(user.getPlayerBoard().TileBoard[i][j].left != null){
+                                if(user.getPlayerBoard().TileBoard[i][j].left.token !=null){
+                                    temp=0;
+                                    for(int k=0;k<animalList.size();k++){
+                                        if(animalList.get(k) == user.getPlayerBoard().TileBoard[i][j].left.token.animalType){
+                                            temp++;
+                                        }
+                                    }
+                                    if(temp==0){
+                                        animalList.add(user.getPlayerBoard().TileBoard[i][j].left.token.animalType);
+                                        ScoreNum += 1;                                     
+                                    }
+                            }
+                            }
+                            if(user.getPlayerBoard().TileBoard[i][j].right != null){
+                                if(user.getPlayerBoard().TileBoard[i][j].right.token !=null){
+                                    temp=0;
+                                    for(int k=0;k<animalList.size();k++){
+                                        if(animalList.get(k) == user.getPlayerBoard().TileBoard[i][j].right.token.animalType){
+                                            temp++;
+                                        }
+                                    }
+                                    if(temp==0){
+                                        animalList.add(user.getPlayerBoard().TileBoard[i][j].right.token.animalType);
+                                        ScoreNum += 1;                                     
+                                    }
+                            }
+                            }
+                        }
+                    }
+            }
+        }
             break;
             case 3:
 
