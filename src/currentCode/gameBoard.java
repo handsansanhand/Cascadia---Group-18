@@ -47,6 +47,7 @@ import java.util.Scanner;
                     System.out.println("A cull is available! Would you like to cull?"); //cull
                     System.out.println("Y / N");
                     System.out.println("The board: " + this);
+                    System.out.println("Your hand: ");
                     Scanner in = new Scanner(System.in);
                     switch (in.next()) {
                         case "y" -> {
@@ -65,6 +66,7 @@ import java.util.Scanner;
                             stillCulling=false;
                             break;
                         }
+
                         default -> System.out.println("Invalid argument");
                     }
                 }
