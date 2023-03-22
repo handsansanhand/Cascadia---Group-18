@@ -28,18 +28,18 @@ public class Scoring {
                 if(user.getPlayerBoard().TileBoard[i][j] != null) {
                     if (user.getPlayerBoard().TileBoard[i][j].landType2 == enumToCount) //if it matches
                     {
-                        columnmCount++;
+                        //columnmCount++;
                         //it is found, use recursion
-                        columnmCount = keepCountingLandType2(enumToCount, columnmCount, i, j, user);
+                        columnmCount = keepCountingLandType2(enumToCount, columnmCount, i, j, user,true);
                         totalCount += columnmCount; // move the increment here
                     }
                 }
                 if(user.getPlayerBoard().TileBoard[i][j] != null)
                 {
                     if(user.getPlayerBoard().TileBoard[i][j].landType == enumToCount) {
-                        columnmCount++;
+                        //columnmCount++;
                         //it is found, use recursion
-                        columnmCount = keepCountingLandType1(enumToCount, columnmCount, i, j, user);
+                        columnmCount = keepCountingLandType1(enumToCount, columnmCount, i, j, user,true);
                         totalCount += columnmCount; // move the increment here
                     }
                 }
@@ -53,56 +53,94 @@ public class Scoring {
         return totalCount;
     }
 
-    public static int keepCountingLandType2(habitatEnum enumToCount, int totalCount, int i, int j, player user) {
+    public static int keepCountingLandType2(habitatEnum enumToCount, int totalCount, int i, int j, player user, boolean canGoRight) {
         int leftCount = 0;
         boolean hasRight=false;
 
         if (user.getPlayerBoard().TileBoard[i - 1][j] != null) { //the tile to the right's is not null
             if (user.getPlayerBoard().TileBoard[i - 1][j].landType == enumToCount) { //and matches
-                totalCount++;
                 hasRight=true;
             }
         }
+
+        //can i go up?
         if (user.getPlayerBoard().TileBoard[i][j + 1] != null && user.getPlayerBoard().TileBoard[i][j + 1].landType2 == enumToCount) //recursive call, when the tile above it matches
         {
-            totalCount = keepCountingLandType2(enumToCount,totalCount+1,i,j+1,user);
-           // totalCount++; // move the increment here
+            //i can go up
+            totalCount = keepCountingLandType2(enumToCount,totalCount,i,j+1,user,true);
+            totalCount++; // move the increment here
         }
+        if(user.getPlayerBoard().TileBoard[i][j+1]!=null && user.getPlayerBoard().TileBoard[i][j+1].isKeystoneTile && user.getPlayerBoard().TileBoard[i][j+1].landType==enumToCount)
+        {//if theres a keystone tile above that matches, i can go up
+
+            totalCount = keepCountingLandType1(enumToCount,totalCount,i,j+1,user,true);
+            totalCount++;
+        }
+        //no? ok can i go accross?
         else if (user.getPlayerBoard().TileBoard[i][j + 1] == null || user.getPlayerBoard().TileBoard[i][j + 1].landType2 != enumToCount) //no more vertical tiles to count
         {
-            if(hasRight && user.getPlayerBoard().TileBoard[i-1][j].landType==enumToCount)
+            if(hasRight && canGoRight) //i can go right
             {
-                totalCount = keepCountingLandType1(enumToCount,totalCount-1,i-1,j,user);
+
+                totalCount = keepCountingLandType1(enumToCount,totalCount,i-1,j,user,false); //start counting right (cant go back left)
+                totalCount++;
             }
-            else{
-           return totalCount;}
+            else {totalCount++;}
         }
         return totalCount;
     }
-    public static int keepCountingLandType1(habitatEnum enumToCount, int totalCount, int i, int j, player user)
+    public static int keepCountingLandType1(habitatEnum enumToCount, int totalCount, int i, int j, player user, boolean canGoLeft)
     {
         int rightCount = 0;
         boolean hasLeft=false;
+        boolean keystoneJumpAvailable=false;
 
-        if (user.getPlayerBoard().TileBoard[i + 1][j] != null) { //the tile to the right's is not null
+        //check if i can go left
+        if (user.getPlayerBoard().TileBoard[i + 1][j] != null) { //the tile to the lefts's is not null
             if (user.getPlayerBoard().TileBoard[i + 1][j].landType2 == enumToCount || (user.getPlayerBoard().TileBoard[i + 1][j].isKeystoneTile && user.getPlayerBoard().TileBoard[i + 1][j].landType==enumToCount)) { //and matches
-                totalCount++;
-                hasLeft=true;
+                hasLeft = true;
             }
         }
+        else if (user.getPlayerBoard().TileBoard[i][j]!=null && user.getPlayerBoard().TileBoard[i][j].isKeystoneTile && user.getPlayerBoard().TileBoard[i - 1][j]!=null && user.getPlayerBoard().TileBoard[i - 1][j].landType == enumToCount) { //i am a keystone tile with an available tile to the RIGHT
+            {
+                keystoneJumpAvailable = true;
+            }
+        }
+
+        //can i go up?
         if(user.getPlayerBoard().TileBoard[i][j+1]!=null && user.getPlayerBoard().TileBoard[i][j+1].landType==enumToCount) //recursive call
         {
-            totalCount = keepCountingLandType1(enumToCount,totalCount+1,i,j+1,user);
-          //  totalCount++; // move the increment here
+            //i can go up
+
+            totalCount = keepCountingLandType1(enumToCount,totalCount,i,j+1,user,true);
+            totalCount++;
+
         }
+        else if(user.getPlayerBoard().TileBoard[i][j+1]!=null && user.getPlayerBoard().TileBoard[i][j].isKeystoneTile && user.getPlayerBoard().TileBoard[i][j+1].landType2==enumToCount)
+        {//if im a keystone tile
+            totalCount += keepCountingLandType2(enumToCount,totalCount,i,j+1,user,true);
+            totalCount++;
+
+        }
+
+        //no? can i go accross?
         else if(user.getPlayerBoard().TileBoard[i][j+1]==null || user.getPlayerBoard().TileBoard[i][j+1].landType!=enumToCount) //no more vertical tiles to count
         {
-            if(hasLeft && user.getPlayerBoard().TileBoard[i+1][j].landType==enumToCount)
+            //i can go left
+            if(hasLeft && canGoLeft)
             {
-                totalCount = keepCountingLandType1(enumToCount,totalCount-1,i+1,j,user);
+                totalCount = keepCountingLandType2(enumToCount,totalCount,i+1,j,user,false); //start counting left
+                totalCount++;
+
             }
-            else{
-           return totalCount;}
+            //or else i could leap to the right (cannot go back left)
+            else if(keystoneJumpAvailable)
+            {
+                totalCount = keepCountingLandType1(enumToCount,totalCount,i-1,j,user,false);
+                totalCount++;
+
+            }
+            else {totalCount++;}
         }
         return totalCount;
     }
