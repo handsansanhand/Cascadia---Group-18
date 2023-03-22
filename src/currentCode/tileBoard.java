@@ -186,8 +186,8 @@ public class tileBoard { // class for the board object for each player
         for (int i = BOARD_HEIGHT - 1; i >= 0; i--) {
             for (int j = BOARD_WIDTH - 1; j >= 0; j--) {
                 if (!columnIsEmpty[j] && TileBoard[j][i] != null) {
-                    String tileString = TileBoard[j][i].toString();
-                    int numPaddingChars = 40 - removeANSIColors(tileString).length();
+                    String tileString = TileBoard[j][i].toString() + "(" + i + "," + j+ ")";
+                    int numPaddingChars = 43 - removeANSIColors(tileString).length();
                     int numLeftPaddingChars = numPaddingChars / 2;
                     int numRightPaddingChars = numPaddingChars - numLeftPaddingChars;
                     String paddedTileString = String.format("%" + numLeftPaddingChars + "s%s%" + numRightPaddingChars + "s", "", tileString, "");
