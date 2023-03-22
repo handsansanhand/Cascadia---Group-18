@@ -557,5 +557,8 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
         }
         return 0;
     }
+    public int calculateScore(int x){ // takes number returned from calculateCardScore function and depending on the cardType, calculates the actual score to be given to the player
+        return 0;
+    }
 
 }
