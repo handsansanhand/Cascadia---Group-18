@@ -131,11 +131,6 @@ public class gameState {
                     getPlayers().get(i).addToken(w); //adds the token to your hand
                     placeTile(i, t);
                     System.out.println(getPlayers().get(i).getPlayerBoard());
-                    Scoring.countHabitatOccurences(habitatEnum.Forest, getPlayers().get(i));
-                    Scoring.countHabitatOccurences(habitatEnum.Mountain, getPlayers().get(i));
-                    Scoring.countHabitatOccurences(habitatEnum.River, getPlayers().get(i));
-                    Scoring.countHabitatOccurences(habitatEnum.Prairie, getPlayers().get(i));
-                    Scoring.countHabitatOccurences(habitatEnum.Wetland, getPlayers().get(i));
                     stillTurn = false;
                     break;
                 }
@@ -146,11 +141,6 @@ public class gameState {
                     getPlayers().get(i).addToken(w); //adds the token to your hand
                     placeTile(i, t);
                     System.out.println(getPlayers().get(i).getPlayerBoard());
-                    Scoring.countHabitatOccurences(habitatEnum.Forest, getPlayers().get(i));
-                    Scoring.countHabitatOccurences(habitatEnum.Mountain, getPlayers().get(i));
-                    Scoring.countHabitatOccurences(habitatEnum.River, getPlayers().get(i));
-                    Scoring.countHabitatOccurences(habitatEnum.Prairie, getPlayers().get(i));
-                    Scoring.countHabitatOccurences(habitatEnum.Wetland, getPlayers().get(i));
                     stillTurn = false;
                     break;
                 }
@@ -161,11 +151,6 @@ public class gameState {
                     getPlayers().get(i).addToken(w); //adds the token to your hand
                     placeTile(i, t);
                     System.out.println(getPlayers().get(i).getPlayerBoard());
-                    Scoring.countHabitatOccurences(habitatEnum.Forest, getPlayers().get(i));
-                    Scoring.countHabitatOccurences(habitatEnum.Mountain, getPlayers().get(i));
-                    Scoring.countHabitatOccurences(habitatEnum.River, getPlayers().get(i));
-                    Scoring.countHabitatOccurences(habitatEnum.Prairie, getPlayers().get(i));
-                    Scoring.countHabitatOccurences(habitatEnum.Wetland, getPlayers().get(i));
                     stillTurn = false;
                     break;
                 }
@@ -176,11 +161,6 @@ public class gameState {
                     getPlayers().get(i).addToken(w); //adds the token to your hand
                    placeTile(i, t);
                     System.out.println(getPlayers().get(i).getPlayerBoard());
-                    Scoring.countHabitatOccurences(habitatEnum.Forest, getPlayers().get(i));
-                    Scoring.countHabitatOccurences(habitatEnum.Mountain, getPlayers().get(i));
-                    Scoring.countHabitatOccurences(habitatEnum.River, getPlayers().get(i));
-                    Scoring.countHabitatOccurences(habitatEnum.Prairie, getPlayers().get(i));
-                    Scoring.countHabitatOccurences(habitatEnum.Wetland, getPlayers().get(i));
                     stillTurn = false;
                     break;
                 }
