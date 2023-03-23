@@ -2,6 +2,7 @@ package currentCode;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.Scanner;
 
 //THIS CLASS ACTS AS LIKE A DUNGEON MASTER, WILL PROB MOSTLY BE REPLACED BY THE UI, KEEPS TRACK OF PLAYERCOUNT ALL THE PLAYERS,
@@ -60,7 +61,7 @@ public class gameState {
             System.out.println(Players.get(j).getName());
         }
         //display the instructions
-        displayControls();
+        //displayControls();
         //player one will start
         System.out.println(getPlayers().get(0).getName() + " will start");
     }
@@ -85,40 +86,8 @@ public class gameState {
 
     public void playGame()
     {
-        boolean stillPlaying=true; //bool to check if the game is still being played
         int i=0;
         nextTurn(i);
-        i++;
-        while(stillPlaying)	//still playing = still playing the game
-        {
-            switch (in.next()) {
-                case "v" -> {
-                    System.out.println(getPlayers().get(i).getPlayerBoard());
-                }
-                case "p" -> {
-                    nextTurn(i);
-                    if (i + 1 == playerCount) {
-                        i = 0;
-                    } else {
-                        i++;
-                    }
-                }
-                case "c" -> {
-                    displayControls();
-                }
-                case "b" -> {
-                    System.out.println(gameBoard);
-                }
-                case "q" -> {
-                    System.out.println("ty for playing");
-                    stillPlaying = false;
-                }
-                case "y" -> {
-                    //tile placement goes here
-                }
-            }
-
-        }
     }
     public static void gameEnd(){
         if(getPlayers().get(0).turnCount >= 20 || getPlayers().get(1).turnCount >= 20 || getPlayers().get(2).turnCount >= 20 || getPlayers().get(3).turnCount >=20){
@@ -150,9 +119,9 @@ public class gameState {
         getPlayers().get(i).turnCount += 1; //variable incremented for each player when they have a turn. every player should have exactly 20 turns (from rulebook)
         boolean stillTurn = true;
         boolean stillTokenPlace = true;
+        System.out.println(getPlayers().get(i).getPlayerBoard());
         printInstructions(i);
-        gameBoard.checkForCull();
-        System.out.println(getPlayers().get(i).name + "'s turn!");
+        gameBoard.checkForCull(getPlayers().get(i));
         while (stillTurn) {
             switch (in.next()) {
                 case "0": {
@@ -244,8 +213,13 @@ public class gameState {
                  Scoring.scoreHabitatCorridors(getPlayers().get(i));
                  break;
                 }
+                case "r": //temporary case that tests the scoring
+                {
+                    System.out.println("Cascadia Rules: https://www.alderac.com/wp-content/uploads/2021/08/Cascadia-Rules.pdf");;
+                    break;
+                }
                 default: {
-                    System.out.println("Invalid argument, press 'c' for instructions");
+                    System.out.println("Invalid argument, press 'c' for instructions or 'r' for the rules");
                     break;
                 }
             }
@@ -255,6 +229,7 @@ public class gameState {
                 System.out.println("Would you like to place a wildlife token? Y/N");
                 System.out.println(getPlayers().get(i).printHand());
                 switch (in.next()) {
+
                     case "y": {
                         placeToken(i);
                         i++;
@@ -289,7 +264,7 @@ public class gameState {
         }
         public void printInstructions(int player)
         {
-            System.out.println("CURRENT TURN: " + getPlayers().get(player).name);
+            System.out.println("CURRENT TURN: " + currentCode.player.name);
             System.out.println("Press s to spend a nature token. NATURE TOKENS: " + getPlayers().get(player).natureTokens);
             System.out.println("Press v to view your board");
             System.out.println("Press h to see your hand");
@@ -324,7 +299,6 @@ public class gameState {
                     }
                     case 2:{
                         gameBoard.spendTokenWipingBoard(getPlayers().get(currentPlayer));
-                        System.out.println("New Board is:");
                         return;
                     }
                     default:{
@@ -337,9 +311,11 @@ public class gameState {
 
         public void placeWildlifeToken(wildlifeToken tokenToPlace, int i, int inputToken) {
             System.out.println(getPlayers().get(i).getPlayerBoard());
-            System.out.println("Where would you like to place the token?"); //ask for the location (tile number)
+            System.out.println("Where would you like to place the token? Press b to select a different token."); //ask for the location (tile number)
             System.out.println("Token: " + tokenToPlace.colorToString());
             String input = in.next();
+            if(Objects.equals(input, "b")){placeToken(i);
+            return;}
             String[] numbers = input.split(",");
             int x = Integer.parseInt(numbers[0].trim());
             int y = Integer.parseInt(numbers[1].trim());
@@ -393,8 +369,8 @@ public class gameState {
         System.out.println("What token would you like to place?");  //asks the user what token they wanna place
         System.out.println(getPlayers().get(i).printHand());
         Scanner in = new Scanner(System.in);
-        while(!in.hasNextInt()){
 
+        while(!in.hasNextInt()){
             System.out.println("incorrect input please try again\n");
             in.next();
         }
@@ -403,6 +379,7 @@ public class gameState {
             System.out.println("incorrect input please try again\n");
             input = Integer.parseInt(in.next());
         }
+
         wildlifeToken tokenToPlace = getPlayers().get(i).hand.get(input);
         placeWildlifeToken(tokenToPlace, i, input);
     }
@@ -410,35 +387,56 @@ public class gameState {
 
 
     public void placeTile(int i, Tile t) {
+        Tile refTile = null;
         System.out.println(getPlayers().get(i).getPlayerBoard());
         System.out.println("Pick a reference tile on the board: ");
         System.out.println("Your tile that will be placed: [" + getPlayers().get(i).getHandTile() +"]");
-        String input = in.next();
-        String[] numbers = input.split(",");
-        int x = Integer.parseInt(numbers[0].trim());
-        int y = Integer.parseInt(numbers[1].trim());
-            if (x > getPlayers().get(i).getPlayerBoard().BOARD_WIDTH || y > getPlayers().get(i).getPlayerBoard().BOARD_HEIGHT) {
-                System.out.println("Incorrect position");
-            }
-            while(getPlayers().get(i).getPlayerBoard().getTile(x,y)==null)
-            {
-                System.out.println("That tile doesnt exist");
-                input = in.next();
-                numbers = input.split(",");
-                x = Integer.parseInt(numbers[0].trim());
-                y = Integer.parseInt(numbers[1].trim());
-                if(getPlayers().get(i).getPlayerBoard().getTile(x,y).up!=null && getPlayers().get(i).getPlayerBoard().getTile(x,y).down!=null && getPlayers().get(i).getPlayerBoard().getTile(x,y).left!=null && getPlayers().get(i).getPlayerBoard().getTile(x,y).right!=null)
-                {
-                    System.out.println("Invalid placement");
-                    input = in.next();
-                    numbers = input.split(",");
-                    x = Integer.parseInt(numbers[0].trim());
-                    y = Integer.parseInt(numbers[1].trim());
+        System.out.println("Or press 6 to rotate your tile: ");
+        while (true) {
+            try {
+                String input = in.next();
+                if (input.equals("6")) {
+                    Tile.rotateTile(t);
+                    System.out.println("Your rotated tile: [" + t + "]");
+                    System.out.println("Enter a reference tile on the board: ");
+                    continue;
                 }
+                if (input.equals("v")) {
+                    System.out.println(getPlayers().get(i).getPlayerBoard());
+                    System.out.println("Pick a reference tile on the board: ");
+                    System.out.println("Your tile that will be placed: [" + getPlayers().get(i).getHandTile() +"]");
+                    System.out.println("Or press 6 to rotate your tile: ");
+                    continue;
+                }
+                String[] numbers = input.split(",");
+                int x = Integer.parseInt(numbers[0].trim());
+                int y = Integer.parseInt(numbers[1].trim());
+
+                if (x > tileBoard.BOARD_WIDTH-1 || y > tileBoard.BOARD_HEIGHT -1) {
+                    System.out.println("Incorrect position");
+                    continue; // continue loop if input is incorrect
+                }
+
+                refTile = getPlayers().get(i).getPlayerBoard().getTile(x, y);
+
+                if (refTile == null) {
+                    System.out.println("That tile doesn't exist.");
+                } else if (refTile.up != null && refTile.down != null && refTile.left != null && refTile.right != null) {
+                    System.out.println("Invalid placement.");
+                } else {
+                    getPlayers().get(i).getPlayerBoard().addTile(refTile, t);
+                    break; // exit loop if successful
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter two numbers separated by a comma.");
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("That position is outside of the allowed space.");
+                getPlayers().get(i).getPlayerBoard().addTile(refTile, t);
+                break;
             }
-            Tile refTile =  getPlayers().get(i).getPlayerBoard().getTile(x,y);
-                getPlayers().get(i).getPlayerBoard().addTile(refTile,t);
         }
+    }
+
 
 
 

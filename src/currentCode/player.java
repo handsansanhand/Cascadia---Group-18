@@ -20,10 +20,10 @@ public class player {
         hand.add(x);
     }
     int turnCount=0;
-    String name;
+    static String name;
     int score;
     tileBoard playerBoard;
-    int natureTokens; //nature tokens
+    int natureTokens=1; //nature tokens
     public player(String x, int i)
     {
         this.name = x;
@@ -45,7 +45,7 @@ public class player {
     }
     public String printHand() //function for printing the hand the user has (wildlifetokens)
     {
-        String handString = "Hand: ";
+        String handString = "" + name + "'s Hand:   ";
         for(int i = 0;i< hand.size();i++)
         {
             handString = handString + "[(" + i + ")" + Tile.getAnimalColor(hand.get(i).getAnimalType()) + hand.get(i).animalType.toString() + Tile.RESET + "] , ";

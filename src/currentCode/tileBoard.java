@@ -1,5 +1,7 @@
 package currentCode;
 
+import javafx.application.Platform;
+
 import java.util.Scanner;
 //EACH 'BOARD' HOLDS AN ARRAYLIST OF TILES
 public class tileBoard { // class for the board object for each player
@@ -22,13 +24,15 @@ public class tileBoard { // class for the board object for each player
         TileBoard[(BOARD_WIDTH / 2)][BOARD_HEIGHT / 2].right = TileBoard[(BOARD_WIDTH / 2) - 1][(BOARD_HEIGHT / 2)];
 
         //upper tile coordinates
-        TileBoard[(BOARD_WIDTH / 2)][(BOARD_HEIGHT / 2) + 1].setTileCoordinates((BOARD_WIDTH / 2), (BOARD_HEIGHT / 2) + 1);
+        TileBoard[(BOARD_WIDTH / 2)][(BOARD_HEIGHT / 2) + 1].setTileCoordinates((BOARD_WIDTH / 2), (BOARD_HEIGHT -2) + 1);
+        //TileBoard[(BOARD_WIDTH / 2)][(BOARD_HEIGHT / 2) + 1].setTileCoordinates((BOARD_WIDTH / 2), (BOARD_HEIGHT / 2) + 1);
         TileBoard[(BOARD_WIDTH / 2)][(BOARD_HEIGHT / 2) + 1].up = TileBoard[(BOARD_WIDTH / 2)][(BOARD_HEIGHT / 2) + 2];
         TileBoard[(BOARD_WIDTH / 2)][(BOARD_HEIGHT / 2) + 1].down = TileBoard[(BOARD_WIDTH / 2)][(BOARD_HEIGHT / 2)];
         TileBoard[(BOARD_WIDTH / 2)][(BOARD_HEIGHT / 2) + 1].left = TileBoard[(BOARD_WIDTH / 2) + 1][(BOARD_HEIGHT / 2) + 1];
         TileBoard[(BOARD_WIDTH / 2)][(BOARD_HEIGHT / 2) + 1].right = TileBoard[(BOARD_WIDTH / 2) - 1][(BOARD_HEIGHT / 2) + 1];
 
         //lower tile coordinates
+        //TileBoard[(BOARD_WIDTH / 2)][(BOARD_HEIGHT / 2) - 1].setTileCoordinates((BOARD_WIDTH / 2), (BOARD_HEIGHT-13) - 1);
         TileBoard[(BOARD_WIDTH / 2)][(BOARD_HEIGHT / 2) - 1].setTileCoordinates((BOARD_WIDTH / 2), (BOARD_HEIGHT / 2) - 1);
         TileBoard[(BOARD_WIDTH / 2)][(BOARD_HEIGHT / 2) - 1].up = TileBoard[(BOARD_WIDTH / 2)][(BOARD_HEIGHT / 2)];
         TileBoard[(BOARD_WIDTH / 2)][(BOARD_HEIGHT / 2) - 1].down = TileBoard[(BOARD_WIDTH / 2)][(BOARD_HEIGHT / 2) - 2];
@@ -42,19 +46,25 @@ public class tileBoard { // class for the board object for each player
 
     public void printReference(Tile tile)
     {
+        boolean hasUp=true; boolean hasDown=true; boolean hasLeft=true; boolean hasRight=true; //just for style, if we have reached the end of the grid
+        if(tile.y==BOARD_HEIGHT-1){hasUp = false;}
+        if(tile.y==0){hasDown = false;}
+        if(tile.x==BOARD_WIDTH-1){hasLeft = false;}
+        if(tile.x==0){hasRight = false;}
+
         String returnString="";
         String tileRightString="";
         String tileLeftString="";
         String tileUpString="";
         String tileDownString="";
-        if(tile.right == null)
-        {tileRightString = tileRightString + "[("  + 4 + ")]";} else{tileRightString = tileRightString + "[" +tile.right+ "]";}
-        if(tile.left == null)
-        {tileLeftString = tileLeftString + "[("  + 3 + ")]";} else{tileLeftString = tileLeftString + "[" +tile.left+ "]";}
-        if(tile.up == null)
-        {tileUpString = tileUpString + "[("  + 1 + ")]";} else {tileUpString = tileUpString + "[" +tile.up+ "]";}
-        if(tile.down == null)
-        {tileDownString = tileDownString + "[("  + 2 + ")]";} else {tileDownString = tileDownString + "[" + tile.down + "]";}
+        if(tile.right == null && hasRight)
+        {tileRightString = tileRightString + "[("  + 4 + ")]";} else if(!hasRight){tileRightString=""; }else{tileRightString = tileRightString + "[" +tile.right+ "]";}
+        if(tile.left == null && hasLeft)
+        {tileLeftString = tileLeftString + "[("  + 3 + ")]";} else if(!hasLeft){tileLeftString=""; } else{tileLeftString = tileLeftString + "[" +tile.left+ "]";}
+        if(tile.up == null && hasUp)
+        {tileUpString = tileUpString + "[("  + 1 + ")]";} else if(!hasUp){tileUpString=""; } else {tileUpString = tileUpString + "[" +tile.up+ "]";}
+        if(tile.down == null && hasDown)
+        {tileDownString = tileDownString + "[("  + 2 + ")]";} else if(!hasDown){tileDownString=""; } else {tileDownString = tileDownString + "[" + tile.down + "]";}
 
         returnString = returnString + "      " + tileUpString + "\n";
         returnString = returnString + tileLeftString;
@@ -168,7 +178,7 @@ public class tileBoard { // class for the board object for each player
 
     public String printUserBoard() {
         String userBoard = "";
-        System.out.println("Your Board:");
+        System.out.println(player.name + "'s Board:");
         boolean[] columnIsEmpty = new boolean[BOARD_WIDTH];
         boolean[] rowIsEmpty = new boolean[BOARD_HEIGHT];
         for (int j = 0; j < BOARD_WIDTH; j++) {

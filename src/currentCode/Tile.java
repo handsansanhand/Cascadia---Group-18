@@ -522,10 +522,14 @@ public class Tile { // class for the tiles that will be inserted onto the board
     }
     public static void rotateTile(Tile tile)
     {
-        habitatEnum tmp;
-        tmp = tile.landType;
-        tile.landType = tile.landType2;
-        tile.landType2 = tmp;
+        if(!tile.isKeystoneTile) {
+            habitatEnum tmp;
+            tmp = tile.landType;
+            tile.landType = tile.landType2;
+            tile.landType2 = tmp;
+        } else{
+            System.out.println("This tile is a keystone tile and cannot be rotated.");
+        }
     }
 
         public String uiPrintTIle()

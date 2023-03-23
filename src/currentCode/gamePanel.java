@@ -5,7 +5,8 @@ import java.util.Scanner;
 //CLASS THAT CURRENTLY PLAYS THE GAME AND CALLS ALL THE FUNCTIONS FROM THE PLAYING CLASS
 public class gamePanel {
 public static void main(String[] args) {
-	System.out.println("Welcome to Cascadia!");
+	System.out.println(Tile.GREEN_BOLD + "Welcome to Cascadia!");
+	System.out.println("The Rules: https://www.alderac.com/wp-content/uploads/2021/08/Cascadia-Rules.pdf" + Tile.RESET );
 	int x = 0;
 	gameState gameState = new gameState();
 	Scanner in = new Scanner(System.in);

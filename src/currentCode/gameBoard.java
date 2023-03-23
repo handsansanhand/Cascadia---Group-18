@@ -17,7 +17,7 @@ import java.util.Scanner;
                 boardWildlifeTokens.add(wildlifeToken.generateWildlifeToken());
             }
             if (highestAnimalTypeCount()==4) { //automatically culls if all the same
-                System.out.println("Four identical wildlife tokens detected, an automatic cull has occurred.");
+                System.out.println(Tile.RED_BOLD + "Four identical wildlife tokens detected, an automatic cull has occurred." + Tile.RESET);
                 cull(findMostCommonAnimal());
             }
         }
@@ -38,30 +38,31 @@ import java.util.Scanner;
             return highestCount;
         }
 
-        public void checkForCull() //lets users know if a cull is available
+        public boolean checkForCull(player user) //lets users know if a cull is available
         {
+            boolean cullAvailabe=false;
             boolean stillCulling=true;
             if(highestAnimalTypeCount()==3) //only when there are 3 of the same animal
             {
+                cullAvailabe=true;
                 while (stillCulling) {
-                    System.out.println("A cull is available! Would you like to cull?"); //cull
-                    System.out.println("Y / N");
-                    System.out.println("The board: " + this);
-                    System.out.println("Your hand: ");
+                    System.out.println(Tile.RED_BOLD + "A cull is available!" + Tile.RESET +  " Would you like to cull?"); //cull
+                    System.out.println(Tile.RED_BOLD + "Y "+ Tile.RESET + "/" + Tile.GREEN_BOLD + " N" + Tile.RESET);
                     Scanner in = new Scanner(System.in);
                     switch (in.next()) {
                         case "y" -> {
                             tokenEnum animaltocull = findMostCommonAnimal();
                             cull(animaltocull);
-                            System.out.println("The " + animaltocull + "'s have been culled.");
-                            System.out.println("The new board is: \n");
+                            String deathString= Tile.RED_BOLD + "The " + animaltocull + "'s have been culled." + Tile.RESET;
+                            System.out.println(deathString);
+                            System.out.println("The new board is:");
                             System.out.println(this);
                             stillCulling=false;
                             break;
                         }
                         case "n" -> {
                             System.out.println("No cull happened");
-                            System.out.println("The board is: \n");
+                            System.out.println("The board is:");
                             System.out.println(this);
                             stillCulling=false;
                             break;
@@ -76,6 +77,7 @@ import java.util.Scanner;
                 cull(findMostCommonAnimal());
                 System.out.println("Too many " + findMostCommonAnimal() + "'s, an automatic cull has been implemented.");
             }
+            return cullAvailabe;
             }
             public Tile removeHabitatTile(int i)  //function for removing the i'th
             {
@@ -158,7 +160,7 @@ import java.util.Scanner;
             if(placementTile.isKeystoneTile && (placementTile.animal1==placementtoken.getAnimalType()))
             {
                 currentPlayer.natureTokens++;
-                System.out.println(currentPlayer.name + " earned a nature token !");
+                System.out.println(Tile.GREEN_BOLD + currentPlayer.name + " earned a nature token !" + Tile.RESET);
             }
         }
 
@@ -311,6 +313,7 @@ import java.util.Scanner;
                     case 3 -> replaceWildlifeToken(3);
                 }
             }
+            System.out.println(printWildlifeTokens());
         }
     }
 

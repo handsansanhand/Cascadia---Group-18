@@ -65,12 +65,12 @@ public class Scoring {
         boolean hasDown=false;
         visited[i][j]=true;
 
-        if (user.getPlayerBoard().TileBoard[i - 1][j] != null) { //the tile to the right's is not null
+        if (i>0 && user.getPlayerBoard().TileBoard[i - 1][j] != null) { //the tile to the right's is not null
             if (user.getPlayerBoard().TileBoard[i - 1][j].landType == enumToCount) { //and matches
                 hasRight=true;
             }
         }
-        if (user.getPlayerBoard().TileBoard[i][j-1] != null) { //the tile to the down
+        if (j>0 && user.getPlayerBoard().TileBoard[i][j-1] != null) { //the tile to the down
             if (user.getPlayerBoard().TileBoard[i][j-1].landType2 == enumToCount) { //and matches
                 hasDown=true;
             }
@@ -89,13 +89,13 @@ public class Scoring {
         if (user.getPlayerBoard().TileBoard[i][j + 1] != null && user.getPlayerBoard().TileBoard[i][j + 1].landType2 == enumToCount) //recursive call, when the tile above it matches
         {
             //i can go up
-            if (!visited[i][j + 1]) {
+            if (j<tileBoard.BOARD_HEIGHT-1 && !visited[i][j + 1]) {
                 visited[i][j+1]=true;
                 totalCount = keepCountingLandType2(enumToCount, totalCount, i, j + 1, user, true, visited);
             }
         }
         else if(user.getPlayerBoard().TileBoard[i][j+1]!=null && user.getPlayerBoard().TileBoard[i][j+1].isKeystoneTile && user.getPlayerBoard().TileBoard[i][j+1].landType==enumToCount) {//if theres a keystone tile above that matches, i can go up
-            if (!visited[i][j + 1])
+            if (j<tileBoard.BOARD_HEIGHT-1 && !visited[i][j + 1])
             {
                 visited[i][j + 1] = true;
                 totalCount = keepCountingLandType1(enumToCount, totalCount, i, j + 1, user, true, true, visited);
@@ -120,7 +120,7 @@ public class Scoring {
         visited[i][j]=true;
 
         //check if i can go left
-        if (user.getPlayerBoard().TileBoard[i + 1][j] != null) { //the tile to the lefts's is not null
+        if (i<tileBoard.BOARD_WIDTH-1 && user.getPlayerBoard().TileBoard[i + 1][j] != null) { //the tile to the lefts's is not null
             if (user.getPlayerBoard().TileBoard[i + 1][j].landType2 == enumToCount) { //and matches
                 hasLeft = true;
             }
@@ -129,13 +129,13 @@ public class Scoring {
                 keystoneLeft=true;
             }
         }
-        if(user.getPlayerBoard().TileBoard[i][j-1] != null)
+        if(j>0 && user.getPlayerBoard().TileBoard[i][j-1] != null)
         {
             if (user.getPlayerBoard().TileBoard[i][j-1].landType == enumToCount) { //and matches
                 hasDown = true;
             }
         }
-        else if (user.getPlayerBoard().TileBoard[i][j]!=null && user.getPlayerBoard().TileBoard[i][j].isKeystoneTile && user.getPlayerBoard().TileBoard[i - 1][j]!=null && user.getPlayerBoard().TileBoard[i - 1][j].landType == enumToCount && canGoRight) { //i am a keystone tile with an available tile to the RIGHT
+        else if (i>0 && user.getPlayerBoard().TileBoard[i][j]!=null && user.getPlayerBoard().TileBoard[i][j].isKeystoneTile && user.getPlayerBoard().TileBoard[i - 1][j]!=null && user.getPlayerBoard().TileBoard[i - 1][j].landType == enumToCount && canGoRight) { //i am a keystone tile with an available tile to the RIGHT
             {
                 keystoneJumpAvailable = true;
             }
@@ -159,12 +159,12 @@ public class Scoring {
 
             //ok i cant go left,
             //can i go up?
-            if(user.getPlayerBoard().TileBoard[i][j+1]!=null && user.getPlayerBoard().TileBoard[i][j+1].landType==enumToCount && !visited[i][j+1]) //recursive call
+            if(j<tileBoard.BOARD_HEIGHT-1 && user.getPlayerBoard().TileBoard[i][j+1]!=null && user.getPlayerBoard().TileBoard[i][j+1].landType==enumToCount && !visited[i][j+1]) //recursive call
             {
                 //i can go up
                 totalCount = keepCountingLandType1(enumToCount,totalCount,i,j+1,user,true,true, visited);
             }
-            else if(user.getPlayerBoard().TileBoard[i][j+1]!=null && user.getPlayerBoard().TileBoard[i][j].isKeystoneTile && user.getPlayerBoard().TileBoard[i][j+1].landType2==enumToCount && !visited[i][j+1])
+            else if(j<tileBoard.BOARD_HEIGHT-1 && user.getPlayerBoard().TileBoard[i][j+1]!=null && user.getPlayerBoard().TileBoard[i][j].isKeystoneTile && user.getPlayerBoard().TileBoard[i][j+1].landType2==enumToCount && !visited[i][j+1])
             {//if im a keystone tile
                 totalCount = keepCountingLandType2(enumToCount,totalCount,i,j+1,user,true,visited);
             }
