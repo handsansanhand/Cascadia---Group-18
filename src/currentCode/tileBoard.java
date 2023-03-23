@@ -171,7 +171,7 @@ public class tileBoard { // class for the board object for each player
 
     public String printUserBoard() {
         String userBoard = "";
-        System.out.println(player.name + "'s Board:");
+        System.out.println("Your Board:");
         boolean[] columnIsEmpty = new boolean[BOARD_WIDTH];
         boolean[] rowIsEmpty = new boolean[BOARD_HEIGHT];
         for (int j = 0; j < BOARD_WIDTH; j++) {

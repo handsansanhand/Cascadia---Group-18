@@ -20,10 +20,10 @@ public class player {
         hand.add(x);
     }
     int turnCount=0;
-    static String name;
+    String name;
     int score;
     tileBoard playerBoard;
-    int natureTokens=1; //nature tokens
+    int natureTokens=2; //nature tokens
     public player(String x, int i)
     {
         this.name = x;

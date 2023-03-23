@@ -73,11 +73,11 @@ public class wildlifeToken {
         String returnString;
         switch (getAnimalType())
         {
-            case ELK -> returnString="ELK";
-            case HAWK -> returnString="HAWK";
-            case FOX -> returnString="FOX";
-            case SALMON -> returnString="SALMON";
-            default -> returnString = "BEAR";
+            case ELK -> returnString= Tile.getAnimalColor(tokenEnum.ELK) + "ELK" + Tile.RESET;
+            case HAWK -> returnString=Tile.getAnimalColor(tokenEnum.HAWK) + "HAWK" + Tile.RESET;
+            case FOX -> returnString=Tile.getAnimalColor(tokenEnum.FOX) + "FOX" + Tile.RESET;
+            case SALMON -> returnString=Tile.getAnimalColor(tokenEnum.SALMON) + "SALMON" + Tile.RESET;
+            default -> returnString = Tile.getAnimalColor(tokenEnum.BEAR) + "BEAR" + Tile.RESET;
         }
         return returnString;
     }

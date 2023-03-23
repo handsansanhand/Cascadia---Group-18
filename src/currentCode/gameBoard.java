@@ -131,7 +131,7 @@ import java.util.Scanner;
             int count =0;
             for(int i=0;i<boardWildlifeTokens.toArray().length;i++)
             {
-                if(boardWildlifeTokens.get(i).toString().equals(animalType.toString()))
+                if(boardWildlifeTokens.get(i).getAnimalType().equals(animalType))
                 {
                     count++;
                 }
@@ -218,23 +218,23 @@ import java.util.Scanner;
         while (stillPicking) {
             switch (in.next()) {
                 case "0": {
-                    returnToken = boardWildlifeTokens.remove(0);
+                    returnToken = removeWildlifeToken(0);
                     stillPicking = false;
                     break;
                 }
                 case "1": {
-                    returnToken = boardWildlifeTokens.remove(1);
+                    returnToken = removeWildlifeToken(1);
                     stillPicking = false;
                     break;
 
                 }
                 case "2": {
-                    returnToken = boardWildlifeTokens.remove(2);
+                    returnToken = removeWildlifeToken(2);
                     stillPicking = false;
                     break;
                 }
                 case "3": {
-                    returnToken = boardWildlifeTokens.remove(3);
+                    returnToken = removeWildlifeToken(3);
                     stillPicking = false;
                     break;
                 }
