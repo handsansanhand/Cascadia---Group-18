@@ -183,11 +183,6 @@ public class gameState {
                     printInstructions(i);
                     break;
                 }
-                case "h":
-                {
-                    System.out.println(getPlayers().get(i).printHand());
-                    break;
-                }
                 case "t": //temporary case that tests the scoring
                 {
                  Scoring.scoreHabitatCorridors(getPlayers().get(i));
@@ -204,20 +199,21 @@ public class gameState {
                 }
             }
         }
-        if(!getPlayers().get(i).hand.isEmpty()) {
+        if(getPlayers().get(i).hand.get(0)!=null) {
             while (stillTokenPlace) {
                 System.out.println("Would you like to place a wildlife token? Y/N");
                 System.out.println(getPlayers().get(i).printHand());
                 switch (in.next()) {
 
                     case "y": {
-                        placeToken(i);
+                        placeWildlifeToken(getPlayers().get(i).hand.get(0), i);
                         i++;
                         nextTurn(i);
                         stillTokenPlace = false;
                         break;
                     }
                     case "n": {
+                        gameBoard.wildlifeTokenBag.add(getPlayers().get(i).hand.remove(0)); //get the wt out of here
                         i++;
                         nextTurn(i);
                         stillTokenPlace = false;
@@ -247,7 +243,6 @@ public class gameState {
             System.out.println("CURRENT TURN: " + currentCode.player.name);
             System.out.println("Press s to spend a nature token. NATURE TOKENS: " + getPlayers().get(player).natureTokens);
             System.out.println("Press v to view your board");
-            System.out.println("Press h to see your hand");
             System.out.println("Pick a habitat token and wildlife token from the board. [0-3]");
             System.out.println(gameBoard);
         }
@@ -289,13 +284,11 @@ public class gameState {
             }
         }
 
-        public void placeWildlifeToken(wildlifeToken tokenToPlace, int i, int inputToken) {
+        public void placeWildlifeToken(wildlifeToken tokenToPlace, int i) {
             System.out.println(getPlayers().get(i).getPlayerBoard());
-            System.out.println("Where would you like to place the token? Press b to select a different token."); //ask for the location (tile number)
+            System.out.println("Where would you like to place the token?"); //ask for the location (tile number)
             System.out.println("Token: " + tokenToPlace.colorToString());
             String input = in.next();
-            if(Objects.equals(input, "b")){placeToken(i);
-            return;}
             String[] numbers = input.split(",");
             int x = Integer.parseInt(numbers[0].trim());
             int y = Integer.parseInt(numbers[1].trim());
@@ -327,7 +320,7 @@ public class gameState {
                     {
                         gameBoard.checkForBonus(getPlayers().get(i).getPlayerBoard().TileBoard[x][y], tokenToPlace, getPlayers().get(i));
                         System.out.println("Token placed successfully!");
-                        getPlayers().get(i).hand.remove(inputToken);
+                        getPlayers().get(i).hand.remove(0);
                         break;
                     } else {
                         System.out.println("Unable to place token.");
@@ -342,29 +335,6 @@ public class gameState {
                 }
             }
         }
-
-    public void placeToken(int i)   //placing wildlife tokens
-    {
-        int input;
-        System.out.println("What token would you like to place?");  //asks the user what token they wanna place
-        System.out.println(getPlayers().get(i).printHand());
-        Scanner in = new Scanner(System.in);
-
-        while(!in.hasNextInt()){
-            System.out.println("incorrect input please try again\n");
-            in.next();
-        }
-        input = in.nextInt();
-        while(input > getPlayers().get(i).hand.size() || input < 0){
-            System.out.println("incorrect input please try again\n");
-            input = Integer.parseInt(in.next());
-        }
-
-        wildlifeToken tokenToPlace = getPlayers().get(i).hand.get(input);
-        placeWildlifeToken(tokenToPlace, i, input);
-    }
-
-
 
     public void placeTile(int i, Tile t) {
         Tile refTile = null;
@@ -384,39 +354,45 @@ public class gameState {
                 if (input.equals("v")) {
                     System.out.println(getPlayers().get(i).getPlayerBoard());
                     System.out.println("Pick a reference tile on the board: ");
-                    System.out.println("Your tile that will be placed: [" + getPlayers().get(i).getHandTile() +"]");
+                    System.out.println("Your tile that will be placed: [" + getPlayers().get(i).getHandTile() + "]");
                     System.out.println("Or press 6 to rotate your tile: ");
                     continue;
                 }
-                String[] numbers = input.split(",");
-                int x = Integer.parseInt(numbers[0].trim());
-                int y = Integer.parseInt(numbers[1].trim());
-
-                if (x > tileBoard.BOARD_WIDTH-1 || y > tileBoard.BOARD_HEIGHT -1) {
-                    System.out.println("Incorrect position");
-                    continue; // continue loop if input is incorrect
+                if (!input.contains(",")) {
+                    System.out.println("Please enter two digits seperated by a comma.");
+                    continue;
                 }
 
-                refTile = getPlayers().get(i).getPlayerBoard().getTile(x, y);
+                    String[] numbers = input.split(",");
+                    int x = Integer.parseInt(numbers[0].trim());
+                    int y = Integer.parseInt(numbers[1].trim());
 
-                if (refTile == null) {
-                    System.out.println("That tile doesn't exist.");
-                } else if (refTile.up != null && refTile.down != null && refTile.left != null && refTile.right != null) {
-                    System.out.println("Invalid placement.");
-                } else {
+                    if (x > tileBoard.BOARD_WIDTH - 1 || y > tileBoard.BOARD_HEIGHT - 1) {
+                        System.out.println("Incorrect position");
+                        continue; // continue loop if input is incorrect
+                    }
+
+                    refTile = getPlayers().get(i).getPlayerBoard().getTile(x, y);
+
+                    if (refTile == null) {
+                        System.out.println("That tile doesn't exist.");
+                    } else if (refTile.up != null && refTile.down != null && refTile.left != null && refTile.right != null) {
+                        System.out.println("Invalid placement.");
+                    } else {
+                        // check if its not null before printing
+                        getPlayers().get(i).getPlayerBoard().addTile(refTile, t);
+                        break; // exit loop if successful
+                    }
+                }
+            catch(NumberFormatException e){
+                    System.out.println("Invalid input. Please enter two numbers separated by a comma.");
+                } catch(ArrayIndexOutOfBoundsException e){
+                    System.out.println("That position is outside of the allowed space.");
                     getPlayers().get(i).getPlayerBoard().addTile(refTile, t);
-                    break; // exit loop if successful
+                    break;
                 }
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter two numbers separated by a comma.");
-            } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("That position is outside of the allowed space.");
-                getPlayers().get(i).getPlayerBoard().addTile(refTile, t);
-                break;
             }
         }
-    }
-
 
 
 

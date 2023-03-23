@@ -7,6 +7,7 @@ import java.util.Scanner;
     public class gameBoard {
         ArrayList<Tile> boardHabitatTiles = new ArrayList<>();
         ArrayList<wildlifeToken> boardWildlifeTokens = new ArrayList<>();
+        ArrayList<wildlifeToken> wildlifeTokenBag = wildlifeToken.makeWildlifeTokenBag();
 
         gameBoard() //gameboard will be constructed with 4 habitat tiles and 4 wildlifetoken tiles
         {
@@ -14,7 +15,7 @@ import java.util.Scanner;
                 boardHabitatTiles.add(Tile.randomTile());
             }
             for (int j = 0; j < 4; j++) {
-                boardWildlifeTokens.add(wildlifeToken.generateWildlifeToken());
+                    boardWildlifeTokens.add(wildlifeTokenBag.remove(j));
             }
             if (highestAnimalTypeCount()==4) { //automatically culls if all the same
                 System.out.println(Tile.RED_BOLD + "Four identical wildlife tokens detected, an automatic cull has occurred." + Tile.RESET);
@@ -42,7 +43,7 @@ import java.util.Scanner;
         {
             boolean cullAvailabe=false;
             boolean stillCulling=true;
-            if(highestAnimalTypeCount()==3) //only when there are 3 of the same animal
+            if(highestAnimalTypeCount()==3) //only when there are 3 of the same animal and eligible tokens left
             {
                 cullAvailabe=true;
                 while (stillCulling) {
@@ -88,10 +89,9 @@ import java.util.Scanner;
             }
     public wildlifeToken removeWildlifeToken(int i)  //function for removing the i'th
     {
-        wildlifeToken temp = boardWildlifeTokens.get(i);
-        boardWildlifeTokens.remove(i);
-        boardWildlifeTokens.add(wildlifeToken.generateWildlifeToken());
-        return temp;
+            wildlifeToken returnToken = boardWildlifeTokens.get(i);
+            boardWildlifeTokens.set(i, wildlifeTokenBag.remove(0));
+            return returnToken;
     }
 
         public void cull(tokenEnum animalToCull)   //function that replaces the culled animals
@@ -100,12 +100,16 @@ import java.util.Scanner;
             {
                 if(boardWildlifeTokens.get(i).animalType.equals(animalToCull))
                 {
+                    /*
                     boardWildlifeTokens.remove(i);
                     boardWildlifeTokens.add(wildlifeToken.generateWildlifeToken());
-                    cull(animalToCull);
+                    cull(animalToCull);*/
+                        wildlifeTokenBag.add(boardWildlifeTokens.remove(i));
+                        boardWildlifeTokens.add(wildlifeTokenBag.remove(0));
+                       // cull(animalToCull);
+                    }
                 }
             }
-        }
         public tokenEnum findMostCommonAnimal()    //function that returns the animal type of the most frequent animal on the board
         {
             tokenEnum highestAnimal= tokenEnum.ELK;
@@ -214,23 +218,23 @@ import java.util.Scanner;
         while (stillPicking) {
             switch (in.next()) {
                 case "0": {
-                    returnToken = removeWildlifeToken(0);
+                    returnToken = boardWildlifeTokens.remove(0);
                     stillPicking = false;
                     break;
                 }
                 case "1": {
-                    returnToken = removeWildlifeToken(1);
+                    returnToken = boardWildlifeTokens.remove(1);
                     stillPicking = false;
                     break;
 
                 }
                 case "2": {
-                    returnToken = removeWildlifeToken(2);
+                    returnToken = boardWildlifeTokens.remove(2);
                     stillPicking = false;
                     break;
                 }
                 case "3": {
-                    returnToken = removeWildlifeToken(3);
+                    returnToken = boardWildlifeTokens.remove(3);
                     stillPicking = false;
                     break;
                 }
@@ -290,6 +294,10 @@ import java.util.Scanner;
                         System.out.println("invalid input, please try again:");
                     }
                 }
+                if(numToCull>wildlifeTokenBag.size())
+                {
+                    System.out.println("not enough tokens left in the bag for that amount");
+                }
             }
             //get the ones to cull
             System.out.println("What tokens would you like to replace?");
@@ -319,7 +327,9 @@ import java.util.Scanner;
 
     public void replaceWildlifeToken(int i) //helper function for spending a naturetoken to wipe a particular token
     {
-        boardWildlifeTokens.set(i, wildlifeToken.generateWildlifeToken());
+        wildlifeToken returnT = boardWildlifeTokens.get(i);
+        boardWildlifeTokens.set(i, wildlifeTokenBag.remove(0));
+        wildlifeTokenBag.add(returnT);
     }
 
 

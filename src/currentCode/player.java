@@ -45,12 +45,10 @@ public class player {
     }
     public String printHand() //function for printing the hand the user has (wildlifetokens)
     {
-        String handString = "" + name + "'s Hand:   ";
-        for(int i = 0;i< hand.size();i++)
-        {
-            handString = handString + "[(" + i + ")" + Tile.getAnimalColor(hand.get(i).getAnimalType()) + hand.get(i).animalType.toString() + Tile.RESET + "] , ";
+        if (hand.get(0) != null) {
+            return "" + name + "'s Hand: [" + Tile.getAnimalColor(hand.get(0).getAnimalType()) + hand.get(0).animalType.toString() + Tile.RESET + "]";
         }
-        return handString.substring(0, handString.length() - 2);
+        return "Hand is empty";
     }
 
 }

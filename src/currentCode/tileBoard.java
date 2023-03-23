@@ -38,19 +38,12 @@ public class tileBoard { // class for the board object for each player
         TileBoard[(BOARD_WIDTH / 2)][(BOARD_HEIGHT / 2) - 1].down = TileBoard[(BOARD_WIDTH / 2)][(BOARD_HEIGHT / 2) - 2];
         TileBoard[(BOARD_WIDTH / 2)][(BOARD_HEIGHT / 2) - 1].left = TileBoard[(BOARD_WIDTH / 2) + 1][(BOARD_HEIGHT / 2) - 1];
         TileBoard[(BOARD_WIDTH / 2)][(BOARD_HEIGHT / 2) - 1].right = TileBoard[(BOARD_WIDTH / 2) - 1][(BOARD_HEIGHT / 2) - 1];
-
-
-
-
     }
 
-    public void printReference(Tile tile)
+    public static void printReference(Tile tile)
     {
         boolean hasUp=true; boolean hasDown=true; boolean hasLeft=true; boolean hasRight=true; //just for style, if we have reached the end of the grid
-        if(tile.y==BOARD_HEIGHT-1){hasUp = false;}
-        if(tile.y==0){hasDown = false;}
-        if(tile.x==BOARD_WIDTH-1){hasLeft = false;}
-        if(tile.x==0){hasRight = false;}
+
 
         String returnString="";
         String tileRightString="";
@@ -197,7 +190,7 @@ public class tileBoard { // class for the board object for each player
             for (int j = BOARD_WIDTH - 1; j >= 0; j--) {
                 if (!columnIsEmpty[j] && TileBoard[j][i] != null) {
                     String tileString = TileBoard[j][i].toString() + "(" + j + "," + i+ ")";
-                    int numPaddingChars = 41 - removeANSIColors(tileString).length();
+                    int numPaddingChars = 42 - removeANSIColors(tileString).length();
                     int numLeftPaddingChars = numPaddingChars / 2;
                     int numRightPaddingChars = numPaddingChars - numLeftPaddingChars;
                     String paddedTileString = String.format("%" + numLeftPaddingChars + "s%s%" + numRightPaddingChars + "s", "", tileString, "");
