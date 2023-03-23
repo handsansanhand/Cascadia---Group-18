@@ -47,7 +47,7 @@ import java.util.Scanner;
             {
                 cullAvailabe=true;
                 while (stillCulling) {
-                    System.out.println(Tile.RED_BOLD + "A cull is available!" + Tile.RESET +  " Would you like to cull?"); //cull
+                    System.out.println(Tile.RED_BOLD + "A cull is available!" + Tile.RESET +  " Would you like to " + Tile.RED_BOLD + "cull" + Tile.RESET + "?"); //cull
                     System.out.println(Tile.RED_BOLD + "Y "+ Tile.RESET + "/" + Tile.GREEN_BOLD + " N" + Tile.RESET);
                     Scanner in = new Scanner(System.in);
                     switch (in.next()) {
@@ -62,7 +62,7 @@ import java.util.Scanner;
                             break;
                         }
                         case "n" -> {
-                            System.out.println("No cull happened");
+                            System.out.println(Tile.GREEN_BOLD + "No cull happened" + Tile.RESET);
                             System.out.println("The board is:");
                             System.out.println(this);
                             stillCulling=false;

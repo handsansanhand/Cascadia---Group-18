@@ -57,7 +57,7 @@ public class Scoring {
             }
         }
         System.out.println(user.name + " has a longest streak of " + (highestCount) + " of " + enumToCount);
-        return totalCount;
+        return highestCount;
     }
 
     public static int keepCountingLandType2(habitatEnum enumToCount, int totalCount, int i, int j, player user, boolean canGoRight, boolean[][] visited) {
