@@ -669,7 +669,188 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
         return 0;
     }
 
-    public static int scoreSalmon(int whatCard, player user) //method that returns the maximum score (run) of salmon in the 2-d array
+    public static int scoreHawk(int whatCard, player user) //method that returns the total score of a players salmon
+    {
+        int score=0;
+        //first, create a 2-d array of booleans
+        boolean[][] marked = new boolean[tileBoard.BOARD_HEIGHT][tileBoard.BOARD_WIDTH];
+        //filled with false by default
+        switch (whatCard)
+        {
+            case 1: //SCORE CARD A
+            {
+                int tally=0;
+                for (int i = 0; i < tileBoard.BOARD_HEIGHT - 1; i++) { //go through the array
+                    for (int j = 0; j < tileBoard.BOARD_WIDTH - 1; j++)
+                    {
+                        if (user.getPlayerBoard().TileBoard[i][j] != null) {
+                            if (user.getPlayerBoard().TileBoard[i][j].token!=null && user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.HAWK && !marked[i][j]) {
+                                // a hawk is found:
+                               tally+=countHawks(user,1,i,j,marked,0,0);
+                            }
+                        }
+                    }
+                }
+                switch (tally)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        score=2;
+                        break;
+                    case 2:
+                        score=5;
+                        break;
+                    case 3:
+                        score=8;
+                        break;
+                    case 4:
+                        score=11;
+                        break;
+                    case 5:
+                        score=14;
+                        break;
+                    case 6:
+                        score=18;
+                        break;
+                    case 7:
+                        score=22;
+                        break;
+                    default:
+                        score=26;
+                        break;
+                }
+
+
+                return score;
+            }
+            case 2: {
+                int tally=0;
+                for (int i = 0; i < tileBoard.BOARD_HEIGHT - 1; i++) { //go through the array
+                    for (int j = 0; j < tileBoard.BOARD_WIDTH - 1; j++) {
+                        if (user.getPlayerBoard().TileBoard[i][j] != null) {
+                            if (user.getPlayerBoard().TileBoard[i][j].token != null && user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.HAWK) {
+                                tally+=countHawks(user,2,i,j,marked,0,0);
+                            }
+                        }
+                    }
+                }
+                System.out.println("final tally: " + tally);
+                switch (tally)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        score=5;
+                        break;
+                    case 3:
+                        score=9;
+                        break;
+                    case 4:
+                        score=12;
+                        break;
+                    case 5:
+                        score=16;
+                        break;
+                    case 6:
+                        score=20;
+                        break;
+                    case 7:
+                        score=24;
+                        break;
+                    default:
+                        score=28;
+                        break;
+                }
+                return score;
+            }
+            case 3:
+            {
+
+
+
+
+                return score;
+            }
+        }
+        return score;
+    }
+
+    public static int countHawks(player user, int whatRule, int row, int column , boolean[][] marked, int minStreak, int maxStreak) //helper function that starts to tally the hawks based on the current rule
+    {
+        int lineTally=0;
+        int streak=1;
+        int tally=0;
+        marked[row][column] = true; // mark the current cell as visited
+        switch (whatRule)
+        {
+            case 1:     //if its rule A, check if the hawk is alone
+                boolean isAlone = true;
+                for (int i = row - 1; i <= row + 1; i++) {
+                    for (int j = column - 1; j <= column + 1; j++) {
+                        if (i >= 0 && i < user.getPlayerBoard().TileBoard.length && j >= 0 && j < user.getPlayerBoard().TileBoard[i].length) {
+                            if (i == row && j == column) {
+                                continue; // skip the current cell
+                            }
+                            if (user.getPlayerBoard().TileBoard[i][j] != null && user.getPlayerBoard().TileBoard[i][j].token != null && user.getPlayerBoard().TileBoard[i][j].token.getAnimalType() == tokenEnum.HAWK) {
+                                isAlone = false; // theres another hawk in the surrounding cells, its not alone
+                                break;
+                            }
+                            else {
+                                isAlone=true;
+                            }
+                        }
+                    }
+                    if (!isAlone) {
+                       tally=0;
+                       break;
+                    }
+                }
+                if (isAlone) { // if the hawk is alone, return 1
+                    tally = 1;
+                } else{tally = 0;}
+                break;
+            case 2: {
+
+                if(user.getPlayerBoard().TileBoard[row][column].token.animalType==tokenEnum.HAWK && countHawks(user,1,row,column,marked,0,0)==1) //this tile contains an alone hawk
+                {
+                    if(user.getPlayerBoard().TileBoard[row][column+2]!=null && user.getPlayerBoard().TileBoard[row][column+2].token!=null && user.getPlayerBoard().TileBoard[row][column+2].token.animalType==tokenEnum.HAWK && countHawks(user,1,row,column+2,marked,0,0)==1)
+                    {
+                        marked[row][column+2]=true;
+                        lineTally++;
+                        tally++;
+                    }
+                    if(user.getPlayerBoard().TileBoard[row][column-2]!=null && user.getPlayerBoard().TileBoard[row][column-2].token!=null && user.getPlayerBoard().TileBoard[row][column-2].token.animalType==tokenEnum.HAWK && countHawks(user,1,row,column-2,marked,0,0)==1)
+                    {
+                        marked[row][column-2]=true;
+                        lineTally++;
+                        tally++;
+                    }
+                    if(user.getPlayerBoard().TileBoard[row+2][column]!=null && user.getPlayerBoard().TileBoard[row+2][column].token!=null && user.getPlayerBoard().TileBoard[row+2][column].token.animalType==tokenEnum.HAWK && countHawks(user,1,row+2,column,marked,0,0)==1)
+                    {
+                        marked[row+2][column]=true;
+                        lineTally++;
+                        tally++;
+                    }
+                    if(user.getPlayerBoard().TileBoard[row-2][column]!=null && user.getPlayerBoard().TileBoard[row-2][column].token!=null && user.getPlayerBoard().TileBoard[row-2][column].token.animalType==tokenEnum.HAWK && countHawks(user,1,row-2,column,marked,0,0)==1)
+                    {
+                        marked[row-2][column]=true;
+                        lineTally++;
+                        tally++;
+                    }
+                }
+                return lineTally; //tally=the number of hawks that are in line of sight and eligible
+            }
+        }
+
+        return tally; //its not alone, return 0
+    }
+
+
+
+    public static int scoreSalmon(int whatCard, player user) //method that returns the total score of a players salmon
     {
         int score=0;
         //first, create a 2-d array of booleans
@@ -724,7 +905,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                         if (user.getPlayerBoard().TileBoard[i][j] != null) {
                             if (user.getPlayerBoard().TileBoard[i][j].token != null && user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.SALMON && !marked[i][j]) {
                                 //find the tally
-                                int tally = countSalmonRun(user, i, j, marked, 5, 0);
+                                int tally=countSalmonRun(user, i, j, marked, 5, 0);
                                 //score them
                                 switch (tally)
                                 {
