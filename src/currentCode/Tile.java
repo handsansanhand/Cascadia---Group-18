@@ -503,7 +503,7 @@ public class Tile { // class for the tiles that will be inserted onto the board
         }
         if (isKeystoneTile) {//check something that indicates that its a special tile ()
             if (token != null) { //filled keystone tile
-                tileString = "*" + getHabitatColor(getLandType()) + getLandType().toString() + RESET + "*" + GREEN_BOLD + " [" + token + "]" + RESET;
+                tileString = "*" + getHabitatColor(getLandType()) + getLandType().toString() + RESET + "*" + GREEN_BOLD + " [" + token.animalType + "]" + RESET;
             } else //empty keystone tile
             {
                 tileString = "*" + getHabitatColor(getLandType()) + getLandType().toString() + RESET + "*" + " [" + animals + "]";
@@ -512,7 +512,7 @@ public class Tile { // class for the tiles that will be inserted onto the board
         {
             if (token != null) //and filled with token
             {
-                tileString = getHabitatColor(getLandType()) + getLandType().toString() + RESET + "\033[32m" + "[" + token + "]" + "\033[0m" + getHabitatColor(getLandType2()) + getLandType2().toString() + RESET;
+                tileString = getHabitatColor(getLandType()) + getLandType().toString() + RESET + "\033[32m" + "[" + token.animalType + "]" + "\033[0m" + getHabitatColor(getLandType2()) + getLandType2().toString() + RESET;
             } else //empty non keystone tile
             {
                 tileString = getHabitatColor(getLandType()) + getLandType().toString() + RESET + " [" + animals + "] " + getHabitatColor(getLandType2()) + getLandType2().toString() + RESET;

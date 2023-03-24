@@ -132,6 +132,7 @@ public class gameState {
         printInstructions(i);
         gameBoard.checkForCull(getPlayers().get(i));
         while (stillTurn) {
+            System.out.println("Current Turn: " + getPlayers().get(i).getName());
             switch (in.next()) {
                 case "0": {
                     Tile t = gameBoard.removeHabitatTile(0);
@@ -224,6 +225,9 @@ public class gameState {
                 case "t": //temporary case that tests the scoring
                 {
                     Scoring.scoreHabitatCorridors(getPlayers().get(i));
+                    System.out.println("Salmon score for scoring card A: " + ScoringCard.scoreSalmon(1,getPlayers().get(i)));
+                    System.out.println("Salmon score for scoring card B: " + ScoringCard.scoreSalmon(2,getPlayers().get(i)));
+                    System.out.println("Salmon score for scoring card C: " + ScoringCard.scoreSalmon(3,getPlayers().get(i)));
                     break;
                 }
                 case "r": //temporary case that tests the scoring
@@ -342,8 +346,7 @@ public class gameState {
                                     System.out.println("Unable to place token.");
                                 }
                             } catch (IllegalArgumentException ex) {
-                                System.out.println(ex.getMessage());
-
+                                System.out.println("Cannot place a " + tokenToPlace + " on that tile.");
                             }
                         }
                         //token has been placed, return
