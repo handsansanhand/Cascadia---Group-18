@@ -316,7 +316,7 @@ public class gameState {
 
                     case "y": { // place the token
                         System.out.println(getPlayers().get(i).getPlayerBoard());
-                        System.out.println("Where would you like to place the token?"); //ask for the location (tile number)
+                        System.out.println("Where would you like to place the token? [X,Y]"); //ask for the location (tile number)
                         System.out.println("Token: " + tokenToPlace.colorToString());
 
                         String input;
@@ -380,7 +380,7 @@ public class gameState {
         {
             for(int j=0; j<tileBoard.BOARD_WIDTH-1;j++)
             {
-             if(user.getPlayerBoard().TileBoard[i][j]!=null && (user.getPlayerBoard().TileBoard[i][j].animal1 == tokenToPlace.animalType || user.getPlayerBoard().TileBoard[i][j].animal2 == tokenToPlace.animalType || user.getPlayerBoard().TileBoard[i][j].animal3 == tokenToPlace.animalType))
+             if(user.getPlayerBoard().TileBoard[i][j]!=null && (user.getPlayerBoard().TileBoard[i][j].animal1 == tokenToPlace.animalType || user.getPlayerBoard().TileBoard[i][j].animal2 == tokenToPlace.animalType || user.getPlayerBoard().TileBoard[i][j].animal3 == tokenToPlace.animalType) && user.getPlayerBoard().TileBoard[i][j].token==null)
                 {
                     return true;
                 }
@@ -390,10 +390,11 @@ public class gameState {
     }
 
 
-    public void placeTile(int i, Tile t) {
+    public static void placeTile(int i, Tile t) {
+        Scanner in = new Scanner(System.in);
         Tile refTile = null;
         System.out.println(getPlayers().get(i).getPlayerBoard());
-        System.out.println("Pick a reference tile on the board: ");
+        System.out.println("Pick a reference tile on the board: [X,Y]");
         System.out.println("Your tile that will be placed: [" + getPlayers().get(i).getHandTile() +"]");
         System.out.println("Or press 6 to rotate your tile: ");
         while (true) {

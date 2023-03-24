@@ -30,7 +30,6 @@ public class wildlifeToken {
     {
         ArrayList<wildlifeToken> WildlifeTokenBag = new ArrayList<>();
         int count=0;
-
         while(count<20)
         {
             WildlifeTokenBag.add(new wildlifeToken(tokenEnum.BEAR));

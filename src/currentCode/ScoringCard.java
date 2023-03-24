@@ -559,7 +559,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
             break;
             case 14:
                 //SALMON A (MAX RUN LENGTH=5)
-                ScoreNum+=scoreSalmon(2,user);
+                ScoreNum+=scoreSalmon(3,user);
             break;
         }
         return 0;
@@ -577,7 +577,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                 for (int i = 0; i < tileBoard.BOARD_HEIGHT - 1; i++) { //go through the array
                     for (int j = 0; j < tileBoard.BOARD_WIDTH - 1; j++) {
                         if (user.getPlayerBoard().TileBoard[i][j] != null) {
-                            if (user.getPlayerBoard().TileBoard[i][j].token!=null && user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.SALMON) {
+                            if (user.getPlayerBoard().TileBoard[i][j].token!=null && user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.SALMON && !marked[i][j]) {
                                 //a tally is found:
                                 int tally = countSalmonRun(user, i, j, marked, 7, 0);
                                 //score it
@@ -618,8 +618,10 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                 for (int i = 0; i < tileBoard.BOARD_HEIGHT - 1; i++) { //go through the array
                     for (int j = 0; j < tileBoard.BOARD_WIDTH - 1; j++) {
                         if (user.getPlayerBoard().TileBoard[i][j] != null) {
-                            if (user.getPlayerBoard().TileBoard[i][j].token != null && user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.SALMON) {
+                            if (user.getPlayerBoard().TileBoard[i][j].token != null && user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.SALMON && !marked[i][j]) {
+                                //find the tally
                                 int tally = countSalmonRun(user, i, j, marked, 5, 0);
+                                //score them
                                 switch (tally)
                                 {
                                     case 0:
@@ -651,8 +653,10 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                 for (int i = 0; i < tileBoard.BOARD_HEIGHT - 1; i++) { //go through the array
                     for (int j = 0; j < tileBoard.BOARD_WIDTH - 1; j++) {
                         if (user.getPlayerBoard().TileBoard[i][j] != null) {
-                            if (user.getPlayerBoard().TileBoard[i][j].token != null && user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.SALMON) {
+                            if (user.getPlayerBoard().TileBoard[i][j].token != null && user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.SALMON && !marked[i][j]) {
+                                //find the tally
                                 int tally = countSalmonRun(user, i, j, marked, 5, 3);
+                                //score them
                                 switch (tally)
                                 {
                                     case 3:
@@ -661,7 +665,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                                     case 4:
                                         score+=12;
                                         break;
-                                    default: //5 and above
+                                    case 5: //5 and above
                                         score+=15;
                                         break;
                                 }
