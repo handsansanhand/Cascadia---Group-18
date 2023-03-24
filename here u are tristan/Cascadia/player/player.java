@@ -23,12 +23,21 @@ public class player extends Habitat{
 public static ArrayList<Text> wildlifetokenplaced = new ArrayList<Text>();
 	public static boolean placed = true;
 static ArrayList<String> names = new ArrayList<String>();
+public static HashMap<Integer ,ArrayList<Double>> alreadycounted = new HashMap<Integer, ArrayList<Double>>();
 static public  int playercount;
 public static HashMap<Integer,Integer> NatureTokens = new HashMap<Integer,Integer>();
 static public int CurrentPlayer = 0;
 public static ArrayList<String> Score = new ArrayList(); 
 public static HashMap<Integer,Integer> HawkCount = new HashMap<Integer,Integer>();
 public static boolean iskeystone = false;
+public static HashMap<Integer,Integer> numtimesbeara = new HashMap<Integer,Integer>();
+public static HashMap<Integer,Integer> numtimeshawka = new HashMap<Integer,Integer>();
+public static HashMap<Integer,Integer> numtimeshawkb = new HashMap<Integer,Integer>();
+public static HashMap<Integer,Integer> numtimeselka = new HashMap<Integer,Integer>();
+public static HashMap<Integer,Integer> numtimeselkb = new HashMap<Integer,Integer>();
+
+
+
 public static boolean hasNatureTokens(int x) {
 	if(NatureTokens.get(x) > 0) {
 		NatureTokens.put(x, NatureTokens.get(x)-1);
@@ -88,94 +97,12 @@ public static String Wildlifecounter(ArrayList<Text> gg) {
 	}
 	return "ELK: "+ELK+" BEAR: "+BEAR+" FOX: "+FOX+" SALMON: "+SALMON+" HAWK: "+HAWK;
 }
-public static int scoring(Rectangle[][] rectangles, ArrayList<Text> gg, int currentplayer) {
-    int score = 0;
-    for (int i = 0; i < gg.size(); i++) {
-        Text text = gg.get(i);
-        if (text.getText().contains("HAWK")) {
-            boolean isNextToHawk = false;
-            double x = text.getX();
-            double y = text.getY();
-            // Check if there's another hawk text in the neighboring positions
-            for (int j = 0; j < gg.size(); j++) {
-                if (i != j) { // Skip the current text
-                    Text neighborText = gg.get(j);
-                    double neighborX = neighborText.getX();
-                    double neighborY = neighborText.getY();
-                    // Check if the neighbor text is within a range of 60 pixels from the current text
-                    if (Math.abs(x - neighborX) <= 60 && Math.abs(y - neighborY) <= 60
-                            && neighborText.getText().contains("HAWK")) {
-                        isNextToHawk = true;
-                        break;
-                    }
-                }
-            }
-            // If the text is not next to another hawk, increment the score
-            if (!isNextToHawk) {
-                score += getHawkScore(currentplayer);
-            }
-        }
-    }
-    return score;
-}
 
 
 
 
 
-private static int getHawkScore(int currentplayer) {
-	if(HawkCount.get(currentplayer) == 1) {
-		int temp = HawkCount.get(currentplayer) + 1;
-		HawkCount.put(currentplayer,temp);
-		return 2;
-	}
-	if(HawkCount.get(currentplayer) == 2) {
-		int temp = HawkCount.get(currentplayer) + 1;
-		HawkCount.put(currentplayer,temp);
-		return 5;
-	}
-	if(HawkCount.get(currentplayer) == 3) {
-		int temp = HawkCount.get(currentplayer) + 1;
-		HawkCount.put(currentplayer,temp);
-		return 8;
-	}
-	
-	return 0;
-	
-}
-private static int getElkRunScore(int numElks) {
-    if (numElks == 1) {
-        return 2;
-    } else if (numElks == 2) {
-        return 5;
-    } else if (numElks == 3) {
-        return 9;
-    } else if (numElks == 4) {
-        return 13;
-    } else {
-        return 0;
-    }
-}
 
-private static int getSalmonRunScore(int numSalmon) {
-    if (numSalmon == 1) {
-        return 2;
-    } else if (numSalmon == 2) {
-        return 4;
-    } else if (numSalmon == 3) {
-        return 7;
-    } else if (numSalmon == 4) {
-        return 11;
-    } else if (numSalmon == 5) {
-        return 15;
-    } else if (numSalmon == 6) {
-        return 20;
-    } else if (numSalmon == 7) {
-        return 26;
-    } else {
-        return 0;
-    }
-}
 
 
 
@@ -619,10 +546,445 @@ public static boolean canPlacetokenHere(int row,int col,Rectangle[][] rectangles
 
 
 
+public static int BearScoringA( ArrayList<Text> gg, int currentPlayer2) {
+	ArrayList<Double> templist = new ArrayList<>(alreadycounted.get(currentPlayer2));
 
+	int score = 0;
+	
+	for(Text text:gg ) {
+    	String compare = text.getText();
+    	double X = text.getX();
+    	double Y = text.getY();
+    	if(compare.contains("BEAR")) {
+    		if(!templist.contains(X)&&!templist.contains(Y)) {
+    			for(Text text1:gg) {
+    				if(text1.getText().contains("BEAR")) {
+    			 double rightcaseX = text1.getX() - X;
+    			 double rightcaseY = text1.getX() - Y;
+    			 double leftcaseX = text1.getX() + X;
+    			 double leftcaseY = text1.getX() + Y;
+    			 if(rightcaseX==60 && rightcaseY!=60&&leftcaseX!=60&&leftcaseY!=60||rightcaseX!=60 && rightcaseY==60&&leftcaseX!=60&&leftcaseY!=60||rightcaseX!=60 && rightcaseY!=60&&leftcaseX!=60&&leftcaseY==60) {
+    				templist.add(X);
+    	    		templist.add(Y);
+    	    		alreadycounted.put(currentPlayer2, templist);
+    	    		score = score + getbearAScore(numtimesbeara.get(currentPlayer2));
+ 
+    	    		int temp = numtimesbeara.get(currentPlayer2) + 1;
+    	    		numtimesbeara.put(currentPlayer2, temp);
+    	    		
+    	    		
+    			 }
+    			}
+    			}
+    			}
+    		}	
+}
 
+return score;
 
+}
+private static int getbearAScore(int numtime) {
+    if (numtime == 1) {
+        return 2;
+    } else if (numtime == 2) {
+        return 5;
+    } else if (numtime == 3) {
+        return 9;
+    } else if (numtime == 4) {
+        return 13;
+    } else {
+        return 0;
+    }
+}
+public static int BearScoringB(ArrayList<Text> gg, int currentPlayer2) {
+	ArrayList<Double> templist = new ArrayList<>(alreadycounted.get(currentPlayer2));
+
+	int score = 0;
+	
+	for(Text text:gg ) {
+    	String compare = text.getText();
+    	double X = text.getX();
+    	double Y = text.getY();
+    	if(compare.contains("BEAR")) {
+    		System.out.println("checkeboxer");
+    		if(!templist.contains(X)&&!templist.contains(Y)) {
+    			for(Text text1:gg) {
+    				if(text1.getText().contains("BEAR")) {
+    			 double rightcaseX = text1.getX() - X;
+    			 double rightcaseY = text1.getX() - Y;
+    			 double leftcaseX = text1.getX() + X;
+    			 double leftcaseY = text1.getX() + Y;
+    			 if(rightcaseX==60&&rightcaseY==60&&leftcaseX!=60&&leftcaseY!=60 || rightcaseX==60 && rightcaseY!=60&&leftcaseX==60&&leftcaseY!=60 || rightcaseX==60 && rightcaseY!=60&&leftcaseX!=60&&leftcaseY==60) {
+    				templist.add(X);
+    	    		templist.add(Y);
+    	    		alreadycounted.put(currentPlayer2, templist);
+    	    		score = score + 10;
+ 
+    	    		
+    	    		
+    	    		
+    			 }
+    			 else  if(rightcaseX!=60 && rightcaseY==60&&leftcaseX==60&&leftcaseY!=60||rightcaseX!=60 && rightcaseY==60&&leftcaseX!=60&&leftcaseY==60) {
+     				templist.add(X);
+     	    		templist.add(Y);
+     	    		alreadycounted.put(currentPlayer2, templist);
+     	    		score = score + 10;
+     	    		
+     	    		
+     			 }
+    			 else  if(rightcaseX!=60 && rightcaseY!=60&&leftcaseX==60&&leftcaseY==60) {
+      				templist.add(X);
+      	    		templist.add(Y);
+      	    		alreadycounted.put(currentPlayer2, templist);
+      	    		score = score + 10;
+      	    		
+      	    		
+      			 }
+    			}
+    			}
+    			}
+    		}	
+}
+
+return score;
+
+}
+public static int BearScoringC(ArrayList<Text> gg, int currentPlayer2) {
+	ArrayList<Double> templist = new ArrayList<>(alreadycounted.get(currentPlayer2));
+
+	int score = 0;
+	
+	for(Text text:gg ) {
+    	String compare = text.getText();
+    	double X = text.getX();
+    	double Y = text.getY();
+    	if(compare.contains("BEAR")) {
+    		if(!templist.contains(X)&&!templist.contains(Y)) {
+    			for(Text text1:gg) {
+    				if(text1.getText().contains("BEAR")) {
+    			 double rightcaseX = text1.getX() - X;
+    			 double rightcaseY = text1.getX() - Y;
+    			 double leftcaseX = text1.getX() + X;
+    			 double leftcaseY = text1.getX() + Y;
+    			 if(rightcaseX!=60 && rightcaseY!=60&&leftcaseX!=60&&leftcaseY!=60) {
+    				templist.add(X);
+    	    		templist.add(Y);
+    	    		alreadycounted.put(currentPlayer2, templist);
+    	    		score = 2;
+ 	
+    			 }
+    			 if(rightcaseX==60 && rightcaseY!=60&&leftcaseX!=60&&leftcaseY!=60||rightcaseX!=60 && rightcaseY==60&&leftcaseX!=60&&leftcaseY!=60||rightcaseX!=60 && rightcaseY!=60&&leftcaseX!=60&&leftcaseY==60) {
+    					templist.add(X);
+        	    		templist.add(Y);
+        	    		alreadycounted.put(currentPlayer2, templist);
+        	    		score = 5;
+        	    		}
+    			 
+    			 
+    			 if(rightcaseX!=60 && rightcaseY!=60&&leftcaseX==60&&leftcaseY==60||rightcaseX!=60 && rightcaseY==60&&leftcaseX==60&&leftcaseY!=60||rightcaseX!=60 && rightcaseY==60&&leftcaseX!=60&&leftcaseY==60||rightcaseX==60&&rightcaseY==60&&leftcaseX!=60&&leftcaseY!=60 || rightcaseX==60 && rightcaseY!=60&&leftcaseX==60&&leftcaseY!=60 || rightcaseX==60 && rightcaseY!=60&&leftcaseX!=60&&leftcaseY==60) {
+     				templist.add(X);
+     	    		templist.add(Y);
+     	    		alreadycounted.put(currentPlayer2, templist);
+     	    		score = 8;
+    			}
+    			}
+    			}
+    		}	
+}
 
 
 }
+	return score;
 
+}
+public static int HawkScoringA( ArrayList<Text> gg, int currentPlayer2) {
+	ArrayList<Double> templist = new ArrayList<>(alreadycounted.get(currentPlayer2));
+
+	int score = 0;
+	
+	for(Text text:gg ) {
+    	String compare = text.getText();
+    	double X = text.getX();
+    	double Y = text.getY();
+    	
+    	if(compare.contains("HAWK")) {
+    		
+
+    		if(!templist.contains(X)&&!templist.contains(Y)) {
+    			for(Text text1:gg) {
+    				if(text1.getText().contains("HAWK")) {
+    			 double rightcaseX = text1.getX() - X;
+    			 double rightcaseY = text1.getX() - Y;
+    			 double leftcaseX = text1.getX() + X;
+    			 double leftcaseY = text1.getX() + Y;
+					
+
+
+    			 if(rightcaseX!=60 && rightcaseY!=60&&leftcaseX!=60&&leftcaseY!=60&&!templist.contains(text1.getX())||!templist.contains(text1.getY())) {
+    				 System.out.println("hawk on board not next to another");
+    				 System.out.println(numtimeshawka.get(currentPlayer2));
+    				templist.add(X);
+    	    		templist.add(Y);
+    	    		alreadycounted.put(currentPlayer2, templist);
+    	    		score = gethawkAScore(numtimeshawka.get(currentPlayer2));
+    	    		int temp = numtimeshawka.get(currentPlayer2) + 1;
+    	    		numtimeshawka.put(currentPlayer2, temp);
+    			 }
+    			 else if(rightcaseX==60&&templist.contains(text1.getY())&&templist.contains(text1.getX())||rightcaseY==60&&templist.contains(text1.getY())&&templist.contains(text1.getX())||leftcaseX==60&&templist.contains(text1.getY())&&templist.contains(text1.getX())||leftcaseY==60&&templist.contains(text1.getY())&&templist.contains(text1.getX())) {
+    				 
+    				 int temp = numtimeshawka.get(currentPlayer2) - 1;
+     	    		 numtimeshawka.put(currentPlayer2, temp);
+     	    		score = gethawkAScore(numtimeshawka.get(currentPlayer2));
+    			 }
+    			}
+    	
+    			}
+    			}
+    		}	
+}
+
+return score;
+
+}
+private static int gethawkAScore(int numtime) {
+    if (numtime == 1) {
+        return 2;
+    } else if (numtime == 2) {
+        return 5;
+    } else if (numtime == 3) {
+        return 8;
+    } else if (numtime == 4) {
+        return 11;
+    } else {
+        return 14;
+    }
+}
+public static int HawkScoringB(ArrayList<Text> gg, int currentPlayer2) {
+	ArrayList<Double> templist = new ArrayList<>(alreadycounted.get(currentPlayer2));
+    int score = 0;
+
+    for (Text text : gg) {
+        String compare = text.getText();
+        double X = text.getX();
+        double Y = text.getY();
+
+        if (compare.contains("HAWK")) {
+            if (!templist.contains(X) && !templist.contains(Y)) {
+                for (Text text1 : gg) {
+                    if (text1.getText().contains("HAWK")) {
+                        double distance = Math.sqrt(Math.pow(text1.getX() - X, 2) + Math.pow(text1.getY() - Y, 2));
+                        if (distance == 0) {
+                            templist.add(X);
+                            templist.add(Y);
+                            alreadycounted.put(currentPlayer2, templist);
+                            score = gethawkBScore(numtimeshawkb.get(currentPlayer2));
+                            numtimeshawkb.put(currentPlayer2, numtimeshawkb.get(currentPlayer2) + 1);
+                            break;  
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return score;
+}
+
+
+
+
+private static int gethawkBScore(int numtime) {
+    if (numtime == 1) {
+        return 2;
+    } else if (numtime == 2) {
+        return 5;
+    } else if (numtime == 3) {
+        return 4;
+    } else if (numtime == 4) {
+        return 3;
+    } else {
+        return 4;
+    }
+}
+public static int HawkScoringC( ArrayList<Text> gg, int currentPlayer2) {
+	ArrayList<Double> templist = new ArrayList<>(alreadycounted.get(currentPlayer2));
+	int score = 0;
+	for(Text text:gg ) {
+    	String compare = text.getText();
+    	double X = text.getX();
+    	double Y = text.getY();
+    	if(compare.contains("HAWK")) {
+    		if(!templist.contains(X)&&!templist.contains(Y)) {
+    			for(Text text1:gg) {
+    				if(text1.getText().contains("HAWK")) {
+    			 double rightcaseX = text1.getX() - X;
+    			 double rightcaseY = text1.getX() - Y;
+    			 double leftcaseX = text1.getX() + X;
+    			 double leftcaseY = text1.getX() + Y;
+    			 if(rightcaseX==180||rightcaseY==180||leftcaseX==180||leftcaseY==180) {
+    				templist.add(X);
+    	    		templist.add(Y);
+    	    		alreadycounted.put(currentPlayer2, templist);
+    	    		score = 3;
+    			 }}}}}}
+
+return score;
+}
+public static int ElkScoring(ArrayList<Text> gg, int currentPlayer2) {
+    ArrayList<Double> templist = new ArrayList<>(alreadycounted.get(currentPlayer2));
+    int score = 0;
+    for (Text text : gg) {
+        String compare = text.getText();
+        double X = text.getX();
+        double Y = text.getY();
+        if (compare.contains("ELK")) {
+            if (!templist.contains(X) && !templist.contains(Y)) {
+                boolean foundStraightLine = false;
+                int countAdjacentElk = 1;
+                double prevX = X;
+                double prevY = Y;
+                for (Text text1 : gg) {
+                    if (text1.getText().contains("ELK")) {
+                        double nextX = text1.getX();
+                        double nextY = text1.getY();
+                        if ((prevX + 60 == nextX && prevY == nextY) || (prevX - 60 == nextX && prevY == nextY) || (prevX == nextX && prevY + 60 == nextY) || (prevX == nextX && prevY - 60 == nextY)) {
+                            foundStraightLine = true;
+                            countAdjacentElk++;
+                            prevX = nextX;
+                            prevY = nextY;
+                        }
+                    }
+                }
+                if (foundStraightLine) {
+                    templist.add(X);
+                    templist.add(Y);
+                    alreadycounted.put(currentPlayer2, templist);
+                    score += getElkScore(countAdjacentElk);
+                    int temp = numtimeselka.get(currentPlayer2) + 1;
+                    numtimeselka.put(currentPlayer2, temp);
+                }
+            }
+        }
+    }
+    return score;
+}
+
+private static int getElkScore(int countAdjacentElk) {
+    if (countAdjacentElk == 1) {
+        return 2;
+    } else if (countAdjacentElk == 2) {
+        return 5;
+    } else if (countAdjacentElk == 3) {
+        return 9;
+    } else if (countAdjacentElk == 4) {
+        return 13;
+    } else {
+        return 0;
+    }
+}
+public static int ElkScoring1(ArrayList<Text> gg, int currentPlayer2) {
+    ArrayList<Double> templist = new ArrayList<>(alreadycounted.get(currentPlayer2));
+    int score = 0;
+    for (Text text : gg) {
+        String compare = text.getText();
+        double X = text.getX();
+        double Y = text.getY();
+        if (compare.contains("ELK")) {
+            if (!templist.contains(X) && !templist.contains(Y)) {
+                boolean foundStraightLine = false;
+                int countAdjacentElk = 1;
+                double prevX = X;
+                double prevY = Y;
+                for (Text text1 : gg) {
+                    if (text1.getText().contains("ELK")) {
+                        double nextX = text1.getX();
+                        double nextY = text1.getY();
+                        if ((prevX + 60 == nextX && prevY == nextY) || (prevX - 60 == nextX && prevY == nextY) || (prevX == nextX && prevY + 60 == nextY) || (prevX == nextX && prevY - 60 == nextY)) {
+                            foundStraightLine = true;
+                            countAdjacentElk++;
+                            prevX = nextX;
+                            prevY = nextY;
+                        }
+                    }
+                }
+                if (foundStraightLine) {
+                    templist.add(X);
+                    templist.add(Y);
+                    alreadycounted.put(currentPlayer2, templist);
+                    score += getElkScore(countAdjacentElk);
+                    int temp = numtimeselka.get(currentPlayer2) + 1;
+                    numtimeselka.put(currentPlayer2, temp);
+                }
+            }
+        }
+    }
+    return score;
+}
+
+private static int getElkScore1(int countAdjacentElk) {
+    if (countAdjacentElk == 1) {
+        return 2;
+    } else if (countAdjacentElk == 2) {
+        return 5;
+    } else if (countAdjacentElk == 3) {
+        return 9;
+    } else if (countAdjacentElk == 4) {
+        return 13;
+    } else {
+        return 0;
+    }
+}
+
+private static int getElkScoreB(int countAdjacentElk) {
+    if (countAdjacentElk == 1) {
+        return 2;
+    } else if (countAdjacentElk == 2) {
+        return 5;
+    } else if (countAdjacentElk == 3) {
+        return 9;
+    } else if (countAdjacentElk == 4) {
+        return 13;
+    } else {
+        return 0;
+    }
+}
+
+public static int ElkScoringB(ArrayList<Text> gg, int currentPlayer2) {
+    ArrayList<Double> templist = new ArrayList<>(alreadycounted.get(currentPlayer2));
+    int score = 0;
+    for (Text text : gg) {
+        String compare = text.getText();
+        double X = text.getX();
+        double Y = text.getY();
+        if (compare.contains("ELK")) {
+            if (!templist.contains(X) && !templist.contains(Y)) {
+                boolean foundStraightLine = false;
+                int countAdjacentElk = 1;
+                double prevX = X;
+                double prevY = Y;
+                for (Text text1 : gg) {
+                    if (text1.getText().contains("ELK")) {
+                        double nextX = text1.getX();
+                        double nextY = text1.getY();
+                        if ((prevX + 60 == nextX && prevY == nextY) || (prevX - 60 == nextX && prevY == nextY) || (prevX == nextX && prevY + 60 == nextY) || (prevX == nextX && prevY - 60 == nextY) || (prevX + 60 == nextX && prevY + 60 == nextY) || (prevX + 60 == nextX && prevY - 60 == nextY) || (prevX - 60 == nextX && prevY + 60 == nextY) || (prevX - 60 == nextX && prevY - 60 == nextY)) {
+                            foundStraightLine = true;
+                            countAdjacentElk++;
+                            prevX = nextX;
+                            prevY = nextY;
+                        }
+                    }
+                }
+                if (foundStraightLine) {
+                    templist.add(X);
+                    templist.add(Y);
+                    alreadycounted.put(currentPlayer2, templist);
+                    score += getElkScoreB(countAdjacentElk);
+                    int temp = numtimeselkb.get(currentPlayer2) + 1;
+                    numtimeselkb.put(currentPlayer2, temp);
+                }
+            }
+        }
+    }
+return score;
+}
+}

@@ -28,11 +28,12 @@ import player.player;
 public class GameMain extends player {
 	private static Scene scene;
 	public static int i = 0;
-
+	public static int turn = 0;
 	public static int wildlifeX;
 	public static int wildlifeY;
 	public static List<Tile> tileList = new ArrayList<>();
 	public static List<Text> labelList = new ArrayList<>();
+	public static int curscore = 0;
 
 	/// ---------------------------------------------------------------
 	/// ---------------------------------------------------------------
@@ -53,8 +54,33 @@ public class GameMain extends player {
 	/// ---------------------------------------------------------------
 	static {
 		try {
+			player.numtimesbeara.put(0, 1);
+			player.numtimesbeara.put(1, 1);
+			player.numtimesbeara.put(2, 1);
+			player.numtimesbeara.put(3, 1);
+			
+			player.numtimeshawka.put(0, 1);
+			player.numtimeshawka.put(1, 1);
+			player.numtimeshawka.put(2, 1);
+			player.numtimeshawka.put(3, 1);
+			
+			player.numtimeshawkb.put(0, 1);
+			player.numtimeshawkb.put(1, 1);
+			player.numtimeshawkb.put(2, 1);
+			player.numtimeshawkb.put(3, 1);
+
+
 			Thread thread = new Thread();
 			ArrayList<Text> wildlifetokenplaced = new ArrayList<Text>();
+			ArrayList<Double> temp12 = new ArrayList<Double>();
+			ArrayList<Double> temp13 = new ArrayList<Double>();
+			ArrayList<Double> temp14 = new ArrayList<Double>();
+			ArrayList<Double> temp15 = new ArrayList<Double>();
+
+			alreadycounted.put(0, temp12);
+			alreadycounted.put(1, temp13);
+			alreadycounted.put(2, temp14);
+			alreadycounted.put(3, temp15);
 
 			FXMLLoader loader = new FXMLLoader(Scene2.class.getResource("Board.fxml"));
 			Pane root = new Pane();
@@ -78,7 +104,6 @@ public class GameMain extends player {
 			error.setVisible(false);
 // for score 
 			Label score = (Label) root.lookup("#Score");
-			score.setText("Score: " + player.scoring(rectangles, wildlifetokenplaced, 0));
 
 			// score enf
 			// these are the labels for rec 1-4
@@ -101,7 +126,6 @@ public class GameMain extends player {
 			for (int i = 0; i < 10; i++) {
 				tileList.add(Tile.randomTile());
 			}
-		
 
 // random tiles for rec 1-4
 			Tile tile1 = Tile.randomTile();
@@ -176,6 +200,8 @@ public class GameMain extends player {
 			// rec1 clicked
 
 			rec1.setOnMouseClicked(event -> {
+				
+
 				rectangles[4][4].setOnMouseClicked(e -> {
 					if (player.isValidClick(4, 4, rectangles) == true) {
 						naturetoken.setVisible(false);
@@ -582,6 +608,8 @@ public class GameMain extends player {
 // rec 2 clicked 
 
 			rec2.setOnMouseClicked(event -> {
+			
+
 				rectangles[4][4].setOnMouseClicked(e -> {
 					if (player.isValidClick(4, 4, rectangles) == true) {
 						naturetoken.setVisible(false);
@@ -982,6 +1010,8 @@ public class GameMain extends player {
 //rec 3 clicked 
 
 			rec3.setOnMouseClicked(event -> {
+			
+
 				rectangles[4][4].setOnMouseClicked(e -> {
 					if (player.isValidClick(4, 4, rectangles) == true) {
 						naturetoken.setVisible(false);
@@ -1382,6 +1412,7 @@ public class GameMain extends player {
 // rec 4 clicked 
 
 			rec4.setOnMouseClicked(event -> {
+			
 				rectangles[4][4].setOnMouseClicked(e -> {
 					if (player.isValidClick(4, 4, rectangles) == true) {
 						naturetoken.setVisible(false);
@@ -1800,7 +1831,7 @@ public class GameMain extends player {
 			Text gg15 = new Text();
 			Text gg16 = new Text();
 			Text gg17 = new Text();
-
+// wildlifetoken1 action listener is here 
 			wildlifetoken1.setOnMouseClicked(e -> {
 				System.out.println("tester");
 
@@ -3662,9 +3693,7 @@ public class GameMain extends player {
 			invert.setText("Invert");
 
 			invert.setOnAction(event -> {
-				System.out.println(label2.getText());
-				System.out.println(label1.getText());
-				System.out.println(label3.getText());
+				
 
 				if (i % 2 == 0) {
 					gg1.setStyle("-fx-background-color: black;");
@@ -3750,81 +3779,10 @@ public class GameMain extends player {
 			wildlifetokenplaced.add(kk14);
 			wildlifetokenplaced.add(kk15);
 			wildlifetokenplaced.add(kk16);
-			gg.setFill(Color.BLACK);
-			gg01.setFill(Color.BLACK);
-			gg2.setFill(Color.BLACK);
-			gg3.setFill(Color.BLACK);
-			gg4.setFill(Color.BLACK);
-			gg5.setFill(Color.BLACK);
-			gg6.setFill(Color.BLACK);
-			gg7.setFill(Color.BLACK);
-			gg8.setFill(Color.BLACK);
-			gg9.setFill(Color.BLACK);
-			gg10.setFill(Color.BLACK);
-			gg11.setFill(Color.BLACK);
-			gg12.setFill(Color.BLACK);
-			gg13.setFill(Color.BLACK);
-			gg14.setFill(Color.BLACK);
-			gg15.setFill(Color.BLACK);
-			gg16.setFill(Color.BLACK);
-			gg17.setFill(Color.BLACK);
-			ss.setFill(Color.BLACK);
-			ss01.setFill(Color.BLACK);
-			ss2.setFill(Color.BLACK);
-			ss3.setFill(Color.BLACK);
-			ss4.setFill(Color.BLACK);
-			ss5.setFill(Color.BLACK);
-			ss6.setFill(Color.BLACK);
-			ss7.setFill(Color.BLACK);
-			ss8.setFill(Color.BLACK);
-			ss9.setFill(Color.BLACK);
-			ss10.setFill(Color.BLACK);
-			ss11.setFill(Color.BLACK);
-			ss12.setFill(Color.BLACK);
-			ss13.setFill(Color.BLACK);
-			ss14.setFill(Color.BLACK);
-			ss15.setFill(Color.BLACK);
-			ss16.setFill(Color.BLACK);
-			ff.setFill(Color.BLACK);
-			ff01.setFill(Color.BLACK);
-			ff2.setFill(Color.BLACK);
-			ff3.setFill(Color.BLACK);
-			ff4.setFill(Color.BLACK);
-			ff5.setFill(Color.BLACK);
-			ff6.setFill(Color.BLACK);
-			ff7.setFill(Color.BLACK);
-			ff8.setFill(Color.BLACK);
-			ff9.setFill(Color.BLACK);
-			ff10.setFill(Color.BLACK);
-			ff11.setFill(Color.BLACK);
-			ff12.setFill(Color.BLACK);
-			ff13.setFill(Color.BLACK);
-			ff14.setFill(Color.BLACK);
-			ff15.setFill(Color.BLACK);
-			ff16.setFill(Color.BLACK);
-			kk.setFill(Color.BLACK);
-			kk01.setFill(Color.BLACK);
-			kk2.setFill(Color.BLACK);
-			kk3.setFill(Color.BLACK);
-			kk4.setFill(Color.BLACK);
-			kk5.setFill(Color.BLACK);
-			kk6.setFill(Color.BLACK);
-			kk7.setFill(Color.BLACK);
-			kk8.setFill(Color.BLACK);
-			kk9.setFill(Color.BLACK);
-			kk10.setFill(Color.BLACK);
-			kk11.setFill(Color.BLACK);
-			kk12.setFill(Color.BLACK);
-			kk13.setFill(Color.BLACK);
-			kk14.setFill(Color.BLACK);
-			kk15.setFill(Color.BLACK);
-			kk16.setFill(Color.BLACK);
 
 			button.setOnAction(event -> {
 
 // add tiles to arraylist 
-				System.out.println("score: ");
-				System.out.println(player.scoring(rectangles, wildlifetokenplaced, 0));
 
 				Collections.shuffle(tileList);
 
@@ -3853,16 +3811,85 @@ public class GameMain extends player {
 				wildlifetoken4.setText(player.StartingWildlifeToken(tileList.get(7)));
 				rec4.setFill(player.getHabcolor(tileList.get(7)));
 
-
-				System.out.println("X: "+text.getX() + " Y: "+text.getY());
-				System.out.println("X: "+text1.getX()+"Y: " +text1.getY() );
 				
 
 				naturetoken.setText("Use Nature Token");
 				naturetoken.setVisible(true);
 
-			});
+				// ake buttons more clear by aking them all black
+				gg.setFill(Color.BLACK);
+				gg01.setFill(Color.BLACK);
+				gg2.setFill(Color.BLACK);
+				gg3.setFill(Color.BLACK);
+				gg4.setFill(Color.BLACK);
+				gg5.setFill(Color.BLACK);
+				gg6.setFill(Color.BLACK);
+				gg7.setFill(Color.BLACK);
+				gg8.setFill(Color.BLACK);
+				gg9.setFill(Color.BLACK);
+				gg10.setFill(Color.BLACK);
+				gg11.setFill(Color.BLACK);
+				gg12.setFill(Color.BLACK);
+				gg13.setFill(Color.BLACK);
+				gg14.setFill(Color.BLACK);
+				gg15.setFill(Color.BLACK);
+				gg16.setFill(Color.BLACK);
+				gg17.setFill(Color.BLACK);
+				ss.setFill(Color.BLACK);
+				ss01.setFill(Color.BLACK);
+				ss2.setFill(Color.BLACK);
+				ss3.setFill(Color.BLACK);
+				ss4.setFill(Color.BLACK);
+				ss5.setFill(Color.BLACK);
+				ss6.setFill(Color.BLACK);
+				ss7.setFill(Color.BLACK);
+				ss8.setFill(Color.BLACK);
+				ss9.setFill(Color.BLACK);
+				ss10.setFill(Color.BLACK);
+				ss11.setFill(Color.BLACK);
+				ss12.setFill(Color.BLACK);
+				ss13.setFill(Color.BLACK);
+				ss14.setFill(Color.BLACK);
+				ss15.setFill(Color.BLACK);
+				ss16.setFill(Color.BLACK);
+				ff.setFill(Color.BLACK);
+				ff01.setFill(Color.BLACK);
+				ff2.setFill(Color.BLACK);
+				ff3.setFill(Color.BLACK);
+				ff4.setFill(Color.BLACK);
+				ff5.setFill(Color.BLACK);
+				ff6.setFill(Color.BLACK);
+				ff7.setFill(Color.BLACK);
+				ff8.setFill(Color.BLACK);
+				ff9.setFill(Color.BLACK);
+				ff10.setFill(Color.BLACK);
+				ff11.setFill(Color.BLACK);
+				ff12.setFill(Color.BLACK);
+				ff13.setFill(Color.BLACK);
+				ff14.setFill(Color.BLACK);
+				ff15.setFill(Color.BLACK);
+				ff16.setFill(Color.BLACK);
+				kk.setFill(Color.BLACK);
+				kk01.setFill(Color.BLACK);
+				kk2.setFill(Color.BLACK);
+				kk3.setFill(Color.BLACK);
+				kk4.setFill(Color.BLACK);
+				kk5.setFill(Color.BLACK);
+				kk6.setFill(Color.BLACK);
+				kk7.setFill(Color.BLACK);
+				kk8.setFill(Color.BLACK);
+				kk9.setFill(Color.BLACK);
+				kk10.setFill(Color.BLACK);
+				kk11.setFill(Color.BLACK);
+				kk12.setFill(Color.BLACK);
+				kk13.setFill(Color.BLACK);
+				kk14.setFill(Color.BLACK);
+				kk15.setFill(Color.BLACK);
+				kk16.setFill(Color.BLACK);
+				curscore = curscore +player.HawkScoringB(wildlifetokenplaced, player.CurrentPlayer)+player.BearScoringA(wildlifetokenplaced, player.CurrentPlayer);
+				score.setText("Score: " + curscore);
 
+			});
 			scene = new Scene(root);
 
 		} catch (IOException e) {

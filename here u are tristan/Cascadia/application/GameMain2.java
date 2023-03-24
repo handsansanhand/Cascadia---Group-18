@@ -3825,13 +3825,7 @@ public class GameMain2 extends player {
 			kk15.setFill(Color.BLACK);
 			kk16.setFill(Color.BLACK);
 
-			
 			button.setOnAction(event -> {
-
-// add tiles to arraylist 
-				System.out.println("score: ");
-				System.out.println(player.scoring(rectangles, wildlifetokenplaced, 0));
-
 
 				Collections.shuffle(tileList);
 if(player.getplayercount() == 3) {
