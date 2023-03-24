@@ -230,6 +230,7 @@ public class gameState {
                     System.out.println("Salmon score for scoring card C: " + ScoringCard.scoreSalmon(3,getPlayers().get(i)));
                     System.out.println("Hawk score for scoring card A: " + ScoringCard.scoreHawk(1,getPlayers().get(i)));
                     System.out.println("Hawk score for scoring card B: " + ScoringCard.scoreHawk(2,getPlayers().get(i)));
+                    System.out.println("Hawk score for scoring card C: " + ScoringCard.scoreHawk(3,getPlayers().get(i)));
                     break;
                 }
                 case "r": //temporary case that tests the scoring

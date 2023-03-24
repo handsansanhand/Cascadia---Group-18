@@ -724,7 +724,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
 
                 return score;
             }
-            case 2: {
+            case 2: {   //SCORE CARD B
                 int tally=0;
                 for (int i = 0; i < tileBoard.BOARD_HEIGHT - 1; i++) { //go through the array
                     for (int j = 0; j < tileBoard.BOARD_WIDTH - 1; j++) {
@@ -765,12 +765,19 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                 }
                 return score;
             }
-            case 3:
+            case 3:     //SCORE CARD C
             {
-
-
-
-
+                int tally=0;
+                for (int i = 0; i < tileBoard.BOARD_HEIGHT - 1; i++) { //go through the array
+                    for (int j = 0; j < tileBoard.BOARD_WIDTH - 1; j++) {
+                        if (user.getPlayerBoard().TileBoard[i][j] != null) {
+                            if (user.getPlayerBoard().TileBoard[i][j].token != null && user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.HAWK) {
+                                tally+=countHawks(user,3,i,j,marked,0,0); //tally = amount of eligible hawk pairs
+                            }
+                        }
+                    }
+                }
+                score = tally*3;
                 return score;
             }
         }
@@ -787,66 +794,94 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
         {
             case 1:     //if its rule A, check if the hawk is alone
                 boolean isAlone = true;
-                for (int i = row - 1; i <= row + 1; i++) {
-                    for (int j = column - 1; j <= column + 1; j++) {
-                        if (i >= 0 && i < user.getPlayerBoard().TileBoard.length && j >= 0 && j < user.getPlayerBoard().TileBoard[i].length) {
-                            if (i == row && j == column) {
-                                continue; // skip the current cell
-                            }
-                            if (user.getPlayerBoard().TileBoard[i][j] != null && user.getPlayerBoard().TileBoard[i][j].token != null && user.getPlayerBoard().TileBoard[i][j].token.getAnimalType() == tokenEnum.HAWK) {
-                                isAlone = false; // theres another hawk in the surrounding cells, its not alone
-                                break;
-                            }
-                            else {
-                                isAlone=true;
+                try {
+                    for (int i = row - 1; i <= row + 1; i++) {
+                        for (int j = column - 1; j <= column + 1; j++) {
+                            if (i >= 0 && i < user.getPlayerBoard().TileBoard.length - 1 && j >= 0 && j < user.getPlayerBoard().TileBoard[i].length - 1) {
+                                if (i == row && j == column) {
+                                    continue; // skip the current cell
+                                }
+                                if (user.getPlayerBoard().TileBoard[i][j] != null && user.getPlayerBoard().TileBoard[i][j].token != null && user.getPlayerBoard().TileBoard[i][j].token.getAnimalType() == tokenEnum.HAWK) {
+                                    isAlone = false; // theres another hawk in the surrounding cells, its not alone
+                                    break;
+                                } else {
+                                    isAlone = true;
+                                }
                             }
                         }
+                        if (!isAlone) {
+                            tally = 0;
+                            break;
+                        }
                     }
-                    if (!isAlone) {
-                       tally=0;
-                       break;
+                    if (isAlone) { // if the hawk is alone, return 1
+                        tally = 1;
+                    } else {
+                        tally = 0;
                     }
-                }
-                if (isAlone) { // if the hawk is alone, return 1
-                    tally = 1;
-                } else{tally = 0;}
+                }catch (Exception ex){return tally;}
                 break;
             case 2: {
-
-                if(user.getPlayerBoard().TileBoard[row][column].token.animalType==tokenEnum.HAWK && countHawks(user,1,row,column,marked,0,0)==1) //this tile contains an alone hawk
+                try {
+                    if (user.getPlayerBoard().TileBoard[row][column].token.animalType == tokenEnum.HAWK && countHawks(user, 1, row, column, marked, 0, 0) == 1) //this tile contains an alone hawk
+                    {
+                        if (user.getPlayerBoard().TileBoard[row][column + 2] != null && user.getPlayerBoard().TileBoard[row][column + 2].token != null && user.getPlayerBoard().TileBoard[row][column + 2].token.animalType == tokenEnum.HAWK && countHawks(user, 1, row, column + 2, marked, 0, 0) == 1) {
+                            marked[row][column + 2] = true;
+                            lineTally++;
+                            tally++;
+                        }
+                        if (user.getPlayerBoard().TileBoard[row][column - 2] != null && user.getPlayerBoard().TileBoard[row][column - 2].token != null && user.getPlayerBoard().TileBoard[row][column - 2].token.animalType == tokenEnum.HAWK && countHawks(user, 1, row, column - 2, marked, 0, 0) == 1) {
+                            marked[row][column - 2] = true;
+                            lineTally++;
+                            tally++;
+                        }
+                        if (user.getPlayerBoard().TileBoard[row + 2][column] != null && user.getPlayerBoard().TileBoard[row + 2][column].token != null && user.getPlayerBoard().TileBoard[row + 2][column].token.animalType == tokenEnum.HAWK && countHawks(user, 1, row + 2, column, marked, 0, 0) == 1) {
+                            marked[row + 2][column] = true;
+                            lineTally++;
+                            tally++;
+                        }
+                        if (user.getPlayerBoard().TileBoard[row - 2][column] != null && user.getPlayerBoard().TileBoard[row - 2][column].token != null && user.getPlayerBoard().TileBoard[row - 2][column].token.animalType == tokenEnum.HAWK && countHawks(user, 1, row - 2, column, marked, 0, 0) == 1) {
+                            marked[row - 2][column] = true;
+                            lineTally++;
+                            tally++;
+                        }
+                    }
+                }catch (ArrayIndexOutOfBoundsException ex)
                 {
-                    if(user.getPlayerBoard().TileBoard[row][column+2]!=null && user.getPlayerBoard().TileBoard[row][column+2].token!=null && user.getPlayerBoard().TileBoard[row][column+2].token.animalType==tokenEnum.HAWK && countHawks(user,1,row,column+2,marked,0,0)==1)
-                    {
-                        marked[row][column+2]=true;
-                        lineTally++;
-                        tally++;
-                    }
-                    if(user.getPlayerBoard().TileBoard[row][column-2]!=null && user.getPlayerBoard().TileBoard[row][column-2].token!=null && user.getPlayerBoard().TileBoard[row][column-2].token.animalType==tokenEnum.HAWK && countHawks(user,1,row,column-2,marked,0,0)==1)
-                    {
-                        marked[row][column-2]=true;
-                        lineTally++;
-                        tally++;
-                    }
-                    if(user.getPlayerBoard().TileBoard[row+2][column]!=null && user.getPlayerBoard().TileBoard[row+2][column].token!=null && user.getPlayerBoard().TileBoard[row+2][column].token.animalType==tokenEnum.HAWK && countHawks(user,1,row+2,column,marked,0,0)==1)
-                    {
-                        marked[row+2][column]=true;
-                        lineTally++;
-                        tally++;
-                    }
-                    if(user.getPlayerBoard().TileBoard[row-2][column]!=null && user.getPlayerBoard().TileBoard[row-2][column].token!=null && user.getPlayerBoard().TileBoard[row-2][column].token.animalType==tokenEnum.HAWK && countHawks(user,1,row-2,column,marked,0,0)==1)
-                    {
-                        marked[row-2][column]=true;
-                        lineTally++;
-                        tally++;
-                    }
+                    return lineTally;
                 }
+
                 return lineTally; //tally=the number of hawks that are in line of sight and eligible
             }
+            case 3:     //if its rule C, check that this hawk has another hawk in its line of sight
+        {
+            //a hawk is found, marked
+                for(int j=0;j<tileBoard.BOARD_WIDTH-1;j++)
+                {
+                    if(user.getPlayerBoard().TileBoard[row][j]!=null && user.getPlayerBoard().TileBoard[row][j].token!=null && user.getPlayerBoard().TileBoard[row][j].token.getAnimalType()==tokenEnum.HAWK && !marked[row][j])
+                    {
+                        //a hawk is found, mark it as well as the current tile as its the number of pairs
+                        marked[row][j] = true;
+                        marked[row][column] = true;
+                        tally += 1; //tally is the amount of eligible hawks
+                    }
+                }
+            for(int i=0;i<tileBoard.BOARD_HEIGHT-1;i++)
+            {
+                if(user.getPlayerBoard().TileBoard[i][column]!=null && user.getPlayerBoard().TileBoard[i][column].token!=null && user.getPlayerBoard().TileBoard[i][column].token.getAnimalType()==tokenEnum.HAWK && !marked[i][column])
+                {
+                    //a hawk is found, mark it as well as the current tile as its the number of pairs
+                    marked[i][column] = true;
+                    marked[row][column] = true;
+                    tally += 1; //tally is the amount of eligible hawks
+                }
+            }
+            return tally;
         }
+        }
+
         return tally; //its not alone, return 0
     }
-
-
 
     public static int scoreSalmon(int whatCard, player user) //method that returns the total score of a players salmon
     {
@@ -903,7 +938,39 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                         if (user.getPlayerBoard().TileBoard[i][j] != null) {
                             if (user.getPlayerBoard().TileBoard[i][j].token != null && user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.SALMON && !marked[i][j]) {
                                 //find the tally
-                                int tally=countSalmonRun(user, i, j, marked, 5, 0);
+                                int tally=countSalmonRun(user, i, j, marked, 4, 0);
+                                //score them
+                                switch (tally)
+                                {
+                                    case 0:
+                                        break;
+                                    case 1:
+                                        score+=2;
+                                        break;
+                                    case 2:
+                                        score+=4;
+                                        break;
+                                    case 3:
+                                        score+=8;
+                                        break;
+                                    default:
+                                        score+=12;
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                }
+                return score;
+            }
+            case 3: //SCORE TYPE C
+            {
+                for (int i = 0; i < tileBoard.BOARD_HEIGHT - 1; i++) { //go through the array
+                    for (int j = 0; j < tileBoard.BOARD_WIDTH - 1; j++) {
+                        if (user.getPlayerBoard().TileBoard[i][j] != null) {
+                            if (user.getPlayerBoard().TileBoard[i][j].token != null && user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.SALMON && !marked[i][j]) {
+                                //find the tally
+                                int tally = countSalmonRun(user, i, j, marked, 5, 0);
                                 //score them
                                 switch (tally)
                                 {
@@ -921,35 +988,8 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                                     case 4:
                                         score+=11;
                                         break;
-                                    default: //5 and above
+                                    default:
                                         score+=17;
-                                        break;
-                                }
-                            }
-                        }
-                    }
-                }
-                return score;
-            }
-            case 3: //SCORE TYPE C
-            {
-                for (int i = 0; i < tileBoard.BOARD_HEIGHT - 1; i++) { //go through the array
-                    for (int j = 0; j < tileBoard.BOARD_WIDTH - 1; j++) {
-                        if (user.getPlayerBoard().TileBoard[i][j] != null) {
-                            if (user.getPlayerBoard().TileBoard[i][j].token != null && user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.SALMON && !marked[i][j]) {
-                                //find the tally
-                                int tally = countSalmonRun(user, i, j, marked, 5, 3);
-                                //score them
-                                switch (tally)
-                                {
-                                    case 3:
-                                        score+=10;
-                                        break;
-                                    case 4:
-                                        score+=12;
-                                        break;
-                                    case 5: //5 and above
-                                        score+=15;
                                         break;
                                 }
                             }
