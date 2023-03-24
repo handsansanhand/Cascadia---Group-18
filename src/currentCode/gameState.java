@@ -338,6 +338,9 @@ public class gameState {
                                 if (getPlayers().get(i).getPlayerBoard().TileBoard[x][y] == null) {
                                     throw new IllegalArgumentException("This tile is null.");
                                 }
+                                if (getPlayers().get(i).getPlayerBoard().TileBoard[x][y].getToken()!=null) {
+                                    throw new IllegalArgumentException("This tile is full. Please try again");
+                                }
                                 getPlayers().get(i).getPlayerBoard().TileBoard[x][y].addWildlifetoken(tokenToPlace);
                                 if (getPlayers().get(i).getPlayerBoard().TileBoard[x][y].getToken() == tokenToPlace) {
                                     gameBoard.checkForBonus(getPlayers().get(i).getPlayerBoard().TileBoard[x][y], tokenToPlace, getPlayers().get(i));

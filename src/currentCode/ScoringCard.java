@@ -735,7 +735,6 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                         }
                     }
                 }
-                System.out.println("final tally: " + tally);
                 switch (tally)
                 {
                     case 0:
@@ -844,7 +843,6 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                 return lineTally; //tally=the number of hawks that are in line of sight and eligible
             }
         }
-
         return tally; //its not alone, return 0
     }
 
