@@ -38,13 +38,75 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
          * 0 = pairs
          * 1 = groups of three
          */
+        int temp=0;
+        if(y==0){
+            if(x.up.token.animalType == animal){
+                temp++;
+            }
+            if(x.down.token.animalType == animal){
+                temp++;
+            }
+            if(x.left.token.animalType == animal){
+                temp++;
+            }
+            if(x.right.token.animalType == animal){
+                temp++;
+            }
+        }
+        else if(y==1){
+            if(x.down.token.animalType == animal){
+                temp++;
+            }
+            if(x.left.token.animalType == animal){
+                temp++;
+            }
+            if(x.right.token.animalType == animal){
+                temp++;
+            }
+        }
+        else if(y==2){
+            if(x.up.token.animalType == animal){
+                temp++;
+            }
+            if(x.left.token.animalType == animal){
+                temp++;
+            }
+            if(x.right.token.animalType == animal){
+                temp++;
+            }
+        }
+        else if(y==3){
+            if(x.up.token.animalType == animal){
+                temp++;
+            }
+            if(x.down.token.animalType == animal){
+                temp++;
+            }
+            if(x.right.token.animalType == animal){
+                temp++;
+            }
+        }
+        else if(y==4){
+            if(x.up.token.animalType == animal){
+                temp++;
+            }
+            if(x.down.token.animalType == animal){
+                temp++;
+            }
+            if(x.left.token.animalType == animal){
+                temp++;
+            }
+        }
+        
         if(z == 1){
             if(y==0){
                 if(x.up.token.animalType == animal){
-                    if(x.down.token.animalType == animal || x.left.token.animalType == animal || x.right.token.animalType == animal){
-                        return 0;
-                    }
                     if(helperGroupCheckBear(x.up, animal, 2, 0) == 1){
+                        if(temp==1){
+                            return 1;
+                        }
+                    }
+                    if(temp==2){
                         return 1;
                     }
                     else{
@@ -52,10 +114,12 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                     }
                 }
                 else if(x.down.token.animalType == animal){
-                    if(x.left.token.animalType == animal || x.right.token.animalType == animal){
-                        return 0;
+                    if(helperGroupCheckBear(x.down, animal, 2, 0) == 1){
+                        if(temp==1){
+                            return 1;
+                        }
                     }
-                    if(helperGroupCheckBear(x.down, animal, 1 , 0) == 1){
+                    if(temp==2){
                         return 1;
                     }
                     else{
@@ -64,10 +128,12 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
         
                 }
                 else if(x.left.token.animalType == animal){
-                    if(x.right.token.animalType == animal){
-                        return 0;
+                    if(helperGroupCheckBear(x.left, animal, 2, 0) == 1){
+                        if(temp==1){
+                            return 1;
+                        }
                     }
-                    if(helperGroupCheckBear(x.left, animal, 4, 0) == 1){
+                    if(temp==2){
                         return 1;
                     }
                     else{
@@ -75,7 +141,12 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                     }
                 }
                 else if(x.right.token.animalType == animal){
-                    if(helperGroupCheckBear(x.right, animal, 3, 0) == 1){
+                    if(helperGroupCheckBear(x.right, animal, 2, 0) == 1){
+                        if(temp==1){
+                            return 1;
+                        }
+                    }
+                    if(temp==2){
                         return 1;
                     }
                     else{
@@ -89,10 +160,12 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
     
             if(y==1){
                 if(x.down.token.animalType == animal){
-                    if(x.left.token.animalType == animal || x.right.token.animalType == animal){
-                        return 0;
+                    if(helperGroupCheckBear(x.down, animal, 2, 0) == 1){
+                        if(temp==1){
+                            return 1;
+                        }
                     }
-                    if(helperGroupCheckBear(x.down, animal, 1, 0) == 1){
+                    if(temp==2){
                         return 1;
                     }
                     else{
@@ -101,10 +174,12 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
         
                 }
                 else if(x.left.token.animalType == animal){
-                    if(x.right.token.animalType == animal){
-                        return 0;
+                    if(helperGroupCheckBear(x.right, animal, 2, 0) == 1){
+                        if(temp==1){
+                            return 1;
+                        }
                     }
-                    if(helperGroupCheckBear(x.left, animal, 4, 0) == 1){
+                    if(temp==2){
                         return 1;
                     }
                     else{
@@ -112,7 +187,12 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                     }
                 }
                 else if(x.right.token.animalType == animal){
-                    if(helperGroupCheckBear(x.right, animal, 3, 0) == 1){
+                    if(helperGroupCheckBear(x.right, animal, 2, 0) == 1){
+                        if(temp==1){
+                            return 1;
+                        }
+                    }
+                    if(temp==2){
                         return 1;
                     }
                     else{
@@ -125,10 +205,12 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
             }
             if(y==2){
                 if(x.up.token.animalType == animal){
-                    if(x.down.token.animalType == animal || x.left.token.animalType == animal || x.right.token.animalType == animal){
-                        return 0;
-                    }
                     if(helperGroupCheckBear(x.up, animal, 2, 0) == 1){
+                        if(temp==1){
+                            return 1;
+                        }
+                    }
+                    if(temp==2){
                         return 1;
                     }
                     else{
@@ -136,10 +218,12 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                     }
                 }
                 else if(x.left.token.animalType == animal){
-                    if(x.right.token.animalType == animal){
-                        return 0;
+                    if(helperGroupCheckBear(x.left, animal, 2, 0) == 1){
+                        if(temp==1){
+                            return 1;
+                        }
                     }
-                    if(helperGroupCheckBear(x.left, animal, 4, 0) == 1){
+                    if(temp==2){
                         return 1;
                     }
                     else{
@@ -147,7 +231,12 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                     }
                 }
                 else if(x.right.token.animalType == animal){
-                    if(helperGroupCheckBear(x.right, animal, 3, 0) == 1){
+                    if(helperGroupCheckBear(x.right, animal, 2, 0) == 1){
+                        if(temp==1){
+                            return 1;
+                        }
+                    }
+                    if(temp==2){
                         return 1;
                     }
                     else{
@@ -160,10 +249,12 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
             }
             if(y==3){
                 if(x.up.token.animalType == animal){
-                    if(x.down.token.animalType == animal || x.left.token.animalType == animal || x.right.token.animalType == animal){
-                        return 0;
-                    }
                     if(helperGroupCheckBear(x.up, animal, 2, 0) == 1){
+                        if(temp==1){
+                            return 1;
+                        }
+                    }
+                    if(temp==2){
                         return 1;
                     }
                     else{
@@ -171,10 +262,12 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                     }
                 }
                 else if(x.down.token.animalType == animal){
-                    if(x.left.token.animalType == animal || x.right.token.animalType == animal){
-                        return 0;
+                    if(helperGroupCheckBear(x.down, animal, 2, 0) == 1){
+                        if(temp==1){
+                            return 1;
+                        }
                     }
-                    if(helperGroupCheckBear(x.down, animal, 1, 0) == 1){
+                    if(temp==2){
                         return 1;
                     }
                     else{
@@ -183,7 +276,12 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
         
                 }
                 else if(x.right.token.animalType == animal){
-                    if(helperGroupCheckBear(x.right, animal, 3, 0) == 1){
+                    if(helperGroupCheckBear(x.right, animal, 2, 0) == 1){
+                        if(temp==1){
+                            return 1;
+                        }
+                    }
+                    if(temp==2){
                         return 1;
                     }
                     else{
@@ -196,10 +294,12 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
             }
             if(y==4){
                 if(x.up.token.animalType == animal){
-                    if(x.down.token.animalType == animal || x.left.token.animalType == animal || x.right.token.animalType == animal){
-                        return 0;
-                    }
                     if(helperGroupCheckBear(x.up, animal, 2, 0) == 1){
+                        if(temp==1){
+                            return 1;
+                        }
+                    }
+                    if(temp==2){
                         return 1;
                     }
                     else{
@@ -207,10 +307,12 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                     }
                 }
                 else if(x.down.token.animalType == animal){
-                    if(x.left.token.animalType == animal || x.right.token.animalType == animal){
-                        return 0;
+                    if(helperGroupCheckBear(x.down, animal, 2, 0) == 1){
+                        if(temp==1){
+                            return 1;
+                        }
                     }
-                    if(helperGroupCheckBear(x.down, animal, 1, 0) == 1){
+                    if(temp==2){
                         return 1;
                     }
                     else{
@@ -219,10 +321,12 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
         
                 }
                 else if(x.left.token.animalType == animal){
-                    if(x.right.token.animalType == animal){
-                        return 0;
+                    if(helperGroupCheckBear(x.left, animal, 2, 0) == 1){
+                        if(temp==1){
+                            return 1;
+                        }
                     }
-                    if(helperGroupCheckBear(x.left, animal, 4, 0) == 1){
+                    if(temp==2){
                         return 1;
                     }
                     else{
