@@ -542,6 +542,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
 
 
     public int calculateCardScore(player user){
+        int bear=0,fox=0,elk=0,hawk=0,salmon=0;
         ArrayList<tokenEnum> animalList = new ArrayList();
         int temp=0;
         int ScoreNum=0;
@@ -627,7 +628,94 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
         }
             break;
             case 3:
-
+            for(int i=0;i<=tileBoard.BOARD_HEIGHT;i++){
+                for(int j=0;j<=tileBoard.BOARD_WIDTH;j++){
+                    if(user.getPlayerBoard().TileBoard[i][j] != null) {
+                        if(user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.FOX){
+                            if(user.getPlayerBoard().TileBoard[i][j].up.token != null){
+                                   if(user.getPlayerBoard().TileBoard[i][j].up.token.animalType == tokenEnum.BEAR){
+                                    bear++;
+                                   }
+                                   if(user.getPlayerBoard().TileBoard[i][j].up.token.animalType == tokenEnum.FOX){
+                                    fox++;
+                                   }
+                                   if(user.getPlayerBoard().TileBoard[i][j].up.token.animalType == tokenEnum.ELK){
+                                    elk++;
+                                   }
+                                   if(user.getPlayerBoard().TileBoard[i][j].up.token.animalType == tokenEnum.HAWK){
+                                    hawk++;
+                                   }
+                                   if(user.getPlayerBoard().TileBoard[i][j].up.token.animalType == tokenEnum.SALMON){
+                                    salmon++;
+                                   }
+                            }
+                            if(user.getPlayerBoard().TileBoard[i][j].down.token != null){
+                                if(user.getPlayerBoard().TileBoard[i][j].down.token.animalType == tokenEnum.BEAR){
+                                 bear++;
+                                }
+                                if(user.getPlayerBoard().TileBoard[i][j].down.token.animalType == tokenEnum.FOX){
+                                 fox++;
+                                }
+                                if(user.getPlayerBoard().TileBoard[i][j].down.token.animalType == tokenEnum.ELK){
+                                 elk++;
+                                }
+                                if(user.getPlayerBoard().TileBoard[i][j].down.token.animalType == tokenEnum.HAWK){
+                                 hawk++;
+                                }
+                                if(user.getPlayerBoard().TileBoard[i][j].down.token.animalType == tokenEnum.SALMON){
+                                 salmon++;
+                                }
+                         }
+                         if(user.getPlayerBoard().TileBoard[i][j].left.token != null){
+                            if(user.getPlayerBoard().TileBoard[i][j].left.token.animalType == tokenEnum.BEAR){
+                             bear++;
+                            }
+                            if(user.getPlayerBoard().TileBoard[i][j].left.token.animalType == tokenEnum.FOX){
+                             fox++;
+                            }
+                            if(user.getPlayerBoard().TileBoard[i][j].left.token.animalType == tokenEnum.ELK){
+                             elk++;
+                            }
+                            if(user.getPlayerBoard().TileBoard[i][j].left.token.animalType == tokenEnum.HAWK){
+                             hawk++;
+                            }
+                            if(user.getPlayerBoard().TileBoard[i][j].left.token.animalType == tokenEnum.SALMON){
+                             salmon++;
+                            }
+                     }
+                     if(user.getPlayerBoard().TileBoard[i][j].right.token != null){
+                        if(user.getPlayerBoard().TileBoard[i][j].right.token.animalType == tokenEnum.BEAR){
+                         bear++;
+                        }
+                        if(user.getPlayerBoard().TileBoard[i][j].right.token.animalType == tokenEnum.FOX){
+                         fox++;
+                        }
+                        if(user.getPlayerBoard().TileBoard[i][j].right.token.animalType == tokenEnum.ELK){
+                         elk++;
+                        }
+                        if(user.getPlayerBoard().TileBoard[i][j].right.token.animalType == tokenEnum.HAWK){
+                         hawk++;
+                        }
+                        if(user.getPlayerBoard().TileBoard[i][j].right.token.animalType == tokenEnum.SALMON){
+                         salmon++;
+                        }
+                 }
+                 if(bear == 2 || bear == 4){
+                    ScoreNum++;
+                 }
+                 if(elk == 2 || elk == 4){
+                    ScoreNum++;
+                 }
+                 if(hawk == 2 || hawk == 4){
+                    ScoreNum++;
+                 }
+                 if(salmon == 2 || salmon == 4){
+                    ScoreNum++;
+                 }
+                        }
+                    }
+            }
+        }
             break;
             case 4:
          
@@ -666,7 +754,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                 ScoreNum+=scoreSalmon(3,user);
             break;
         }
-        return 0;
+        return ScoreNum;
     }
 
     public static int scoreHawk(int whatCard, player user) //method that returns the total score of a players salmon
