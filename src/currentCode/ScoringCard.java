@@ -774,7 +774,6 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                                 // a elk is found:
                                 // find the line size
                                 int lineSize =countElk(1,user,i,j,marked);
-                                System.out.println("line size:" + lineSize + "found");
                                 switch (lineSize)
                                 {
                                     case 1:
@@ -920,13 +919,10 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
             case 1:
             if ((row > 0 && row < tileBoard.BOARD_WIDTH - 1) && (column > 0 && column < tileBoard.BOARD_WIDTH - 1)) {   //as long as we can keep counting
                 if (user.getPlayerBoard().TileBoard[row][column + 1] != null && user.getPlayerBoard().TileBoard[row][column + 1].getToken() != null && user.getPlayerBoard().TileBoard[row][column + 1].getToken().getAnimalType() == tokenEnum.ELK) {
-                    System.out.println("found an elk above");
                     count = countElkHorizontal(user, row, column, marked, tally);
                 } else if (user.getPlayerBoard().TileBoard[row + 1][column] != null && user.getPlayerBoard().TileBoard[row + 1][column].getToken() != null && user.getPlayerBoard().TileBoard[row + 1][column].getToken().getAnimalType() == tokenEnum.ELK) {
-                    System.out.println("found an elk above");
                     count = countElkVertical(user, row, column, marked, tally);
                 }
-                System.out.println("line tally: " + tally);
                 return count;
             }
             case 2: //card B, counting the largestgroup
