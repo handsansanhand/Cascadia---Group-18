@@ -50,7 +50,6 @@ public class gameState {
         for(int j=0;j<getPlayerCount();j++) {
             System.out.println(Players.get(j).getName());
         }
-        displayControls();
         System.out.println(getPlayers().get(0).getName() + " will start");
     }
 
@@ -63,13 +62,11 @@ public class gameState {
             System.out.println(Tile.GREEN_BOLD + getPlayers().get(i).getName() + "'s turn!" + Tile.RESET);
             startTurn(i); //asks the user to draw a tile
             System.out.println("\n" + getPlayers().get(i).getPlayerBoard());
-            displayControls();
         }
         else {
             System.out.println(Tile.GREEN_BOLD + getPlayers().get(i).getName() + "'s turn!" + Tile.RESET);
             startTurn(i); //asks the user to draw a tile
             System.out.println("\n" + getPlayers().get(i).getPlayerBoard());
-            displayControls();
         }
     }
 
@@ -82,14 +79,10 @@ public class gameState {
         {
             switch (in.next()) {
                 case "v" -> {
-                    System.out.println(getPlayers().get(i).getPlayerBoard());
                 }
                 case "c" -> {
-                    displayControls();
                 }
                 case "q" -> {
-                    System.out.println("ty for playing");
-                    stillPlaying = false;
                 }
                 case "y" -> {
                     //tile placement goes here
@@ -227,6 +220,7 @@ public class gameState {
                     Scoring.scoreHabitatCorridors(getPlayers().get(i));
                     System.out.println("Elk score for scoring card A: " + ScoringCard.scoreElk(1,getPlayers().get(i)));
                     System.out.println("Elk score for scoring card B: " + ScoringCard.scoreElk(2,getPlayers().get(i)));
+                    System.out.println("Elk score for scoring card C: " + ScoringCard.scoreElk(3,getPlayers().get(i)));
                     System.out.println("Salmon score for scoring card A: " + ScoringCard.scoreSalmon(1,getPlayers().get(i)));
                     System.out.println("Salmon score for scoring card B: " + ScoringCard.scoreSalmon(2,getPlayers().get(i)));
                     System.out.println("Salmon score for scoring card C: " + ScoringCard.scoreSalmon(3,getPlayers().get(i)));
@@ -238,8 +232,11 @@ public class gameState {
                 case "r": //temporary case that tests the scoring
                 {
                     System.out.println("Cascadia Rules: https://www.alderac.com/wp-content/uploads/2021/08/Cascadia-Rules.pdf");
-                    ;
                     break;
+                }
+                case "q": //ENDGAME TEMPORARY FUNCTION
+                {
+
                 }
                 default: {
                     System.out.println("Invalid argument, press 'c' for instructions or 'r' for the rules");
@@ -369,7 +366,6 @@ public class gameState {
                         break;
                     }
                     case "c": {
-                        displayControls();
                         System.out.println("\nWould you like to place a wildlife token?. Y / N");
                         System.out.println(gameBoard);
                         break;
@@ -456,15 +452,4 @@ public class gameState {
                 }
             }
         }
-
-
-
-    public void displayControls()
-    {
-        System.out.println("Press v to view your board"); //this should pop ur board up
-        System.out.println("Press 'p' to pass");
-        System.out.println("Press 'c' for controls");
-        System.out.println("Press 'b' to view the game board");
-        System.out.println("Press 'r' for the rules of the game"); //to display the instructions of the game ?? maybe a html
-    }
 }

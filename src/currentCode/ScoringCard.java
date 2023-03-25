@@ -866,6 +866,46 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                 }
                 break;
             }
+            case 3:     //CASE 3, SHAPES
+            {
+                for (int i = 0; i < tileBoard.BOARD_HEIGHT - 1; i++) { //go through the array
+                    for (int j = 0; j < tileBoard.BOARD_WIDTH - 1; j++) {
+                        if (user.getPlayerBoard().TileBoard[i][j] != null) {
+                            if (user.getPlayerBoard().TileBoard[i][j].token != null && user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.ELK && !marked[i][j]) {
+                                //a hawk is found
+                                int count = countElk(3, user, i, j, marked);
+                                switch (count)
+                                {
+                                    case 1:
+                                    {
+                                        score+=2;
+                                        break;
+                                    }
+                                    case 2:
+                                    {
+                                        score+=5;
+                                        break;
+                                    }
+                                    case 3:
+                                    {
+                                        score+=9;
+                                        break;
+                                    }
+                                    case 4:
+                                    {
+                                        score+=13;
+                                        break;
+                                    }
+                                    default:
+                                    {
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
         return score;
     }
@@ -908,9 +948,92 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                     }
                     return groupSize;
                 }
+            case 3:     //SCORE CARD C, SHAPES
+            {
+                if ((row > 0 && row < tileBoard.BOARD_WIDTH - 1) && (column > 0 && column < tileBoard.BOARD_WIDTH - 1)) {   //as long as we can keep counting
+                    //check if theres a tile directly vertical or horizontal to this one
+                    Tile currentTile = user.getPlayerBoard().TileBoard[row][column];
+                    tally= findMatchingPattern(currentTile,user,marked);
+                }
+            }
 
         }
         return tally;
+    }
+    public static int findMatchingPattern(Tile t, player user, boolean[][] marked)
+    {
+        //t = starting tile
+        marked[t.x][t.y]=true;
+        int count=1; //incremented everytime we find an eligible tile
+        if(findElkVerticallyNextTo(t,user,marked)!=null) //theres a tile vertically above t
+        {
+            count++; //increment the count, 2
+            Tile upTile = findElkVerticallyNextTo(t,user,marked); //the tile we found
+            if(findElkHorizontallyNextTo(upTile,user,marked)!=null)
+            {
+                count++; //3
+                Tile upDiagonalTile=findElkHorizontallyNextTo(upTile,user,marked); //the tile we found
+                if(upDiagonalTile.down!=null && upDiagonalTile.getToken()!=null && upDiagonalTile.down.getToken().getAnimalType()==tokenEnum.ELK) //if this tile is not null and an elk, we can mark it
+                {
+                    marked[t.x+1][t.y]=true;
+                    count++; //4
+                }
+            }
+
+        }
+        if(findElkHorizontallyNextTo(t,user,marked)!=null) //or else if the tile has an eligible tile to its left
+        {
+            count++; //2
+            Tile horizontalTile = findElkHorizontallyNextTo(t,user,marked); //the tile we found
+            if(findElkVerticallyNextTo(horizontalTile,user,marked)!=null)
+            {
+                count++; //3
+                Tile diagonalTile=findElkVerticallyNextTo(horizontalTile,user,marked);
+                if(diagonalTile.right!=null && diagonalTile.getToken()!=null && diagonalTile.getToken().getAnimalType()==tokenEnum.ELK)
+                {
+                    marked[t.x][t.y+1]=true;
+                    count++; //4
+                }
+            }
+        }
+        return count;
+    }
+    public static Tile findElkVerticallyNextTo(Tile t, player user, boolean[][] marked) //returns the tile that is vertically next to the current tile
+    {
+        if(t!=null) {
+            if (t.x > 0 && t.x < tileBoard.BOARD_WIDTH - 1 && t.y > 0 && t.y < tileBoard.BOARD_HEIGHT) { //check its eligible first
+                if (user.getPlayerBoard().TileBoard[t.x][t.y + 1] != null && user.getPlayerBoard().TileBoard[t.x][t.y + 1].getToken() != null && user.getPlayerBoard().TileBoard[t.x][t.y + 1].getToken().getAnimalType() == tokenEnum.ELK && !marked[t.x][t.y + 1]) {
+                    //found a tile above
+                    marked[t.x][t.y + 1] = true;
+                    return user.getPlayerBoard().TileBoard[t.x][t.y + 1];
+                }
+                if (user.getPlayerBoard().TileBoard[t.x][t.y - 1] != null && user.getPlayerBoard().TileBoard[t.x][t.y - 1].getToken() != null && user.getPlayerBoard().TileBoard[t.x][t.y - 1].getToken().getAnimalType() == tokenEnum.ELK && !marked[t.x][t.y - 1]) {
+                    //found a tile above
+                    marked[t.x][t.y - 1] = true;
+                    return user.getPlayerBoard().TileBoard[t.x][t.y - 1];
+                }
+            }
+            return null; //found none
+        }
+        return null;
+    }
+    public static Tile findElkHorizontallyNextTo(Tile t, player user, boolean[][] marked) //returns the tile that is vertically next to the current tile
+    {
+        if(t!=null) {
+            if (t.x > 0 && t.x < tileBoard.BOARD_WIDTH - 1 && t.y > 0 && t.y < tileBoard.BOARD_HEIGHT) { //check its eligible first
+                if (user.getPlayerBoard().TileBoard[t.x + 1][t.y] != null && user.getPlayerBoard().TileBoard[t.x + 1][t.y].getToken() != null && user.getPlayerBoard().TileBoard[t.x + 1][t.y].getToken().getAnimalType() == tokenEnum.ELK && !marked[t.x + 1][t.y]) {
+                    //found a tile above
+                    marked[t.x + 1][t.y] = true;
+                    return user.getPlayerBoard().TileBoard[t.x + 1][t.y];
+                }
+                if (user.getPlayerBoard().TileBoard[t.x - 1][t.y] != null && user.getPlayerBoard().TileBoard[t.x - 1][t.y].getToken() != null && user.getPlayerBoard().TileBoard[t.x - 1][t.y].getToken().getAnimalType() == tokenEnum.ELK && !marked[t.x - 1][t.y]) {
+                    //found a tile above
+                    marked[t.x - 1][t.y] = true;
+                    return user.getPlayerBoard().TileBoard[t.x - 1][t.y];
+                }
+            }
+            return null; //found none
+        } return null;
     }
     public static int countElkVertical(player user, int row, int column, boolean[][] marked, int count)
     {
@@ -919,7 +1042,6 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
             marked[row+1][column]=true;
             count+=countElkVertical(user,row+1,column,marked, count);
         }
-        System.out.println("h count: " + count);
         return count;
     }
     public static int countElkHorizontal(player user, int row, int column, boolean[][] marked, int count)
@@ -929,7 +1051,6 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
             marked[row][column+1]=true;
             count+=countElkHorizontal(user,row,column+1,marked, count);
         }
-        System.out.println("v count: " + count);
         return count;
     }
 
