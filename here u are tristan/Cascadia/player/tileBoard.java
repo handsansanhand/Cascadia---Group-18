@@ -2,10 +2,6 @@ package player;
 
 
 import java.util.Scanner;
-
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-
 public class tileBoard { 
 
 	final int BOARD_HEIGHT=15;

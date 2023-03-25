@@ -1,7 +1,4 @@
 package currentCode;
-
-import javafx.application.Platform;
-
 import java.util.Scanner;
 //EACH 'BOARD' HOLDS AN ARRAYLIST OF TILES
 public class tileBoard { // class for the board object for each player

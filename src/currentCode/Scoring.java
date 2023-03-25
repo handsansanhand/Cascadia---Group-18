@@ -1,7 +1,5 @@
 package currentCode;
 
-import java.util.Arrays;
-
 //class that will contain all the scoring options/methods
 public class Scoring {
 

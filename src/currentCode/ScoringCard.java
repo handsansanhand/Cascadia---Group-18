@@ -1,10 +1,7 @@
 package currentCode;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
-import javax.swing.GroupLayout.Group;
 public class ScoringCard{ // This is the class for a single Scoring Card object. We will need to initialise 5 of these objects and use the calculate function on each one to return the score
     int cardType; // variable to identify card type out of the 15 available
     /*
@@ -609,7 +606,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
 
     public int calculateCardScore(player user){
         int bear=0,fox=0,elk=0,hawk=0,salmon=0;
-        ArrayList<tokenEnum> animalList = new ArrayList();
+        ArrayList<tokenEnum> animalList = new ArrayList<tokenEnum>();
         int temp=0;
         int GroupNum=0;
         int ScoreNum=0;
