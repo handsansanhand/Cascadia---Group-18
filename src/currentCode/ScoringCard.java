@@ -1620,8 +1620,40 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
         }
         return tally; //return the total run length
     }
-    public int calculateScore(int x){ // takes number returned from calculateCardScore function and depending on the cardType, calculates the actual score to be given to the player
-        return 0;
+   public String toString(){
+    switch(cardType){
+       case 0:
+       return "Bear A";
+       case 1:
+       return "Bear B";
+       case 2:
+       return "Fox A";
+       case 3:
+       return "Fox B";
+       case 4:
+       return "Elk A";
+       case 5:
+       return "Elk B";
+       case 6:
+       return "Hawk A";
+       case 7:
+       return "Hawk B";
+       case 8:
+       return "Salmon A";
+       case 9:
+       return "Salmon B";
+       case 10:
+       return "Bear C";
+       case 11:
+       return "Fox C";
+       case 12:
+       return "Elk C";
+       case 13:
+       return "Hawk C";
+       case 14:
+       return "Salmon C";
+       default:
+       return ("toString cardType error");
     }
-
+   }
 }
