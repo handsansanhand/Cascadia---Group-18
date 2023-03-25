@@ -121,6 +121,8 @@ public class Tile { // class for the tiles that will be inserted onto the board
                         animal1 = tokenEnum.BEAR;
                         break;
                 }
+            default:
+                break;
 
         }
         switch(landType2) {
@@ -221,6 +223,8 @@ public class Tile { // class for the tiles that will be inserted onto the board
                 }
             case Empty:
                 break;
+            default:
+                break;
 
         }
         switch(landType) {
@@ -317,6 +321,8 @@ public class Tile { // class for the tiles that will be inserted onto the board
                         animal1 = tokenEnum.BEAR;
                         break;
                 }
+            default:
+                break;
 
         }
         if(isKeystoneTile)
@@ -475,6 +481,7 @@ public class Tile { // class for the tiles that will be inserted onto the board
             case Prairie -> returnString=YELLOW;
             case Mountain -> returnString=WHITE;
             case Wetland -> returnString=CYAN;
+            default -> throw new IllegalArgumentException("Unexpected value: " + habitat);
         }
         return returnString;
     }
@@ -488,6 +495,7 @@ public class Tile { // class for the tiles that will be inserted onto the board
             case ELK -> returnString=BOLD + LIGHT_GREEN;
             case SALMON -> returnString=BOLD + PINK;
             case FOX -> returnString=BOLD + ORANGE;
+            default -> throw new IllegalArgumentException("Unexpected value: " + animal);
         }
         return returnString;
     }
@@ -551,6 +559,8 @@ public class Tile { // class for the tiles that will be inserted onto the board
                 case Mountain:
                     str1 = "Mountain";
                     break;
+                default:
+                    break;
             }
             switch(landType2){
                 case Empty:
@@ -570,6 +580,8 @@ public class Tile { // class for the tiles that will be inserted onto the board
                     break;
                 case Mountain:
                     str2 = "Mountain";
+                    break;
+                default:
                     break;
             }
             return str1 + " " + str2;
