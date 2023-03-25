@@ -23,7 +23,7 @@ public class player {
     String name;
     int score;
     tileBoard playerBoard;
-    int natureTokens=2; //nature tokens
+    int natureTokens; //nature tokens
     public player(String x, int i)
     {
         this.name = x;

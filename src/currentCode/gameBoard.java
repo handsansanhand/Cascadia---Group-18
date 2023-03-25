@@ -8,6 +8,7 @@ import java.util.Scanner;
         ArrayList<Tile> boardHabitatTiles = new ArrayList<>();
         ArrayList<wildlifeToken> boardWildlifeTokens = new ArrayList<>();
         ArrayList<wildlifeToken> wildlifeTokenBag = wildlifeToken.makeWildlifeTokenBag();
+        ArrayList<ScoringCard> scoringCards = new ArrayList<>();
 
         gameBoard() //gameboard will be constructed with 4 habitat tiles and 4 wildlifetoken tiles
         {
@@ -21,6 +22,11 @@ import java.util.Scanner;
                 System.out.println(Tile.RED_BOLD + "Four identical wildlife tokens detected, an automatic cull has occurred." + Tile.RESET);
                 cull(findMostCommonAnimal());
             }
+            scoringCards.add(ScoringCard.generateScoringCardBear());
+            scoringCards.add(ScoringCard.generateScoringCardElk());
+            scoringCards.add(ScoringCard.generateScoringCardSalmon());
+            scoringCards.add(ScoringCard.generateScoringCardHawk());
+            scoringCards.add(ScoringCard.generateScoringCardFox());
         }
 
         public int highestAnimalTypeCount() //function that returns the highest amount of times an animal appears on the board

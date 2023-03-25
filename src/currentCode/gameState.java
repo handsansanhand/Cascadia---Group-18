@@ -216,6 +216,8 @@ public class gameState {
                 }
                 case "t": //temporary case that tests the scoring
                 {
+                    System.out.println(gameBoard.scoringCards);
+                    System.out.println("bear score: " + gameBoard.scoringCards.get(0).calculateCardScore(getPlayers().get(i)));
                     Scoring.scoreHabitatCorridors(getPlayers().get(i));
                     System.out.println("Elk score for scoring card A: " + ScoringCard.scoreElk(1,getPlayers().get(i)));
                     System.out.println("Elk score for scoring card B: " + ScoringCard.scoreElk(2,getPlayers().get(i)));
