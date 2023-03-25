@@ -1653,7 +1653,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
        case 14:
        return "Salmon C";
        default:
-       return ("toString cardType error");
+       return "toString cardType error";
     }
    }
 }
