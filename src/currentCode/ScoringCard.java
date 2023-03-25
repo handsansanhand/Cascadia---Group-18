@@ -22,9 +22,73 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
      * 13 = Hawk C
      * 14 = Salmon C
      */
-    ScoringCard(){
+    ScoringCard(int cardType){
+        this.cardType = cardType;
+    }
+    public static ScoringCard generateScoringCardBear(){
         Random rand = new Random();
-        cardType = rand.nextInt(15); // Constructor creates random card type
+        switch(rand.nextInt(3)){
+            case 0:
+            return new ScoringCard(0);
+            case 1:
+            return new ScoringCard(1);
+            case 2:
+            return new ScoringCard(10);
+            default:
+            return null;
+        }
+    }
+    public static ScoringCard generateScoringCardFox(){
+        Random rand = new Random();
+        switch(rand.nextInt(3)){
+            case 0:
+            return new ScoringCard(2);
+            case 1:
+            return new ScoringCard(3);
+            case 2:
+            return new ScoringCard(11);
+            default:
+            return null;
+        }
+    }
+    public static ScoringCard generateScoringCardElk(){
+        Random rand = new Random();
+        switch(rand.nextInt(3)){
+            case 0:
+            return new ScoringCard(4);
+            case 1:
+            return new ScoringCard(5);
+            case 2:
+            return new ScoringCard(12);
+            default:
+            return null;
+        }
+    }
+    public static ScoringCard generateScoringCardHawk(){
+        Random rand = new Random();
+        switch(rand.nextInt(3)){
+            case 0:
+            return new ScoringCard(6);
+            case 1:
+            return new ScoringCard(7);
+            case 2:
+            return new ScoringCard(13);
+            default:
+            return null;
+        }
+    }
+    public static ScoringCard generateScoringCardSalmon(){
+        Random rand = new Random();
+        switch(rand.nextInt(3)){
+            case 0:
+            return new ScoringCard(8);
+            case 1:
+            return new ScoringCard(9);
+            case 2:
+            return new ScoringCard(14);
+            default:
+            return null;
+        }
     }
     public int helperGroupCheckBear(Tile x, tokenEnum animal, int y, int z){ // Helper function for card type A to check if any of the surrounding tiles contains the animal. More than 2 of the type of animal is not considered a pair and are disqualifed from gaining points
         /* y
