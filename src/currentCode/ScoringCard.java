@@ -757,6 +757,182 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
         return ScoreNum;
     }
 
+    public static int scoreElk(int whatCard, player user)
+    {
+        int score=0;
+        //first, create a 2-d array of booleans
+        boolean[][] marked = new boolean[tileBoard.BOARD_HEIGHT][tileBoard.BOARD_WIDTH];
+        //filled with false by default
+        switch (whatCard)
+        {
+            case 1:     //SCORE CARD A, find the elk, count the line, return the length
+                for (int i = 0; i < tileBoard.BOARD_HEIGHT - 1; i++) { //go through the array
+                    for (int j = 0; j < tileBoard.BOARD_WIDTH - 1; j++)
+                    {
+                        if (user.getPlayerBoard().TileBoard[i][j] != null) {
+                            if (user.getPlayerBoard().TileBoard[i][j].token!=null && user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.ELK && !marked[i][j]) {
+                                // a elk is found:
+                                // find the line size
+                                int lineSize =countElk(1,user,i,j,marked);
+                                System.out.println("line size:" + lineSize + "found");
+                                switch (lineSize)
+                                {
+                                    case 1:
+                                    {
+                                        score+=2;
+                                        break;
+                                    }
+                                    case 2:
+                                    {
+                                        score+=5;
+                                        break;
+                                    }
+                                    case 3:
+                                    {
+                                        score+=9;
+                                        break;
+                                    }
+                                    case 4:
+                                    {
+                                        score+=13;
+                                        break;
+                                    }
+                                    default:
+                                    {
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                break;
+
+            case 2:
+            {
+                for (int i = 0; i < tileBoard.BOARD_HEIGHT - 1; i++) { //go through the array
+                    for (int j = 0; j < tileBoard.BOARD_WIDTH - 1; j++) {
+                        if (user.getPlayerBoard().TileBoard[i][j] != null) {
+                            if (user.getPlayerBoard().TileBoard[i][j].token != null && user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.ELK && !marked[i][j]) {
+                                // a elk is found:
+                                // find group size
+                                int groupSize=countElk(2,user,i,j,marked);
+                                switch (groupSize)
+                                {
+                                    case 1:
+                                    {
+                                        score+=2;
+                                        break;
+                                    }
+                                    case 2:
+                                    {
+                                        score+=4;
+                                        break;
+                                    }
+                                    case 3:
+                                    {
+                                        score+=7;
+                                        break;
+                                    }
+                                    case 4:
+                                    {
+                                        score+=10;
+                                        break;
+                                    }
+                                    case 5:
+                                    {
+                                        score+=14;
+                                        break;
+                                    }
+                                    case 6:
+                                    {
+                                        score+=18;
+                                        break;
+                                    }
+                                    case 7:
+                                    {
+                                        score+=23;
+                                        break;
+                                    }
+                                    default:
+                                    {
+                                        score+=28;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                break;
+            }
+        }
+        return score;
+    }
+
+    public static int countElk(int whatCard, player user, int row, int column, boolean[][] marked)
+    {
+        //can be any lines, so mark each one in the line when counting, BUT, if we find an elk thats marked, we can unmark it and keep counting (allows multiple lines)
+        marked[row][column]=true;
+        int tally=1;
+        int count=0;
+        switch (whatCard) {
+            case 1:
+            if ((row > 0 && row < tileBoard.BOARD_WIDTH - 1) && (column > 0 && column < tileBoard.BOARD_WIDTH - 1)) {   //as long as we can keep counting
+                if (user.getPlayerBoard().TileBoard[row][column + 1] != null && user.getPlayerBoard().TileBoard[row][column + 1].getToken() != null && user.getPlayerBoard().TileBoard[row][column + 1].getToken().getAnimalType() == tokenEnum.ELK) {
+                    System.out.println("found an elk above");
+                    count = countElkHorizontal(user, row, column, marked, tally);
+                } else if (user.getPlayerBoard().TileBoard[row + 1][column] != null && user.getPlayerBoard().TileBoard[row + 1][column].getToken() != null && user.getPlayerBoard().TileBoard[row + 1][column].getToken().getAnimalType() == tokenEnum.ELK) {
+                    System.out.println("found an elk above");
+                    count = countElkVertical(user, row, column, marked, tally);
+                }
+                System.out.println("line tally: " + tally);
+                return count;
+            }
+            case 2: //card B, counting the largestgroup
+                if((row > 0 && row < tileBoard.BOARD_WIDTH - 1) && (column > 0 && column < tileBoard.BOARD_WIDTH - 1)) //while it can be counted
+                {
+                    marked[row][column] = true;
+                    int groupSize = 1;
+                    if (row > 0 && user.getPlayerBoard().TileBoard[row - 1][column] != null && user.getPlayerBoard().TileBoard[row - 1][column].getToken() != null && user.getPlayerBoard().TileBoard[row - 1][column].getToken().getAnimalType() == tokenEnum.ELK && !marked[row - 1][column]) {
+                        groupSize += countElk(2,user,row-1,column,marked);
+                    }
+                    if (row < tileBoard.BOARD_WIDTH - 1 && user.getPlayerBoard().TileBoard[row + 1][column] != null && user.getPlayerBoard().TileBoard[row + 1][column].getToken() != null && user.getPlayerBoard().TileBoard[row + 1][column].getToken().getAnimalType() == tokenEnum.ELK && !marked[row + 1][column]) {
+                        groupSize += countElk(2,user,row+1,column,marked);
+                    }
+                    if (column > 0 && user.getPlayerBoard().TileBoard[row][column - 1] != null && user.getPlayerBoard().TileBoard[row][column - 1].getToken() != null && user.getPlayerBoard().TileBoard[row][column - 1].getToken().getAnimalType() == tokenEnum.ELK && !marked[row][column - 1]) {
+                        groupSize += countElk(2,user,row,column-1,marked);
+                    }
+                    if (column < tileBoard.BOARD_WIDTH - 1 && user.getPlayerBoard().TileBoard[row][column + 1] != null && user.getPlayerBoard().TileBoard[row][column + 1].getToken() != null && user.getPlayerBoard().TileBoard[row][column + 1].getToken().getAnimalType() == tokenEnum.ELK && !marked[row][column + 1]) {
+                        groupSize += countElk(2,user,row,column+1,marked);
+                    }
+                    return groupSize;
+                }
+
+        }
+        return tally;
+    }
+    public static int countElkVertical(player user, int row, int column, boolean[][] marked, int count)
+    {
+        if (user.getPlayerBoard().TileBoard[row+1][column]!=null && user.getPlayerBoard().TileBoard[row+1][column].getToken() != null && user.getPlayerBoard().TileBoard[row+1][column].getToken().getAnimalType() == tokenEnum.ELK) {
+            if(count==4){return count;}
+            marked[row+1][column]=true;
+            count+=countElkVertical(user,row+1,column,marked, count);
+        }
+        System.out.println("h count: " + count);
+        return count;
+    }
+    public static int countElkHorizontal(player user, int row, int column, boolean[][] marked, int count)
+    {
+        if (user.getPlayerBoard().TileBoard[row][column+1]!=null && user.getPlayerBoard().TileBoard[row][column+1].getToken() != null && user.getPlayerBoard().TileBoard[row][column+1].getToken().getAnimalType() == tokenEnum.ELK) {
+            if(count==4){return count;}
+            marked[row][column+1]=true;
+            count+=countElkHorizontal(user,row,column+1,marked, count);
+        }
+        System.out.println("v count: " + count);
+        return count;
+    }
+
     public static int scoreHawk(int whatCard, player user) //method that returns the total score of a players salmon
     {
         int score=0;
