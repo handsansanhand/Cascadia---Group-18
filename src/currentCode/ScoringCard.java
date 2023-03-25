@@ -3,6 +3,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+
+import javax.swing.GroupLayout.Group;
 public class ScoringCard{ // This is the class for a single Scoring Card object. We will need to initialise 5 of these objects and use the calculate function on each one to return the score
     int cardType; // variable to identify card type out of the 15 available
     /*
@@ -609,6 +611,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
         int bear=0,fox=0,elk=0,hawk=0,salmon=0;
         ArrayList<tokenEnum> animalList = new ArrayList();
         int temp=0;
+        int GroupNum=0;
         int ScoreNum=0;
         switch(cardType){
             case 0:
@@ -616,7 +619,19 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                     for(int j=0;j<=tileBoard.BOARD_WIDTH;j++){
                         if(user.getPlayerBoard().TileBoard[i][j] != null) {
                             if(user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.BEAR){
-                                    ScoreNum += helperGroupCheckBear(user.getPlayerBoard().TileBoard[i][j], tokenEnum.BEAR, 0, 0);
+                                    GroupNum += helperGroupCheckBear(user.getPlayerBoard().TileBoard[i][j], tokenEnum.BEAR, 0, 0);
+                                    switch(GroupNum){
+                                        case 0:
+                                        break;
+                                        case 1:
+                                        ScoreNum += 4;
+                                        case 2:
+                                        ScoreNum += 11;
+                                        case 3:
+                                        ScoreNum += 19;
+                                        case 4:
+                                        ScoreNum += 27;
+                                    }
                             }
                         }
                 }
@@ -627,7 +642,8 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                     for(int j=0;j<=tileBoard.BOARD_WIDTH;j++){
                         if(user.getPlayerBoard().TileBoard[i][j] != null) {
                             if(user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.BEAR){
-                                    ScoreNum += helperGroupCheckBear(user.getPlayerBoard().TileBoard[i][j], tokenEnum.BEAR, 0, 1);
+                                    GroupNum += helperGroupCheckBear(user.getPlayerBoard().TileBoard[i][j], tokenEnum.BEAR, 0, 1);
+                                    ScoreNum += GroupNum * 10;
                             }
                         }
                 }
@@ -764,17 +780,23 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                          salmon++;
                         }
                  }
-                 if(bear == 2 || bear == 4){
-                    ScoreNum++;
+                 if(bear == 4 || bear == 2){
+                    GroupNum++;
                  }
-                 if(elk == 2 || elk == 4){
-                    ScoreNum++;
+                 if(elk == 4 || elk == 2){
+                    GroupNum++;
                  }
-                 if(hawk == 2 || hawk == 4){
-                    ScoreNum++;
+                 if(hawk == 4 || hawk == 2){
+                    GroupNum++;
                  }
-                 if(salmon == 2 || salmon == 4){
-                    ScoreNum++;
+                 if(salmon == 4 || salmon == 2){
+                    GroupNum++;
+                 }
+                 switch(GroupNum){
+                    case 1:
+                    ScoreNum += 3;
+                    case 2:
+                    ScoreNum += 5;
                  }
                         }
                     }
