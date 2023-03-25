@@ -801,8 +801,49 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                 //SALMON A (MAX RUN LENGTH=5)
                 ScoreNum+=scoreSalmon(2,user);
             break;
-            case 10:
-
+            case 10: // Bear Scoring Card C
+            for(int i=0;i<=tileBoard.BOARD_HEIGHT;i++){
+                for(int j=0;j<=tileBoard.BOARD_WIDTH;j++){
+                    if(user.getPlayerBoard().TileBoard[i][j] != null) {
+                        if(user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.BEAR){
+                            bear = 1;
+                            if(user.getPlayerBoard().TileBoard[i][j].up.token != null){
+                                   if(user.getPlayerBoard().TileBoard[i][j].up.token.animalType == tokenEnum.BEAR){
+                                    bear++;
+                                    bear += helperGroupCheckBear(user.getPlayerBoard().TileBoard[i][j].up, tokenEnum.BEAR, 2, 0);
+                            }
+                        }
+                            if(user.getPlayerBoard().TileBoard[i][j].down.token != null){
+                                if(user.getPlayerBoard().TileBoard[i][j].down.token.animalType == tokenEnum.BEAR){
+                                        bear++;
+                                        bear += helperGroupCheckBear(user.getPlayerBoard().TileBoard[i][j].down, tokenEnum.BEAR, 1, 0);
+                                }
+                         }
+                         if(user.getPlayerBoard().TileBoard[i][j].left.token != null){
+                            if(user.getPlayerBoard().TileBoard[i][j].left.token.animalType == tokenEnum.BEAR){
+                                    bear++;
+                                    bear += helperGroupCheckBear(user.getPlayerBoard().TileBoard[i][j].left, tokenEnum.BEAR, 4, 0);
+                     }
+                    }
+                     if(user.getPlayerBoard().TileBoard[i][j].right.token != null){
+                        if(user.getPlayerBoard().TileBoard[i][j].right.token.animalType == tokenEnum.BEAR){
+                                bear++;
+                                bear += helperGroupCheckBear(user.getPlayerBoard().TileBoard[i][j].right, tokenEnum.BEAR, 3, 0);
+                        }
+                 }
+                 if(bear == 1){ //actual score here
+                    ScoreNum += 2;
+                 }
+                 if(bear == 2){
+                    ScoreNum += 5;
+                 }
+                 if(bear == 3){
+                    ScoreNum += 8;
+                 }
+                        }
+                    }
+            }
+        }
             break;
             case 11:
 
