@@ -624,12 +624,16 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                                         break;
                                         case 1:
                                         ScoreNum += 4;
+                                        break;
                                         case 2:
                                         ScoreNum += 11;
+                                        break;
                                         case 3:
                                         ScoreNum += 19;
+                                        break;
                                         case 4:
                                         ScoreNum += 27;
+                                        break;
                                     }
                             }
                         }
@@ -642,7 +646,8 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                     for(int j=0;j<=tileBoard.BOARD_WIDTH-1;j++){
                         if(user.getPlayerBoard().TileBoard[i][j] != null) {
                             if(user.getPlayerBoard().TileBoard[i][j].token!=null && user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.BEAR && !m[i][j]){
-                                    GroupNum += helperGroupCheckBear(user.getPlayerBoard().TileBoard[i][j], tokenEnum.BEAR, 0, 1,m);
+                                    GroupNum = helperGroupCheckBear(user.getPlayerBoard().TileBoard[i][j], tokenEnum.BEAR, 0, 1,m);
+                                System.out.println(GroupNum);
                                     ScoreNum += GroupNum * 10;
                             }
                         }

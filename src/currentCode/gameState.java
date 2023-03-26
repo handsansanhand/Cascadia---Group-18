@@ -217,6 +217,7 @@ public class gameState {
                 }
                 case "t": //temporary case that tests the scoring
                 {
+                    System.out.println(gameBoard.scoringCards.get(0).calculateCardScore(getPlayers().get(i)));
                     System.out.println(gameBoard.scoringCards);
                     Scoring.scoreHabitatCorridors(getPlayers().get(i));
                     break;
@@ -467,7 +468,7 @@ public class gameState {
                     System.out.println("Invalid input. Please enter two numbers separated by a comma.");
                 } catch(ArrayIndexOutOfBoundsException e){
                     System.out.println("That position is outside of the allowed space.");
-                    getPlayers().get(i).getPlayerBoard().addTile(refTile, t);
+                    placeTile(i,t);
                     break;
                 }
             }
