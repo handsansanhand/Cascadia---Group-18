@@ -2,7 +2,7 @@ package currentCode;
 import java.util.Scanner;
 //EACH 'BOARD' HOLDS AN ARRAYLIST OF TILES
 public class tileBoard { // class for the board object for each player
-    //HEEEELELOO TOOOOOPOO SDDSADXDF
+
     final static int BOARD_HEIGHT = 15;
     final static int BOARD_WIDTH = 15;
     Tile[][] TileBoard = new Tile[BOARD_WIDTH][BOARD_HEIGHT];
