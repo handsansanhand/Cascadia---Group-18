@@ -158,10 +158,10 @@ import java.util.Scanner;
         }
         public String printWildlifeTokens()     //function for printing the current wt's
         {
-            String wTString = "Wildlife Tokens: ";
+            String wTString = "Wildlife Tokens:  ";
             for(int i=0;i<boardWildlifeTokens.size();i++)
             {
-                wTString = wTString + "(" + i + ")" + "[ " + boardWildlifeTokens.get(i).toString() + " ] ";
+                wTString = wTString + "(" + i + ")" + "[ " + boardWildlifeTokens.get(i).toString() + " ]";
             }
             return wTString;
         }
@@ -342,7 +342,7 @@ import java.util.Scanner;
 
         public String toString() //temporary tostring method for veiwing the board TEMPORARY
         {
-            return printHabitatTiles() + "\n" + printWildlifeTokens();
+            return printHabitatTiles() + "\n" + printWildlifeTokens() + "\nScoring Cards: " + scoringCards;
         }
 
     }

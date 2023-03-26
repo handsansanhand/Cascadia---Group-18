@@ -1,6 +1,7 @@
 package currentCode;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 //THIS CLASS IS FOR EACH INDIVIDUAL PLAYER, THEIR NAME SCORE, 'HAND' AND THEIR OWN BOARD
 //EACH 'PLAYER' HAS THEIR OWN 'BOARD' CLASS TO PLACE THEIR HABITAT TILES
@@ -51,4 +52,10 @@ public class player {
         return "Hand is empty";
     }
 
+}
+class PlayerComparator implements Comparator<player> {  //player comparator, used for sorting the score
+    @Override
+    public int compare(player o1, player o2) {
+        return o2.getScore() - o1.getScore();
+    }
 }

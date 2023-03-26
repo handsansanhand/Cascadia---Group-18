@@ -1,17 +1,106 @@
 package currentCode;
 
+import com.sun.webkit.ThemeClient;
+
+import java.sql.Time;
+import java.util.ArrayList;
+
 //class that will contain all the scoring options/methods
 public class Scoring {
 
+    ArrayList<player> currentPlayers=gameState.Players;
+    static ArrayList<habitatEnum> habitats = new ArrayList<>();
 
-    //method that checks the largest corridor of habitatEnums
-    public static void scoreHabitatCorridors(player user)
-    {
-        countHabitatOccurences(habitatEnum.Forest, user);
-        countHabitatOccurences(habitatEnum.Mountain, user);
-        countHabitatOccurences(habitatEnum.River, user);
-        countHabitatOccurences(habitatEnum.Prairie, user);
-        countHabitatOccurences(habitatEnum.Wetland, user);
+    //method that scores all the habitatEnums
+    public static void scoreHabitatCorridors(player user) throws InterruptedException {
+
+        //find the largest corridor of each type
+        int forest = countHabitatOccurences(habitatEnum.Forest, user);
+        System.out.println(Tile.getHabitatColor(habitatEnum.Forest) + user.name + " has a highest corridor of " + forest + " Forest's" + Tile.RESET);
+        Thread.sleep(600);
+       int mountain = countHabitatOccurences(habitatEnum.Mountain, user);
+        System.out.println(Tile.getHabitatColor(habitatEnum.Mountain) + user.name + " has a highest corridor of " + mountain + " Mountain's" + Tile.RESET);
+        Thread.sleep(600);
+        int river =countHabitatOccurences(habitatEnum.River, user);
+        System.out.println(Tile.getHabitatColor(habitatEnum.River) + user.name + " has a highest corridor of " + river  + " River's" + Tile.RESET);
+        Thread.sleep(600);
+        int prairie=countHabitatOccurences(habitatEnum.Prairie, user);
+        System.out.println(Tile.getHabitatColor(habitatEnum.Prairie) + user.name + " has a highest corridor of " + prairie+ " Prairie's" + Tile.RESET);
+        Thread.sleep(600);
+        int wetland=countHabitatOccurences(habitatEnum.Wetland, user);
+        System.out.println(Tile.getHabitatColor(habitatEnum.Wetland) + user.name + " has a highest corridor of " + wetland + " Wetland's" + Tile.RESET);
+        Thread.sleep(600);
+        //add them up
+        int totalScore= forest+mountain+river+prairie+wetland;
+        System.out.println(Tile.GREEN_BOLD + "" + user.name + "'s Total Habitat Score = " + totalScore + Tile.RESET);
+        System.out.println();
+        user.score+=totalScore; //increment the score
+        Thread.sleep(1500);
+    }
+    public static void compareLargestCorridors() throws InterruptedException {
+        habitats.add(habitatEnum.Forest);
+        habitats.add(habitatEnum.Mountain);
+        habitats.add(habitatEnum.River);
+        habitats.add(habitatEnum.Prairie);
+        habitats.add(habitatEnum.Wetland);
+
+        for(int x=0;x<habitats.size();x++) {
+            int maxSize=0;
+            int secondMaxSize=0;
+            player winningPlayer = gameState.getPlayers().get(0);
+            player winningPlayer2 = gameState.getPlayers().get(0);
+            for (int i = 0; i < gameState.getPlayers().size(); i++) //compare each
+            {
+                int count = countHabitatOccurences(habitats.get(x), gameState.getPlayers().get(i));
+                if(count>maxSize)
+                {
+                    secondMaxSize=maxSize;
+                    maxSize=count;
+                    winningPlayer2 = winningPlayer;
+                    winningPlayer = gameState.getPlayers().get(i);
+                }
+                else if(count>secondMaxSize && count<=maxSize)
+                {
+                    secondMaxSize=count;
+                    winningPlayer2 = gameState.getPlayers().get(i);
+                }
+            }
+            if(gameState.playerCount==2)
+               {
+                   if(secondMaxSize==maxSize) //a tie
+                   {
+                       winningPlayer2.score+=1;
+                       winningPlayer.score+=1;
+                       System.out.println(winningPlayer2.name +" and " + winningPlayer.name + " have the same largest corridor of " + Tile.getHabitatColor(habitats.get(x)) + habitats.get(x) + Tile.RESET + " with a score of " + Tile.getHabitatColor(habitats.get(x)) + maxSize + " +1 POINTS" + Tile.RESET);
+                   }
+                   else{
+                       System.out.println(winningPlayer.name + " has the largest corridor of " + Tile.getHabitatColor(habitats.get(x)) + habitats.get(x) + Tile.RESET + "'s with a score of " + Tile.getHabitatColor(habitats.get(x)) + maxSize + " +2 POINTS" + Tile.RESET);
+                       Thread.sleep(1000);
+                       if(secondMaxSize>0) {
+                           System.out.println(winningPlayer2.name + " has the second largest corridor of " + Tile.getHabitatColor(habitats.get(x)) + habitats.get(x) + Tile.RESET + "'s with a score of " + Tile.getHabitatColor(habitats.get(x)) + secondMaxSize + Tile.RESET);
+                       }
+                       winningPlayer.score += 2;}}
+
+            else if(gameState.playerCount>=3)
+            {
+                if(secondMaxSize==maxSize) //a tie
+                {
+                    winningPlayer2.score+=1;
+                    winningPlayer.score+=1;
+                    System.out.println(winningPlayer2.name +" and " + winningPlayer.name + " have the same largest corridor of " + Tile.getHabitatColor(habitats.get(x)) + habitats.get(x) + Tile.RESET + " with a score of " + Tile.getHabitatColor(habitats.get(x)) + maxSize + " +1 POINT" + Tile.RESET);
+                }
+                else {
+                    System.out.println(winningPlayer.name + " has the largest corridor of " + Tile.getHabitatColor(habitats.get(x)) + habitats.get(x) + Tile.RESET + "'s with a score of " + Tile.getHabitatColor(habitats.get(x)) + maxSize + " +3 POINTS" + Tile.RESET);
+                    Thread.sleep(1000);
+                    if(secondMaxSize>0) {
+                        System.out.println(winningPlayer2.name + " has the second largest corridor of " + Tile.getHabitatColor(habitats.get(x)) + habitats.get(x) + Tile.RESET + "'s with a score of " + Tile.getHabitatColor(habitats.get(x)) + secondMaxSize + " +1 POINT" + Tile.RESET);
+                        winningPlayer2.score += 1;
+                    }
+                    winningPlayer.score += 3;
+                }
+            }
+            Thread.sleep(3000);
+        }
     }
     public static int countHabitatOccurences(habitatEnum enumToCount, player user) //helper function that counts the highest occurences of a certain enum
     {
@@ -54,7 +143,7 @@ public class Scoring {
                 }
             }
         }
-        System.out.println(user.name + " has a longest streak of " + (highestCount) + " of " + enumToCount);
+      //  System.out.println(user.name + " has a longest streak of " + (highestCount) + " of " + enumToCount);
         return highestCount;
     }
 
