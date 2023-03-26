@@ -30,7 +30,6 @@ public class wildlifeToken {
     {
         ArrayList<wildlifeToken> WildlifeTokenBag = new ArrayList<>();
         int count=0;
-
         while(count<20)
         {
             WildlifeTokenBag.add(new wildlifeToken(tokenEnum.BEAR));
@@ -53,7 +52,7 @@ public class wildlifeToken {
         }
         while(count<100)
         {
-            WildlifeTokenBag.add(new wildlifeToken(tokenEnum.SALMON));
+            WildlifeTokenBag.add(new wildlifeToken(tokenEnum.BEAR));
             count++;
         }
         Collections.shuffle(WildlifeTokenBag);
