@@ -11,7 +11,7 @@ public class gameState {
 
     public static int playerCount;
     static ArrayList<player> Players = new ArrayList<player>();
-    gameBoard gameBoard = new gameBoard();
+    static gameBoard gameBoard = new gameBoard();
 
     public int getPlayerCount() {
         return playerCount;
@@ -90,24 +90,133 @@ public class gameState {
 
         }
     }
-    public static void gameEnd(){
-        if(getPlayers().get(0).turnCount >= 20 || getPlayers().get(1).turnCount >= 20 || getPlayers().get(2).turnCount >= 20 || getPlayers().get(3).turnCount >=20){
-            System.out.println("Maximum turn count exceeded, Game should end");
+
+    public static void endTheGame() throws InterruptedException {
+        //first score the animals:
+        for(int x=0;x<playerCount;x++)
+        {
+            for(int i=0;i<gameBoard.scoringCards.size();i++) {
+                int score = gameBoard.scoringCards.get(i).calculateCardScore(getPlayers().get(x));
+                System.out.println(getPlayers().get(x).name + " score for " + gameBoard.scoringCards.get(i) + " is " + score);
+            }
+            System.out.println(Tile.GREEN_BOLD + getPlayers().get(x).name + " total animal score is: " + getPlayers().get(x).score + Tile.RESET);
+            System.out.println();
+            Thread.sleep(2000);
         }
+        for(int x=0;x<playerCount;x++)
+        {
+            Scoring.scoreHabitatCorridors(getPlayers().get(x)); //count up each max habitat corridor
+        }
+        Scoring.compareLargestCorridors(); //count up who has the biggest of each type
+        System.out.println();
+        for(int x=0;x<playerCount;x++) //tally up the remaining nature tokens
+        {
+            if(getPlayers().get(x).natureTokens>0)
+            {
+                System.out.println(Tile.GREEN_BOLD + getPlayers().get(x).name + " has " + getPlayers().get(x).natureTokens + " Nature Tokens Left! " + "+ " + getPlayers().get(x).natureTokens + " POINTS" + Tile.RESET);
+                getPlayers().get(x).score+=getPlayers().get(x).natureTokens;
+            }
+        }
+
+        //find the ranking
+        Collections.sort(getPlayers(), new PlayerComparator());
+        System.out.println(Tile.GREEN_BOLD + " LEADERBOARD: \n" + Tile.RESET);
+        Thread.sleep(1500);
+        if(playerCount>3){
+            System.out.println(Tile.BOLD + Tile.PINK + "4th Place: " + getPlayers().get(3).name + "\n" + getPlayers().get(3).score + " POINTS" +  Tile.RESET);
+        }
+        Thread.sleep(700);
+        if(playerCount>2){
+            System.out.println(Tile.RED_BOLD + "3rd Place: " + getPlayers().get(2).name + "\n" + getPlayers().get(2).score + " POINTS"+ Tile.RESET);
+        }
+        Thread.sleep(2000);
+        System.out.println(Tile.WHITE_BOLD + "2nd Place: " + getPlayers().get(1).name + "\n" + getPlayers().get(1).score + " POINTS"+ Tile.RESET);
+        Thread.sleep(2000);
+        System.out.println(Tile.YELLOW_BOLD + "1st Place: " + getPlayers().get(0).name + "\n" + getPlayers().get(0).score + " POINTS"+ Tile.RESET);
+        System.out.println("\n");
+        Thread.sleep(1400);
+        System.out.println(Tile.YELLOW_BOLD + getPlayers().get(0).getName() + " WINS!");
+        System.exit(0);
+    }
+    public static void gameEnd() throws InterruptedException {
         switch(gameState.playerCount){
             case 2:
+                if(Tile.count==35)
+                {
+                    System.out.println(Tile.RED_BOLD + "Only 2 Tiles Left!" + Tile.RESET);
+                }
+                if(Tile.count==36)
+                {
+                    System.out.println(Tile.RED_BOLD + "Final Turn!" + Tile.RESET);
+                }
+                if(getPlayers().get(0).turnCount == 18 || getPlayers().get(1).turnCount == 18 )
+                {
+                    System.out.println(Tile.RED_BOLD + "Only 2 Turns Left!" + Tile.RESET);
+                }
+                if(getPlayers().get(0).turnCount == 19 || getPlayers().get(1).turnCount == 19 )
+                {
+                    System.out.println(Tile.RED_BOLD + "Final Turn!" + Tile.RESET);
+                }
+                if(getPlayers().get(0).turnCount >= 20 && getPlayers().get(1).turnCount >= 20 )
+                {
+                    //end the game
+                    endTheGame();
+                }
                 if(Tile.count >= 37 ){
                     System.out.println("Out of tiles");
                     //System.exit(0);
+                    endTheGame();
                 }
                 break;
             case 3:
+                if(getPlayers().get(0).turnCount == 18 || getPlayers().get(1).turnCount == 18 || getPlayers().get(2).turnCount == 18 )
+                {
+                    System.out.println(Tile.RED_BOLD + "Only 2 Turns Left!" + Tile.RESET);
+                }
+                if(getPlayers().get(0).turnCount == 19 || getPlayers().get(1).turnCount == 19 || getPlayers().get(2).turnCount == 18 )
+                {
+                    System.out.println(Tile.RED_BOLD + "Final Turn!" + Tile.RESET);
+                }
+                if(getPlayers().get(0).turnCount == 20 && getPlayers().get(1).turnCount == 20 && getPlayers().get(2).turnCount == 20 )
+                {
+                    //end the game
+                    endTheGame();
+                }
+                if(Tile.count==52)
+                {
+                    System.out.println(Tile.RED_BOLD + "Only 2 Tiles Left!" + Tile.RESET);
+                }
+                if(Tile.count==53)
+                {
+                    System.out.println(Tile.RED_BOLD + "Only 1 Tile Left!" + Tile.RESET);
+                }
                 if(Tile.count >= 54 ){
                     System.out.println("Out of tiles");
                     //System.exit(0);
                 }
                 break;
             case 4:
+                if(getPlayers().get(0).turnCount == 18 || getPlayers().get(1).turnCount == 18 || getPlayers().get(2).turnCount == 18 || getPlayers().get(3).turnCount == 18 )
+                {
+                    System.out.println(Tile.RED_BOLD + "Only 2 Turns Left!" + Tile.RESET);
+                }
+                if(getPlayers().get(0).turnCount == 19 || getPlayers().get(1).turnCount == 19 || getPlayers().get(2).turnCount == 18  || getPlayers().get(3).turnCount == 19 )
+                {
+                    System.out.println(Tile.RED_BOLD + "Final Turn!" + Tile.RESET);
+                }
+                if(getPlayers().get(0).turnCount == 20 && getPlayers().get(1).turnCount == 20 && getPlayers().get(2).turnCount == 20  && getPlayers().get(3).turnCount == 20 )
+                {
+                    //end the game
+                    endTheGame();
+                }
+                if(Tile.count==69)
+                {
+                    System.out.println(Tile.RED_BOLD + "Only 2 Tiles Left!" + Tile.RESET);
+                }
+                if(Tile.count==70)
+                {
+                    System.out.println(Tile.RED_BOLD + "Only 1 Tile Left!" + Tile.RESET);
+                }
                 if(Tile.count >= 71 ){
                     System.out.println("Out of tiles");
                     //System.exit(0);
@@ -117,6 +226,7 @@ public class gameState {
     }
 
     public void startTurn(int i) throws InterruptedException {
+        gameEnd(); //check to see if the game should still be played
         getPlayers().get(i).turnCount += 1; //variable incremented for each player when they have a turn. every player should have exactly 20 turns (from rulebook)
         boolean stillTurn = true;
         boolean stillTokenPlace = true;
@@ -215,40 +325,26 @@ public class gameState {
                     printInstructions(i);
                     break;
                 }
-                case "t": //temporary case that tests the scoring
-                {
-                    System.out.println(gameBoard.scoringCards.get(0).calculateCardScore(getPlayers().get(i)));
-                    System.out.println(gameBoard.scoringCards);
-                    Scoring.scoreHabitatCorridors(getPlayers().get(i));
-                    break;
-                }
                 case "q": //temporary case that quits the game
                 {
-                    for(int x=0;x<getPlayerCount();x++)
-                    {
-                        Scoring.scoreHabitatCorridors(getPlayers().get(x)); //count up each max habitat corridor
+                    System.out.println(Tile.RED_BOLD + "Are you sure you want to end the game? Y / N" + Tile.RESET);
+                    boolean endthegame=true;
+                    while(endthegame) {
+                        switch (in.next()) {
+                            case "y": {
+                                endTheGame();
+                            }
+                            case "n": {
+                                endthegame=false;
+                                break;
+                            }
+                            default:
+                            {
+                                break;
+                            }
+                        }
                     }
-                    Scoring.compareLargestCorridors(); //count up who has the biggest of each type
-                    //find the ranking
-                    Collections.sort(getPlayers(), new PlayerComparator());
-                    System.out.println(Tile.GREEN_BOLD + " LEADERBOARD: \n" + Tile.RESET);
-                   Thread.sleep(1500);
-                    if(playerCount>3){
-                        System.out.println(Tile.BOLD + Tile.PINK + "4th Place: " + getPlayers().get(3).name + "\n" + getPlayers().get(3).score + " POINTS" +  Tile.RESET);
-                    }
-                    Thread.sleep(700);
-                    if(playerCount>2){
-                        System.out.println(Tile.RED_BOLD + "3rd Place: " + getPlayers().get(2).name + "\n" + getPlayers().get(2).score + " POINTS"+ Tile.RESET);
-                    }
-                    Thread.sleep(2000);
-                    System.out.println(Tile.WHITE_BOLD + "2nd Place: " + getPlayers().get(1).name + "\n" + getPlayers().get(1).score + " POINTS"+ Tile.RESET);
-                    Thread.sleep(2000);
-                    System.out.println(Tile.YELLOW_BOLD + "1st Place: " + getPlayers().get(0).name + "\n" + getPlayers().get(0).score + " POINTS"+ Tile.RESET);
-                    System.out.println("\n");
-                    Thread.sleep(1400);
-                    System.out.println(Tile.YELLOW_BOLD + getPlayers().get(0).getName() + " WINS!");
-                    stillPlaying=false;
-                    System.exit(0);
+                    endTheGame();
                     break;
                 }
                 case "r": //temporary case that tests the scoring

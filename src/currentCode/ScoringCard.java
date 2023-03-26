@@ -944,7 +944,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                 for(int j=0;j<=tileBoard.BOARD_WIDTH-1;j++){
                     if(user.getPlayerBoard().TileBoard[i][j] != null && user.getPlayerBoard().TileBoard[i][j].token!=null) {
                         if(user.getPlayerBoard().TileBoard[i][j].token.animalType == tokenEnum.FOX && !markedArray[i][j]){
-                            if(user.getPlayerBoard().TileBoard[i][j].up.token != null){
+                            if(user.getPlayerBoard().TileBoard[i][j].up!=null && user.getPlayerBoard().TileBoard[i][j].up.token != null){
                                    if(user.getPlayerBoard().TileBoard[i][j].up.token.animalType == tokenEnum.BEAR){
                                     bear++;
                                    }
@@ -961,7 +961,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                                     salmon++;
                                    }
                             }
-                            if(user.getPlayerBoard().TileBoard[i][j].down.token != null){
+                            if(user.getPlayerBoard().TileBoard[i][j].down!=null && user.getPlayerBoard().TileBoard[i][j].down.token != null){
                                 if(user.getPlayerBoard().TileBoard[i][j].down.token.animalType == tokenEnum.BEAR){
                                  bear++;
                                 }
@@ -978,7 +978,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                                  salmon++;
                                 }
                          }
-                         if(user.getPlayerBoard().TileBoard[i][j].left.token != null){
+                         if(user.getPlayerBoard().TileBoard[i][j].left!=null && user.getPlayerBoard().TileBoard[i][j].left.token != null){
                             if(user.getPlayerBoard().TileBoard[i][j].left.token.animalType == tokenEnum.BEAR){
                              bear++;
                             }
@@ -995,7 +995,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                              salmon++;
                             }
                      }
-                     if(user.getPlayerBoard().TileBoard[i][j].right.token != null){
+                     if(user.getPlayerBoard().TileBoard[i][j].right!=null && user.getPlayerBoard().TileBoard[i][j].right.token != null){
                         if(user.getPlayerBoard().TileBoard[i][j].right.token.animalType == tokenEnum.BEAR){
                          bear++;
                         }
@@ -1041,6 +1041,7 @@ public class ScoringCard{ // This is the class for a single Scoring Card object.
                 ScoreNum+=scoreSalmon(3,user);
             break;
         }
+        user.score+=ScoreNum;
         return ScoreNum;
     }
 
