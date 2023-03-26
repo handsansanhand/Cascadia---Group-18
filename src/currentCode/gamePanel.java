@@ -10,7 +10,7 @@ public static void main(String[] args) throws InterruptedException {
 	int x = 0;
 	gameState gameState = new gameState();
 	Scanner in = new Scanner(System.in);
-	System.out.println("Enter number of players");
+	System.out.println("Enter number of players: [2-4]");
 	while(in.hasNext()) {
 		if(in.hasNextInt()){
 			x = in.nextInt();
