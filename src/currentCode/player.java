@@ -1,3 +1,10 @@
+/*
+Student Number - Name - Github ID
+21467574 - Jack Wright - #102315833
+21447182 - Jack Neilan - #102314039
+21350866 - Trystan Rothery - #102313516
+*/
+
 package currentCode;
 
 import java.util.ArrayList;
@@ -54,6 +61,12 @@ public class player {
 
 }
 class PlayerComparator implements Comparator<player> {  //player comparator, used for sorting the score
+    /*
+Student Number - Name - Github ID
+21467574 - Jack Wright - #102315833
+21447182 - Jack Neilan - #102314039
+21350866 - Trystan Rothery - #102313516
+*/
     @Override
     public int compare(player o1, player o2) {
         return o2.getScore() - o1.getScore();
