@@ -16,19 +16,19 @@ public class Scoring {
 
         //find the largest corridor of each type
         int forest = countHabitatOccurences(habitatEnum.Forest, user);
-        System.out.println(Tile.getHabitatColor(habitatEnum.Forest) + user.name + " has a highest corridor of " + forest + " Forest's" + Tile.RESET);
+        System.out.println(Tile.getHabitatColor(habitatEnum.Forest) + user.name + " has a Highest Corridor of " + forest + " Forest's" + Tile.RESET);
         Thread.sleep(600);
        int mountain = countHabitatOccurences(habitatEnum.Mountain, user);
-        System.out.println(Tile.getHabitatColor(habitatEnum.Mountain) + user.name + " has a highest corridor of " + mountain + " Mountain's" + Tile.RESET);
+        System.out.println(Tile.getHabitatColor(habitatEnum.Mountain) + user.name + " has a Highest Corridor of " + mountain + " Mountain's" + Tile.RESET);
         Thread.sleep(600);
         int river =countHabitatOccurences(habitatEnum.River, user);
-        System.out.println(Tile.getHabitatColor(habitatEnum.River) + user.name + " has a highest corridor of " + river  + " River's" + Tile.RESET);
+        System.out.println(Tile.getHabitatColor(habitatEnum.River) + user.name + " has a Highest Corridor of " + river  + " River's" + Tile.RESET);
         Thread.sleep(600);
         int prairie=countHabitatOccurences(habitatEnum.Prairie, user);
-        System.out.println(Tile.getHabitatColor(habitatEnum.Prairie) + user.name + " has a highest corridor of " + prairie+ " Prairie's" + Tile.RESET);
+        System.out.println(Tile.getHabitatColor(habitatEnum.Prairie) + user.name + " has a Highest Corridor of " + prairie+ " Prairie's" + Tile.RESET);
         Thread.sleep(600);
         int wetland=countHabitatOccurences(habitatEnum.Wetland, user);
-        System.out.println(Tile.getHabitatColor(habitatEnum.Wetland) + user.name + " has a highest corridor of " + wetland + " Wetland's" + Tile.RESET);
+        System.out.println(Tile.getHabitatColor(habitatEnum.Wetland) + user.name + " has a Highest Corridor of " + wetland + " Wetland's" + Tile.RESET);
         Thread.sleep(600);
         //add them up
         int totalScore= forest+mountain+river+prairie+wetland;
