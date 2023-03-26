@@ -52,7 +52,7 @@ public class wildlifeToken {
         }
         while(count<100)
         {
-            WildlifeTokenBag.add(new wildlifeToken(tokenEnum.BEAR));
+            WildlifeTokenBag.add(new wildlifeToken(tokenEnum.SALMON));
             count++;
         }
         Collections.shuffle(WildlifeTokenBag);

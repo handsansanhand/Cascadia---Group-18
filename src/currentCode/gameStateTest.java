@@ -60,6 +60,6 @@ public class gameStateTest {
        assertEquals(gB.countAnimals(tokenEnum.BEAR),4); //counts the max amount of animals in the board
         assertFalse(gB.checkForCull(x));
     }
-    
+
 
 }
