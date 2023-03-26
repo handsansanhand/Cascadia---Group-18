@@ -116,6 +116,7 @@ public class gameState {
                 System.out.println(Tile.GREEN_BOLD + getPlayers().get(x).name + " has " + getPlayers().get(x).natureTokens + " Nature Tokens Left! " + "+ " + getPlayers().get(x).natureTokens + " POINTS" + Tile.RESET);
                 getPlayers().get(x).score+=getPlayers().get(x).natureTokens;
             }
+            Thread.sleep(1000);
         }
 
         //find the ranking
