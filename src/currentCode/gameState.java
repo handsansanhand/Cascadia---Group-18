@@ -95,11 +95,13 @@ public class gameState {
         if(i>=playerCount)
         {
             i=0;
+            if(gameMode == 1 ) {Thread.sleep(1500);}
             System.out.println(Tile.GREEN_BOLD + getPlayers().get(i).getName() + "'s turn!" + Tile.RESET);
             startTurn(i); //asks the user to draw a tile
             System.out.println("\n" + getPlayers().get(i).getPlayerBoard());
         }
         else {
+            if(gameMode == 1 ) {Thread.sleep(1500);}
             System.out.println(Tile.GREEN_BOLD + getPlayers().get(i).getName() + "'s turn!" + Tile.RESET);
             startTurn(i); //asks the user to draw a tile
             System.out.println("\n" + getPlayers().get(i).getPlayerBoard());
@@ -276,12 +278,13 @@ public class gameState {
             Thread.sleep(1500);
             Random rand = new Random();
             //BOT CLASS:
-            int randTileIndex = rand.nextInt(4); // generate a random index between 0 and 3 (inclusive) for tile placement
-            int randTokenIndex = rand.nextInt(4); // generate a random index between 0 and 3 (inclusive) for token placement
-        Tile t = gameBoard.removeHabitatTile(randTileIndex);
+            int randIndex = rand.nextInt(4); // generate a random index between 0 and 3 (inclusive) for tile placement
+           // int randTokenIndex = rand.nextInt(4); // generate a random index between 0 and 3 (inclusive) for token placement
+        Tile t = gameBoard.removeHabitatTile(randIndex);
         getPlayers().get(i).handTile = t;
+            System.out.println();
             System.out.println(getPlayers().get(i).name + " picked Tile: " + t);
-        wildlifeToken w = gameBoard.removeWildlifeToken(randTokenIndex);
+        wildlifeToken w = gameBoard.removeWildlifeToken(randIndex);
             System.out.println(getPlayers().get(i).name + " picked Wildlife Token: " + w);
             Thread.sleep(2500);
         getPlayers().get(i).addToken(w); //adds the token to your hand
@@ -480,13 +483,16 @@ public class gameState {
     public void placeWildlifeToken(wildlifeToken tokenToPlace, int i) throws InterruptedException //method for placing a wildlife token
     {
         System.out.println(getPlayers().get(i).name + " is placing a Wildlife Token ...");
-        Thread.sleep(1500);
+        if(gameMode == 1) {Thread.sleep(1500);}
+        System.out.println(getPlayers().get(i).printHand());
+        if(gameMode == 1) {Thread.sleep(100);}
         System.out.println(getPlayers().get(i).name + "'s Board:\n" + getPlayers().get(i).getPlayerBoard());
-        Thread.sleep(1000);
+        if(gameMode == 1) {Thread.sleep(1500);}
         if (gameMode == 1) { //bot token implementation
             if (!tokenCanBePlaced(tokenToPlace, getPlayers().get(i))) //the token cannot be placed, remove it from your hand
             {
                 System.out.println("The " + getPlayers().get(i).hand.get(0) + " cannot be placed.");
+                Thread.sleep(1500);
                 wildlifeToken removedToken = getPlayers().get(i).hand.get(0);
                 gameBoard.wildlifeTokenBag.add(getPlayers().get(i).hand.remove(0)); //get the wt out of here
                 System.out.println("The " + Tile.getAnimalColor(removedToken.animalType) + removedToken + Tile.RESET + " has been put back in the bag.");
@@ -494,7 +500,6 @@ public class gameState {
             } else {
                 boolean stillPlacing = true;
                 //System.out.println("Placing a wildlife token...");
-                System.out.println(getPlayers().get(i).printHand());
                 Thread.sleep(1500);
                 List<String> choices = Arrays.asList("y", "n");
                 Random rand = new Random();

@@ -94,10 +94,14 @@ import java.util.Scanner;
             }
             public Tile removeHabitatTile(int i)  //function for removing the i'th
             {
+                Tile returnTile = boardHabitatTiles.get(i);
+                boardHabitatTiles.set(i, Tile.randomTile());
+                return  returnTile;
+                /*
                 Tile temp = boardHabitatTiles.get(i);
                 boardHabitatTiles.remove(i);
                 boardHabitatTiles.add(Tile.randomTile());
-                return temp;
+                return temp;*/
             }
     public wildlifeToken removeWildlifeToken(int i)  //function for removing the i'th
     {
