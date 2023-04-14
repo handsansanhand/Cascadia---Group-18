@@ -430,7 +430,7 @@ public class Tile { // class for the tiles that will be inserted onto the board
                     token = x;
                     return;
                 } else {
-                    throw new IllegalArgumentException();
+                    //System.out.println("animal type: " + x);
                 }
         }
 

@@ -229,7 +229,6 @@ public class tileBoard { // class for the board object for each player
 
     public String printUserBoard() {
         String userBoard = "";
-        System.out.println("Your Board:");
         boolean[] columnIsEmpty = new boolean[BOARD_WIDTH];
         boolean[] rowIsEmpty = new boolean[BOARD_HEIGHT];
         for (int j = 0; j < BOARD_WIDTH; j++) {
@@ -264,7 +263,10 @@ public class tileBoard { // class for the board object for each player
         return userBoard;
     }
 
-
+public static boolean canPlaceTile(int x, int y, Tile t)
+{
+    return true;
+}
 
     // helper method to remove ANSI color codes from a string
     private String removeANSIColors(String str) {

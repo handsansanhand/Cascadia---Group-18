@@ -33,8 +33,25 @@ public static void main(String[] args) throws InterruptedException {
 			in.next();
 		}
 	}
+	//ask if you want bot mode or normal mode?
+	System.out.println("Press 1 for Bot Mode, Press 2 for Human Mode");
+	int mode = 0;
+	while(in.hasNext())
+	{
+		if(in.hasNextInt())
+		{
+			mode = in.nextInt();
+			if(x != 1 && x != 2)
+			{
+				System.out.println("Invalid Input\nPlease try again");
+				in.nextLine();
+			}
+			else {break;}
+		} else {System.out.println("Invalid Input\nPlease try again");
+			in.nextLine();}
+	}
 	gameState.setPlayerCount(x);
-	gameState.initializeGame();
+	gameState.initializeGame(mode);
 	gameState.playGame();
 
 	 x = 0;
