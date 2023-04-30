@@ -23,7 +23,7 @@ import java.util.Scanner;
 //THIS CLASS ACTS AS LIKE A DUNGEON MASTER, WILL PROB MOSTLY BE REPLACED BY THE UI, KEEPS TRACK OF PLAYERCOUNT ALL THE PLAYERS,
 //AND THE GAMEBOARD (THE BOARD IN THE MIDDLE OF THE TABLE WHICH IS SAME FOR EVERYONE)
 public class gameState {
-    Scanner in = new Scanner(System.in);
+    static Scanner in = new Scanner(System.in);
 
     public static int playerCount;
     public static int gameMode; //variable that 1==bot mode, 2==human mode
@@ -480,7 +480,7 @@ public class gameState {
 
     }
 
-    public void placeWildlifeToken(wildlifeToken tokenToPlace, int i) throws InterruptedException //method for placing a wildlife token
+     public static void placeWildlifeToken(wildlifeToken tokenToPlace, int i) throws InterruptedException //method for placing a wildlife token
     {
         System.out.println(getPlayers().get(i).name + " is placing a Wildlife Token ...");
         if(gameMode == 1) {Thread.sleep(1500);}
@@ -616,7 +616,7 @@ public class gameState {
         }
     }
 
-    public boolean tokenCanBePlaced(wildlifeToken tokenToPlace, player user) //helper function that finds if a token can be placed, if it doesnt, then it gets passed back into the bag
+    public static boolean tokenCanBePlaced(wildlifeToken tokenToPlace, player user) //helper function that finds if a token can be placed, if it doesnt, then it gets passed back into the bag
     {
         for(int i=0;i<tileBoard.BOARD_HEIGHT-1;i++)
         {
